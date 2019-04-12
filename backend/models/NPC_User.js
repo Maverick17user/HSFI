@@ -36,6 +36,9 @@ const NPC_UserSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    role: {
+        type: String
     }
 });
 

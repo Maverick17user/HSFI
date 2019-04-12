@@ -13,17 +13,32 @@ class Navbar extends Component {
     }
 
     render() {
+        // console.log(this.props);
         const {isAuthenticated, user} = this.props.auth;
-        const authLinks = (
-            <ul className="navbar-nav ml-auto">
-                <a href="#" className="nav-link" onClick={this.onLogout.bind(this)}>
-                    <img src={user.avatar} alt={user.name} title={user.name}
-                        className="rounded-circle"
-                        style={{ width: '25px', marginRight: '5px'}} />
-                            Logout
-                </a>
-            </ul>
-        )
+
+        let authLinks
+
+        switch (user.role) {
+            // case manager / operator...
+            case 'npc':
+                authLinks = (
+                    <ul className="navbar-nav ml-auto">
+                        <div className="authedUser_label_wrap">
+                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
+                            style={{ width: '25px', marginRight: '5px'}} />
+                            <span className="text-info">{user.name} ({user.role})</span>
+                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
+                                Log Out    
+                            </a>
+                        </div>
+                    </ul>
+                )
+                break;
+        
+            default:
+                break;
+        }
+        
         const guestLinks = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">

@@ -30,6 +30,7 @@ router.post('/register', function(req, res) {
                 r: 'pg',
                 d: 'mm'
             });
+            const role = 'npc'
             const newNPC = new NPC_User({
                 country: req.body.country,
                 name: req.body.name,
@@ -38,8 +39,11 @@ router.post('/register', function(req, res) {
                 phone: req.body.phone,
                 email: req.body.email,
                 password: req.body.password,
-                avatar
+                avatar,
+                role
             });
+            console.log(newNPC);
+            
             
             bcrypt.genSalt(10, (err, salt) => {
                 if(err) console.error('There was an error', err);
@@ -84,7 +88,8 @@ router.post('/login', (req, res) => {
                         const payload = {
                             id: user.id,
                             name: user.name,
-                            avatar: user.avatar
+                            avatar: user.avatar,
+                            role: user.role
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600
