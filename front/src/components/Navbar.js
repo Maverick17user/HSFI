@@ -13,16 +13,34 @@ class Navbar extends Component {
     }
 
     render() {
-        // console.log(this.props);
         const {isAuthenticated, user} = this.props.auth;
 
         let authLinks
 
         switch (user.role) {
-            // case manager / operator...
-            case 'npc':
+            case 'manager':
                 authLinks = (
-                    <ul className="navbar-nav ml-auto">
+                    <>
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="#">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Vendor registration desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Scratch card desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Hotline</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Inspection desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Report</a>
+                            </li>
+                        </ul>
                         <div className="authedUser_label_wrap">
                             <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
                             style={{ width: '25px', marginRight: '5px'}} />
@@ -31,10 +49,75 @@ class Navbar extends Component {
                                 Log Out    
                             </a>
                         </div>
-                    </ul>
+                    </>
                 )
                 break;
-        
+            case 'npc':
+                authLinks = (
+                    <>
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="#">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Vendor registration desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Scratch card desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Hotline</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Inspection desk</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Report</a>
+                            </li>
+                        </ul>
+                        <div className="authedUser_label_wrap">
+                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
+                            style={{ width: '25px', marginRight: '5px'}} />
+                            <span className="text-info">{user.name} ({user.role})</span>
+                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
+                                Log Out    
+                            </a>
+                        </div>
+                    </>
+                )
+                break;
+            case 'operator':
+                function ListItem(props) {
+                    return (
+                        <li className="nav-item active">
+                            <a className="nav-link" href="#">{props.value}</a>
+                        </li>
+                    )
+                }
+                function OperatorTasksList(props) {
+                    const totalList = [...props.tasks].map((taskPoint, index) => 
+                        <ListItem key={index.toString()} value={taskPoint} />
+                    )
+                    return (
+                        <ul className="navbar-nav mr-auto">
+                            {totalList}
+                        </ul>
+                    )
+                }
+                authLinks = (
+                    <>
+                        <OperatorTasksList tasks={user.task}/>
+                        <div className="authedUser_label_wrap">
+                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
+                            style={{ width: '25px', marginRight: '5px'}} />
+                            <span className="text-info">{user.name} ({user.role})</span>
+                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
+                                Log Out    
+                            </a>
+                        </div>
+                    </>
+                )
+                break;
             default:
                 break;
         }
@@ -72,12 +155,18 @@ class Navbar extends Component {
             </ul>
         )
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Redux Node Auth</Link>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    {isAuthenticated ? authLinks : guestLinks}
-                </div>
-            </nav>
+            <header>
+                <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+                    <Link className="navbar-brand" to="/">HSFI</Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        {isAuthenticated ? authLinks : guestLinks}
+                    </div>
+                </nav>
+            </header>
         )
     }
 }

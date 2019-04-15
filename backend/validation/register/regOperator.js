@@ -2,6 +2,8 @@ const Validator = require('validator');
 const isEmpty = require('../is-empty');
 
 module.exports = function validateRegisterInput(data) {
+    console.log( typeof data.task + " - " + typeof data.task.join(''));
+    
     let errors = {};
     data.country = !isEmpty(data.country) ? data.country : '';
     data.name = !isEmpty(data.name) ? data.name : '';
@@ -9,7 +11,7 @@ module.exports = function validateRegisterInput(data) {
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password = !isEmpty(data.password) ? data.password : '';
     data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';
-    data.task = !isEmpty(data.task) ? data.task : '';
+    data.task = !isEmpty(data.task.join('')) ? data.task : '';
 
     if(Validator.isEmpty(data.country)) {
         errors.country = 'Country field is required';
@@ -35,9 +37,9 @@ module.exports = function validateRegisterInput(data) {
         errors.email = 'Email is required';
     }
 
-    if(Validator.isEmpty(data.task)) {
-        errors.task = 'Task is required';
-    }
+    // if(Validator.isEmpty(data.task)) {
+    //     errors.task = 'Task is required';
+    // }
 
     if(!Validator.isLength(data.password, {min: 6, max: 30})) {
         errors.password = 'Password must have 6 chars';

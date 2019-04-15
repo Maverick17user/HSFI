@@ -7,6 +7,7 @@ const config = require('./db');
 const npc_users = require('./routes/npc_user'); 
 const manager_users = require('./routes/manager_user');
 const operator_users = require('./routes/operator_users');
+const countries = require('./routes/country');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
@@ -23,10 +24,11 @@ app.use(bodyParser.json());
 app.use('/api/users', npc_users);
 app.use('/api/managerUsers', manager_users);
 app.use('/api/operatorUsers', operator_users);
+app.use('/api/countries', operator_users);
 
-app.get('/', function(req, res) {
-    res.send('hello page');
-});
+// app.get('/', function(req, res) {
+//     res.send('hello page');
+// });
 
 const PORT = process.env.PORT || 5000;
 

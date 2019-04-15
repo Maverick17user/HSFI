@@ -30,6 +30,7 @@ router.post('/registerOperator', function(req, res) {
                 r: 'pg',
                 d: 'mm'
             });
+            const role = 'operator'
             const newOperator = new Operator_User({
                 country: req.body.country,
                 name: req.body.name,
@@ -37,7 +38,8 @@ router.post('/registerOperator', function(req, res) {
                 email: req.body.email,
                 password: req.body.password,
                 task: req.body.task,
-                avatar
+                avatar,
+                role
             });
             
             bcrypt.genSalt(10, (err, salt) => {
@@ -83,7 +85,9 @@ router.post('/loginOperator', (req, res) => {
                         const payload = {
                             id: user.id,
                             name: user.name,
-                            avatar: user.avatar
+                            avatar: user.avatar,
+                            task: user.task,
+                            role: user.role
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600

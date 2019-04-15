@@ -8,7 +8,6 @@ const validateRegisterInput = require('../validation/register/regManager');
 const validateLoginInput = require('../validation/login');
 
 const Manager_User = require('../models/Manager_User');
-const NPC_User = require('../models/NPC_User');
 
 router.post('/registerManager', function(req, res) {
 
@@ -31,13 +30,15 @@ router.post('/registerManager', function(req, res) {
                 r: 'pg',
                 d: 'mm'
             });
+            const role = 'manager'
             const newManager = new Manager_User({
                 name: req.body.name,
                 office: req.body.office,
                 phone: req.body.phone,
                 email: req.body.email,
                 password: req.body.password,
-                avatar
+                avatar,
+                role
             });
             
             bcrypt.genSalt(10, (err, salt) => {
@@ -83,7 +84,8 @@ router.post('/loginManager', (req, res) => {
                         const payload = {
                             id: user.id,
                             name: user.name,
-                            avatar: user.avatar
+                            avatar: user.avatar,
+                            role: user.role
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600

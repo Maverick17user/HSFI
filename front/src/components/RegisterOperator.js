@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { registerOperatorUser } from '../actions/authentication';
 import classnames from 'classnames';
 
-
 class RegisterOperator extends Component {
 
     constructor(props) {
@@ -17,10 +16,11 @@ class RegisterOperator extends Component {
             email: '',
             password: '',
             password_confirm: '',
-            task: '',
+            task: [],
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -28,6 +28,10 @@ class RegisterOperator extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    handleMultiSelectChange(e) {
+        this.setState({task: [...e.target.selectedOptions].map(o => o.value)});
     }
 
     handleSubmit(e) {
@@ -41,7 +45,7 @@ class RegisterOperator extends Component {
             password_confirm: this.state.password_confirm,
             task: this.state.task,
         }
-        console.log(this.state);
+        console.log(this.state.task);
         this.props.registerOperatorUser(Operator_user, this.props.history);
     }
 
@@ -150,7 +154,7 @@ class RegisterOperator extends Component {
                         {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                     </div>
                     <div className="form-group">
-                        <input
+                        {/* <input
                         type="text"
                         placeholder="Task"
                         className={classnames('form-control form-control-lg', {
@@ -160,7 +164,17 @@ class RegisterOperator extends Component {
                         onChange={ this.handleInputChange }
                         value={ this.state.task }
                         />
-                        {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
+                        {errors.name && (<div className="invalid-feedback">{errors.name}</div>)} */}
+                        <label htmlFor="task">Task</label>
+                        <select multiple={true} className={classnames('form-control', {
+                            'is-invalid': errors.task
+                        })} id="task" name="task"  onChange={ this.handleMultiSelectChange }>
+                            <option value={ 'Vendor Registration' }>Vendor Registration</option>
+                            <option value={ 'Scrathc card desk' }>Scrathc card desk</option>
+                            <option value={ 'Hotline' }>Hotline</option>
+                            <option value={ 'Inspection' }>Inspection</option>
+                        </select>
+                        {errors.task && (<div className="invalid-feedback">{errors.task}</div>)}
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">

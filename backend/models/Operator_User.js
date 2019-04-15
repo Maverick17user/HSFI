@@ -23,7 +23,7 @@ const Operator_UserSchema = new Schema({
         required: true
     },
     task: {
-        type: String,
+        type: Array,
         required: true
     },
     avatar: {
@@ -32,6 +32,9 @@ const Operator_UserSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    role: {
+        type: String
     }
 });
 

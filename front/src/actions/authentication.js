@@ -30,7 +30,7 @@ export const registerOperatorUser = (user, history) => dispatch => {
     axios.post('/api/operatorUsers/registerOperator', user)
         .then(res => history.push('/loginOperator'))
         .catch(err => {
-            console.log(err.response.data);
+            // console.log(err.response.data);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -62,7 +62,6 @@ export const loginUser = (user) => dispatch => {
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);
             const decoded = jwt_decode(token);
-            console.log(decoded);
             dispatch(setCurrentUser(decoded));
         })
         .catch(err => {

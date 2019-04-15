@@ -41,9 +41,7 @@ router.post('/register', function(req, res) {
                 password: req.body.password,
                 avatar,
                 role
-            });
-            console.log(newNPC);
-            
+            });    
             
             bcrypt.genSalt(10, (err, salt) => {
                 if(err) console.error('There was an error', err);
