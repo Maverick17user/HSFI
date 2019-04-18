@@ -6,6 +6,9 @@ import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 
 class Navbar extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     onLogout(e) {
         e.preventDefault();
@@ -125,7 +128,6 @@ class Navbar extends Component {
         const guestLinks = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    {/* <Link className="nav-link" to="/register"> */}
                     <div className="btn-group">
                         <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -137,7 +139,6 @@ class Navbar extends Component {
                             <Link className="dropdown-item" to="/registerOperator">Operator</Link>
                         </div>
                     </div>
-                    {/* </Link> */}
                 </li>
                 <li className="nav-item" style={{marginLeft: '25px'}}>
                     <div className="btn-group">

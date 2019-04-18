@@ -2,34 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addNewCountry } from '../actions/countries/addNewCountry'
+// import { addNewCountry } from '../actions/countries/addNewCountry'
 import { NavLink, Route, Switch, Link, Redirect } from 'react-router-dom'
+
+import RedactCountryList from './authHomeComponents/RedactCountryList'
 
 class AuthHome extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            inputedCountry: ''
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleAddSubmit = this.handleAddSubmit.bind(this);
     }
-
-    handleInputChange(e) {
-        this.setState({
-            inputedCountry: e.target.value
-        })
-    }
-
-    handleAddSubmit(e) {
-        e.preventDefault();
-        const newCountry = {
-            inputedCountry: this.state.inputedCountry,
-        }
-        this.props.addNewCountry(newCountry);
-    }
-
     render() {
 
         const {user} = this.props.auth;
@@ -55,42 +36,6 @@ class AuthHome extends Component {
                 <div className="col-3">
                     <div className="list-group" id="list-tab" role="tablist">
                         {PanelLinks}
-                    </div>
-                </div>
-            )
-        }
-
-        // Country list tab result component
-        const RedactCountryList = () => {
-            return (
-                <div className="col-9">
-                    <div className="tab-content" id="nav-tabContent">
-                        <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                            <div className="row">
-                                <div className="col-8">
-                                    <p className="text-primary">Country list redact form</p>
-                                    <form className="form" onSubmit={this.handleAddSubmit}>
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" name="inputedCountry"
-                                                placeholder="Country name" onChange={this.handleInputChange} required />
-                                        </div>
-                                        <div className="form-group">
-                                            <button type="submit" className="btn btn-success">Add</button>
-                                            <button type="submit" className="btn btn-danger">Remove</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="col-4">
-                                    <p className="text-primary">Curent country list</p>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">Norway</li>
-                                        <li className="list-group-item">Norway</li>
-                                        <li className="list-group-item">Norway</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
                     </div>
                 </div>
             )
@@ -189,7 +134,6 @@ class AuthHome extends Component {
 }
 
 AuthHome.propTypes = {
-    addNewCountry: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
 }
 
@@ -197,4 +141,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export  default connect(mapStateToProps, { addNewCountry })(withRouter(AuthHome));
+export default connect(mapStateToProps)(withRouter(AuthHome));

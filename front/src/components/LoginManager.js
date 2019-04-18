@@ -51,6 +51,8 @@ class LoginManager extends Component {
 
     render() {
         const {errors} = this.state;
+        // console.log(errors);
+        
         return(
             <div className="container" style={{ marginTop: '50px', width: '700px'}}>
                 <h2>Login</h2>
@@ -96,7 +98,7 @@ class LoginManager extends Component {
 LoginManager.propTypes = {
     loginManagerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    // errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

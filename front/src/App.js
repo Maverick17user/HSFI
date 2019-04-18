@@ -41,9 +41,9 @@ if(localStorage.jwtToken) {
 const App = ({history}) => {
     return (
       <Provider store={ store }>
-        <Router history={history}>
+        <Router >
           <div>
-            <Navbar/>
+            <Navbar history={history}/>
             <div className="container">
               <Switch>
                 {/* <Route exact path="/" component={Home} /> */}

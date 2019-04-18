@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use('/api/users', npc_users);
 app.use('/api/managerUsers', manager_users);
 app.use('/api/operatorUsers', operator_users);
-app.use('/api/countries', operator_users);
+app.use('/api/countries', countries);
 
 // app.get('/', function(req, res) {
 //     res.send('hello page');
