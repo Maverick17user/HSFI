@@ -55,28 +55,12 @@ class RedactCountryList extends Component{
         const countryName = {
             country: this.state.country,
         }
-
-        // const makeRequest = (method) => {
-        //     return fetch('/api/countries/redactPanel/countryList', {
-        //         method: method,
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(countryName)
-        //     });
-        // }
         
         switch (this.state.flag) {
             case 'add':
-                // !!!
-                // makeRequest('post')
                 this.props.addNewCountry(countryName);
                 break;
             case 'remove':
-                // makeRequest('delete')
-                // .then(resp => resp.json())
-                //     .then(data => this.props.removeCountry(data))
-                //     .catch(err => console.log(err))
                 this.props.removeCountry(countryName);
                 break;
             case 'edit':
@@ -86,9 +70,9 @@ class RedactCountryList extends Component{
                 break;
         }
 
-        // this.setState({
-        //     country: ''
-        // })
+        this.setState({
+            country: ''
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -103,7 +87,6 @@ class RedactCountryList extends Component{
     render() {
 
         const {errors} = this.state
-        // const {countries} = this.props.countries
         
         return (
             <div className="col-9">
@@ -136,7 +119,6 @@ class RedactCountryList extends Component{
                                 </form>
                             </div>
                             <div className="col-4">
-                                {/* <CountryList addChanges={countries} /> */}
                                 <CountryList />
                             </div>
                         </div>
@@ -152,13 +134,11 @@ RedactCountryList.propTypes = {
     addNewCountry: PropTypes.func.isRequired,
     removeCountry: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    // countries: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
     errors: state.errors,
-    // countries: state.countries
 })
 
 export  default connect(mapStateToProps, { addNewCountry, removeCountry })(withRouter(RedactCountryList));

@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     onLogout(e) {
         e.preventDefault();
@@ -18,106 +16,96 @@ class Navbar extends Component {
     render() {
         const {isAuthenticated, user} = this.props.auth;
 
+        const initailTaskList = [
+            {title:'Home', route:'/'},
+            {title:'Vendor registration', route:'/venRegistration'},
+            {title:'Scratch card desk', route:'/venScratchCards'},
+            {title:'Hotline', route:'/hotline'},
+            {title:'Inspection', route:'/inspection'},
+            {title:'Report', route:'/report'},
+        ]
+
+        const ListItem = (props) => {
+            return (
+                <li className="nav-item">
+                    <NavLink className="nav-link" to={props.to} activeClassName="active">{props.value}</NavLink>
+                </li>
+            )
+        }
+
+        const TaskList = (props) => {
+            let isForOperator = false
+
+            if(props.operatorTasks) {
+                isForOperator = true
+            }
+
+            const generateOperatorTasksData = (operatorTasks) => {
+                return [{title:'Home', route:'/'}].concat(operatorTasks.map(taskName => {
+                    switch (taskName) {
+                        case 'Vendor Registration':
+                            return {title: 'Vendor Registration', route: '/venRegistration'}
+                        case 'Scratch card desk':
+                            return {title: 'Scratch card desk', route: '/venScratchCards'}
+                        case 'Hotline':
+                            return {title: 'Hotline', route: '/hotline'}
+                        case 'Inspection':
+                            return {title: 'Inspection', route: '/inspection'}
+                        default:
+                            break;
+                    }
+                }))
+            }
+
+            let tasks = (!isForOperator) ?  props.tasks : generateOperatorTasksData(props.operatorTasks)        
+
+            return ( 
+                <ul className="navbar-nav mr-auto">
+                    {tasks.map((task, index) => {
+                        return <ListItem key={index.toString()} value={task.title} to={task.route} />
+                    })}
+                </ul>
+            )
+        }
+
+        // TODO: split to separated components
+        const UserBar = (props) => {
+            return (
+                <div className="authedUser_label_wrap">
+                    <img src={props.avatar} alt={props.name} title={props.name} className="rounded-circle"
+                    style={{ width: '25px', marginRight: '5px'}} />
+                    <span className="text-info">{props.name} ({props.role})</span>
+                    <a href="#" className="nav-link" onClick={props.toLogOut} style={{display: 'inline'}}>
+                        Log Out    
+                    </a>
+                </div>
+            )
+        }
+
         let authLinks
 
         switch (user.role) {
             case 'manager':
                 authLinks = (
                     <>
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Vendor registration desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Scratch card desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Hotline</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Inspection desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Report</a>
-                            </li>
-                        </ul>
-                        <div className="authedUser_label_wrap">
-                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
-                            style={{ width: '25px', marginRight: '5px'}} />
-                            <span className="text-info">{user.name} ({user.role})</span>
-                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
-                                Log Out    
-                            </a>
-                        </div>
+                        <TaskList tasks={initailTaskList} />
+                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
             case 'npc':
                 authLinks = (
                     <>
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Vendor registration desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Scratch card desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Hotline</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Inspection desk</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Report</a>
-                            </li>
-                        </ul>
-                        <div className="authedUser_label_wrap">
-                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
-                            style={{ width: '25px', marginRight: '5px'}} />
-                            <span className="text-info">{user.name} ({user.role})</span>
-                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
-                                Log Out    
-                            </a>
-                        </div>
+                        <TaskList tasks={initailTaskList} />
+                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
             case 'operator':
-                function ListItem(props) {
-                    return (
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">{props.value}</a>
-                        </li>
-                    )
-                }
-                function OperatorTasksList(props) {
-                    const totalList = [...props.tasks].map((taskPoint, index) => 
-                        <ListItem key={index.toString()} value={taskPoint} />
-                    )
-                    return (
-                        <ul className="navbar-nav mr-auto">
-                            {totalList}
-                        </ul>
-                    )
-                }
                 authLinks = (
                     <>
-                        <OperatorTasksList tasks={user.task}/>
-                        <div className="authedUser_label_wrap">
-                            <img src={user.avatar} alt={user.name} title={user.name} className="rounded-circle"
-                            style={{ width: '25px', marginRight: '5px'}} />
-                            <span className="text-info">{user.name} ({user.role})</span>
-                            <a href="#" className="nav-link" onClick={this.onLogout.bind(this)} style={{display: 'inline'}}>
-                                Log Out    
-                            </a>
-                        </div>
+                        <TaskList operatorTasks={user.task} />
+                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;

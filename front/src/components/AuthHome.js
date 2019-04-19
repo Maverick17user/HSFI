@@ -46,11 +46,6 @@ class AuthHome extends Component {
             return (
                 <div className="col-9">
                     Food Groups content.
-                    <div className="form-group">
-                      <input type="text"
-                        className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
-                      <small id="helpId" className="form-text text-muted">Help text</small>
-                    </div> 
                 </div>
             )
         }
@@ -79,14 +74,36 @@ class AuthHome extends Component {
             )
         }
 
+        const OperatorHome = () => {
+            return (
+                <div className="col-9">
+                    Operator home component.
+                </div>
+            )
+        }
+
         const ReadactPanel = (props) => {
 
             const autoRegirectFromHome = () => {
-                if(props.location.pathname === '/redactPanel') {
-                    return (
-                        <Redirect from="/redactPanel" to="/redactPanel/countryList" />
-                    )
+                switch (user.role) {
+                    case 'manager':
+                        if(props.location.pathname === '/redactPanel') {
+                            return <Redirect from="/redactPanel" to="/redactPanel/countryList" />  
+                        }
+                        break;
+                    case 'npc':
+                        if(props.location.pathname === '/redactPanel') {
+                            return <Redirect from="/redactPanel" to="/redactPanel/organizationsList" />  
+                        }
+                        break;
+                    default:
+                        break;
                 }
+            }
+
+            // TODO: Move operator home outside ReadactPanel component
+            if (user.role === 'operator') {
+                return <Route exact path="/redactPanel" component={OperatorHome} />
             }
 
             return (
@@ -103,8 +120,9 @@ class AuthHome extends Component {
                 </>
             )
         }
+        
 
-        let navLinksData = [
+        let managerNavLinksData = [
             {title: 'Country list', target:  '/redactPanel/countryList'},
             {title: 'Food groups', target: '/redactPanel/foodGroups'},
             {title: 'Organizations', target: '/redactPanel/organizationsList'},
@@ -112,16 +130,34 @@ class AuthHome extends Component {
             {title: 'NPC"s reg. requests', target: '/redactPanel/NpcRequests'},
         ]
 
+        let npcNavLinksData = [
+            {title: 'Organizations', target: '/redactPanel/organizationsList'},
+        ]
+
         switch (user.role) {
             case 'manager':
                 authHome = (
                     <div className="row">
-                        <ReadactPanel linksData={navLinksData} location={this.props.location} />
+                        <ReadactPanel linksData={managerNavLinksData} location={this.props.location} />
+                    </div>
+                )
+                break;
+            case 'npc':
+                authHome = (
+                    <div className="row">
+                        <ReadactPanel linksData={npcNavLinksData} location={this.props.location} />
+                    </div>
+                )
+                break;
+            case 'operator':
+                authHome = (
+                    <div className="row">
+                        <ReadactPanel linksData={npcNavLinksData} location={this.props.location} />
                     </div>
                 )
                 break;
             default: 
-                authHome = null
+                authHome = <p className="text-warning">Error 404. Page not found</p>
                 break;
         }
 

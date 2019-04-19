@@ -31,11 +31,11 @@ if(localStorage.jwtToken) {
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
 
-  const currentTime = Date.now() / 1000;
-  if(decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
-    window.location.href = '/'
-  }
+  // const currentTime = Date.now() / 1000;
+  // if(decoded.exp < currentTime) {
+  //   store.dispatch(logoutUser());
+  //   window.location.href = '/'
+  // }
 }
 
 const App = ({history}) => {
@@ -46,17 +46,20 @@ const App = ({history}) => {
             <Navbar history={history}/>
             <div className="container">
               <Switch>
-                {/* <Route exact path="/" component={Home} /> */}
-                <Route exact path="/" render={() => (
-                  <Home />
-                )}/>
+                <Route exact path="/" render={() => <Home />}/>
                 <Route exact path="/registerManager" component={RegisterManager} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/registerOperator" component={RegisterOperator} />
                 <Route exact path="/loginManager" component={LoginManager} />
                 <Route exact path="/loginOperator" component={LoginOperator} />
                 <Route exact path="/login" component={LogIn} />
+
                 <Route path="/redactPanel" component={AuthHome} />
+                <Route exact path="/venRegistration" render={() => <p>venRegistration</p>}/>
+                <Route exact path="/venScratchCards" render={() => <p>venScratchCards</p>}/>
+                <Route exact path="/hotline" render={() => <p>hotline</p>}/>
+                <Route exact path="/inspection" render={() => <p>inspection</p>}/>
+                <Route exact path="/report" render={() => <p>report</p>}/>
               </Switch>
             </div>
           </div>
