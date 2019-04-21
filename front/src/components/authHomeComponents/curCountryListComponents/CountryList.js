@@ -2,24 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { putCountriesIntoStore } from '../../../actions/countries/putCountriesIntoStore'
 
 class CountryList extends Component {
-    constructor() {
-        super()
-    }
-
-    componentDidMount() {
-        fetch('/api/countries/redactPanel/countryList', {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-        .then(resp => resp.json())
-            .then(data => this.props.putCountriesIntoStore(data))
-            .catch(err => console.log(err))
-    }
 
     render() {
         const {dbCountries} = this.props.dbCountries
@@ -42,7 +26,6 @@ class CountryList extends Component {
 }
 
 CountryList.propTypes = {
-    putCountriesIntoStore: PropTypes.func.isRequired,
     dbCountries: PropTypes.object.isRequired,
 }
 
@@ -50,4 +33,4 @@ const mapStateToProps = (state) => ({
     dbCountries: state.dbCountries
 })
 
-export default connect(mapStateToProps, { putCountriesIntoStore })(withRouter(CountryList));
+export default connect(mapStateToProps)(withRouter(CountryList));

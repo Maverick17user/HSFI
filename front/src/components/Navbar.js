@@ -6,11 +6,25 @@ import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
+import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
+
 class Navbar extends Component {
 
     onLogout(e) {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
+    }
+
+    componentDidMount() {
+      fetch('/api/countries/redactPanel/countryList', {
+          method: 'get',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      })
+      .then(resp => resp.json())
+          .then(data => this.props.putCountriesIntoStore(data))
+          .catch(err => console.log(err))
     }
 
     render() {
@@ -161,11 +175,12 @@ class Navbar extends Component {
 }
 Navbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    putCountriesIntoStore: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser, putCountriesIntoStore })(withRouter(Navbar));

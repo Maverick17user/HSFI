@@ -85,7 +85,8 @@ router.post('/loginManager', (req, res) => {
                             id: user.id,
                             name: user.name,
                             avatar: user.avatar,
-                            role: user.role
+                            role: user.role,
+                            date: user.date
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600

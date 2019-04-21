@@ -17,6 +17,8 @@ import LogIn from './components/LogIn';
 import LoginOperator from './components/LoginOperator';
 import LoginManager from './components/LoginManager';
 
+import VenRegForm from './components/venReg/VenRegForm'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -25,7 +27,11 @@ import Popper from 'popper.js';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import AuthHome from './components/AuthHome'
+
+import { putCountriesIntoStore } from './actions/countries/putCountriesIntoStore'
+
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -38,34 +44,60 @@ if(localStorage.jwtToken) {
   // }
 }
 
-const App = ({history}) => {
-    return (
-      <Provider store={ store }>
-        <Router >
-          <div>
-            <Navbar history={history}/>
-            <div className="container">
-              <Switch>
-                <Route exact path="/" render={() => <Home />}/>
-                <Route exact path="/registerManager" component={RegisterManager} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/registerOperator" component={RegisterOperator} />
-                <Route exact path="/loginManager" component={LoginManager} />
-                <Route exact path="/loginOperator" component={LoginOperator} />
-                <Route exact path="/login" component={LogIn} />
-
-                <Route path="/redactPanel" component={AuthHome} />
-                <Route exact path="/venRegistration" render={() => <p>venRegistration</p>}/>
-                <Route exact path="/venScratchCards" render={() => <p>venScratchCards</p>}/>
-                <Route exact path="/hotline" render={() => <p>hotline</p>}/>
-                <Route exact path="/inspection" render={() => <p>inspection</p>}/>
-                <Route exact path="/report" render={() => <p>report</p>}/>
-              </Switch>
+class App extends Component {
+    // componentDidMount() {
+    //   fetch('/api/countries/redactPanel/countryList', {
+    //       method: 'get',
+    //       headers: {
+    //           'Content-Type': 'application/json'
+    //       },
+    //   })
+    //   .then(resp => resp.json())
+    //       .then(data => this.props.putCountriesIntoStore(data))
+    //       .catch(err => console.log(err))
+    // }
+    render() {
+      return (
+        <Provider store={ store }>
+          <Router >
+            <div>
+              <Navbar history={this.props.history}/>
+              <div className="container">
+                <Switch>
+                  <Route exact path="/" render={() => <Home />}/>
+                  <Route exact path="/registerManager" component={RegisterManager} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/registerOperator" component={RegisterOperator} />
+                  <Route exact path="/loginManager" component={LoginManager} />
+                  <Route exact path="/loginOperator" component={LoginOperator} />
+                  <Route exact path="/login" component={LogIn} />
+  
+                  <Route path="/redactPanel" component={AuthHome} />
+                  <Route path="/venRegistration" component={VenRegForm}/>
+                  <Route path="/venScratchCards" render={() => <p>venScratchCards</p>}/>
+                  <Route path="/hotline" render={() => <p>hotline</p>}/>
+                  <Route path="/inspection" render={() => <p>inspection</p>}/>
+                  <Route path="/report" render={() => <p>report</p>}/>
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
-      </Provider>
-    );
+          </Router>
+        </Provider> 
+      );
+    }
 }
 
-export default App;
+export default App
+
+// export default connect({ putCountriesIntoStore })(withRouter(App))
+
+// const ConnectedApp = connect({putCountriesIntoStore})(withRouter(App));
+
+// export const Root = () => 
+//     <Provider store={store}>
+//       {/* <Router > */}
+//         <ConnectedApp/>
+//       {/* </Router> */}
+//     </Provider>
+
+

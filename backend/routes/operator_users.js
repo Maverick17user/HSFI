@@ -87,7 +87,8 @@ router.post('/loginOperator', (req, res) => {
                             name: user.name,
                             avatar: user.avatar,
                             task: user.task,
-                            role: user.role
+                            role: user.role,
+                            date: user.date
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600

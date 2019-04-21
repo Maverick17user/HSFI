@@ -1,0 +1,190 @@
+* {
+  font-family: Montserrat-Medium, Arial, Helvetica, sans-serif;
+}
+
+input {
+  cursor: pointer;
+}
+
+div.multiSelect-wrap {
+  background: white;
+  background-color: white;
+  -webkit-box-shadow: 0 0 0 1px #CED4DA;
+          box-shadow: 0 0 0 1px #CED4DA;
+  border-radius: 3px;
+  z-index: 99;
+}
+
+header {
+  -webkit-box-shadow: 0 0 2px lightgray;
+          box-shadow: 0 0 2px lightgray;
+}
+
+div.progress {
+  margin-bottom: 50px;
+}
+
+div.regVen, div.startTransaction {
+  padding: 25px;
+  background: #F8F9FA;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 2px lightgray;
+          box-shadow: 0 0 2px lightgray;
+}
+
+div.regVen h2, div.startTransaction h2 {
+  font-family: Montserrat-Bold, Arial, Helvetica, sans-serif;
+}
+
+div.hotline {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 2px lightgray;
+          box-shadow: 0 0 2px lightgray;
+  padding: 25px;
+}
+
+div.venPicture-wrap {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+div.venPicture-wrap img {
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+div.venPicture-wrap span {
+  margin-top: 10px;
+}
+
+div.vProfile img {
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+div.vProfile h3.venProfile-h3 {
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+div.vProfile span.profileData, div.vProfile a {
+  font-size: 1em;
+}
+
+div.vProfile div.table-wrap {
+  margin-bottom: 40px;
+}
+
+div.viewVendors div.vendors_pseudoHeader {
+  padding: 5px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+div.viewVendors div.vendors_pseudoHeader h2 {
+  margin-right: 50px;
+  margin-bottom: 0;
+}
+
+div.viewVendors p.text-info {
+  margin-bottom: 10px;
+}
+
+div.viewVendors table.vendors__table {
+  cursor: pointer;
+}
+
+div.tableSort-wrap {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1%;
+}
+
+div.map-wrap {
+  height: 400px;
+}
+
+div.question-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+div.question-wrap span {
+  width: 100px;
+}
+
+div.question-wrap div.ball {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.question-wrap div.ball div.plus, div.question-wrap div.ball div.minus {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: lightgray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.3em;
+  margin-right: 5px;
+}
+
+div.question-wrap div.ball div.plus:hover, div.question-wrap div.ball div.minus:hover {
+  border: 1px solid gray;
+  color: #17A2B8;
+}
+
+div.question-wrap div.ball div.plus.--active, div.question-wrap div.ball div.minus.--active {
+  background: #17A2B8;
+  color: white;
+}
+
+div.reportForm div.form-check {
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+div.reportForm div.form-check label.form-check-label {
+  min-width: 250px;
+}
+
+div.reportForm div.form-check input {
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */

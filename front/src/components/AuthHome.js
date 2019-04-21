@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import { addNewCountry } from '../actions/countries/addNewCountry'
+// import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
 import { NavLink, Route, Switch, Link, Redirect } from 'react-router-dom'
 
 import RedactCountryList from './authHomeComponents/RedactCountryList'
 
 class AuthHome extends Component {
-    constructor(props) {
-        super(props)
-    }
+
     render() {
 
         const {user} = this.props.auth;

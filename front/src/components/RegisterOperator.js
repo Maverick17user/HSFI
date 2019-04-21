@@ -31,7 +31,7 @@ class RegisterOperator extends Component {
     }
 
     handleMultiSelectChange(e) {
-        this.setState({task: [...e.target.selectedOptions].map(o => o.value)});
+        this.setState({[e.target.name]: [...e.target.selectedOptions].map(o => o.value)});
     }
 
     handleSubmit(e) {
