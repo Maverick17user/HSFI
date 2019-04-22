@@ -131,60 +131,11 @@ class VForm extends Component {
                         </div>
                     </div>
                 </div> 
-                {/* delete it pls */}
+                {/* TODO: Code above make as single component too... */}
                 <BuisnessScheduleComponent 
                 handleMultiSelectChange={this.handleMultiSelectChange}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
-                data={vendorRegData.buisnessSchedule}
                 />
-                {/* <span>Buisness schedule</span>
-                <div className="row">
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="work_day"><small>Day</small></label>
-                            <div className="multiSelect-wrap">
-                                <select multiple className="selectpicker form-control" id="work_day"
-                                onChange={(e) => this.handleMultiSelectChange(e, 0, "buisnessSchedule")} name="day">
-                                    <option value={'Monday'}>Monday</option>
-                                    <option value={'Tuesday'}>Tuesday</option>
-                                    <option value={'Wednesday'}>Wednesday</option>
-                                    <option value={'Thursday'}>Thursday</option>
-                                    <option value={'Friday'}>Friday</option>
-                                    <option value={'Saturday'}>Saturday</option>
-                                    <option value={'Sunday'}>Sunday</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="from-group">
-                            <label htmlFor="work_from"><small>From</small></label>
-                            <input type="time" className="form-control" id="work_from" name="from"
-                            onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'buisnessSchedule')} 
-                            value={vendorRegData.buisnessSchedule[0].from || ''} />
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <div className="row">
-                                <div className="col">
-                                    <label htmlFor="work_to"><small>To</small></label>
-                                    <div className="row">
-                                        <div className="col">
-                                            <input type="time" className="form-control" id="work_to" name="to" 
-                                            onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'buisnessSchedule')} 
-                                            value={vendorRegData.buisnessSchedule[0].to || ''}/>
-                                        </div>
-                                        <div className="col">
-                                            <button type="button" className="btn btn-success">Add</button>
-                                            <button type="button" className="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="form-group">
                     <label htmlFor="ing_source">Ingredient source</label>
                     <div className="row">

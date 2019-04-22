@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 // import LocationInputGroup from './BuisnessLocationGroup'
 
+
+// TODO: To redux store
 class BuisnessLocationGroup extends Component {
     constructor() {
         super() 

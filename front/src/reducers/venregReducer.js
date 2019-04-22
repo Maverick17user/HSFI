@@ -2,7 +2,8 @@ import {
     FETCH_IN_VENREG, 
     INPUT_CHANGE_IN_VENREG, 
     MARKED_INPUT_CHANGE_IN_VENREG,
-    MULTI_SELECT_CHANGE_IN_VENREG
+    MULTI_SELECT_CHANGE_IN_VENREG,
+    CREATE_UNIT_IN_VENREG
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +50,14 @@ export default function(state = initialState, action ) {
         case MULTI_SELECT_CHANGE_IN_VENREG: {
             const data = state.vendorRegData[action.prop]
             data[action.index][action.target.name] = [...action.target.selectedOptions].map(o => o.value)
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    [action.prop]: data,
+                })
+            })}
+        case CREATE_UNIT_IN_VENREG: {
+            const data = state.vendorRegData[action.prop]
+            data.push({})
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
