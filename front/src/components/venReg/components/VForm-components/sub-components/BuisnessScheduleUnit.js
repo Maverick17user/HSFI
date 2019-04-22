@@ -1,6 +1,22 @@
 import React, {Component} from 'react';
+import {createNewShaduleObject} from '../../../../../actions/createNewShaduleObject'
+import {removeShaduleObject} from '../../../../../actions/removeShaduleObject'
 
 class BuisnessScheduleUnit extends Component {
+    constructor() {
+        super()
+        this.addUnit= this.addUnit.bind(this)
+        this.removeUnit= this.removeUnit.bind(this)
+    }
+
+    addUnit() {
+        this.props.createNewShaduleObject()
+    }
+
+    removeUnit() {
+        this.props.removeShaduleObject()
+    }
+
     render() {
         const props = this.props
         console.log(props.data);
@@ -46,9 +62,13 @@ class BuisnessScheduleUnit extends Component {
                                             value={props.data[0].to || ''}/>
                                         </div>
                                         <div className="col">
-                                            <button type="button" className="btn btn-success">Add</button>
-                                            {(!props.flag) && 
-                                            <button type="button" className="btn btn-danger">Delete</button>}
+                                            {(props.flag === 'initial') && 
+                                            <button type="button" 
+                                            // onClick={}
+                                            className="btn btn-success">Add</button>}
+                                            {(props.flag !== 'initial') && 
+                                            // onClick={}
+                                            <button type="button" className="btn btn-danger">Remove</button>}
                                         </div>
                                     </div>
                                 </div>

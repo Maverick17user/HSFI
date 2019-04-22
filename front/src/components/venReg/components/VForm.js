@@ -20,6 +20,7 @@ class VForm extends Component {
             licScan: {},
         }
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleInputChangeWithFlag = this.handleInputChangeWithFlag.bind(this)
         this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -135,7 +136,6 @@ class VForm extends Component {
                 handleMultiSelectChange={this.handleMultiSelectChange}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 data={vendorRegData.buisnessSchedule}
-                flag='initial'
                 />
                 {/* <span>Buisness schedule</span>
                 <div className="row">
