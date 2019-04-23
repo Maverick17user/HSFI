@@ -3,10 +3,11 @@ import BuisnessScheduleUnit from './sub-components/BuisnessScheduleUnit'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+
 class BuisnessScheduleComponent extends Component {
     constructor(props){
         super(props);
-      }
+    }
     render() {
         const props = this.props
         const {vendorRegData} = this.props.vendorRegData
@@ -14,31 +15,32 @@ class BuisnessScheduleComponent extends Component {
 
         let dopularUnits = null
 
-        // The first item is initial
-        buisnessSchedule.pop(buisnessSchedule[0])
+        if(buisnessSchedule.length > 1) {
+            let shcheduleUnits = [...vendorRegData.buisnessSchedule]
 
-        if(buisnessSchedule.length > 0) {
-            dopularUnits = [...vendorRegData.buisnessSchedule].map((unit, index) => {
-                return (
-                    <BuisnessScheduleUnit 
+            // Delete first item because it is initial
+            shcheduleUnits.shift()
+
+            dopularUnits = shcheduleUnits.map((unit) => { 
+                return <BuisnessScheduleUnit 
                     handleMultiSelectChange={props.handleMultiSelectChange}
                     handleInputChangeWithFlag={props.handleInputChangeWithFlag}
+                    index={Number(unit.id)}
                     data={buisnessSchedule}
-                    index={Number(index+1)}
-                    key={(index+1).toString()}
-                    />
-                )
+                    key={unit.id.toString()} />    
             })
         }
 
         return (
             <>
+                <span>Buisness schedule</span>
                 <BuisnessScheduleUnit 
                 handleMultiSelectChange={props.handleMultiSelectChange}
                 handleInputChangeWithFlag={props.handleInputChangeWithFlag}
                 data={buisnessSchedule}
                 flag="initial"
                 index={Number(0)}
+                key={toString(0)}
                 />
                 {dopularUnits}
             </>
@@ -46,13 +48,14 @@ class BuisnessScheduleComponent extends Component {
     }
 }
 
+BuisnessScheduleComponent.propTypes = {
+    vendorRegData: PropTypes.object.isRequired,
+    handleMultiSelectChange: PropTypes.func.isRequired,
+    handleInputChangeWithFlag: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = (state) => ({
     vendorRegData: state.vendorRegData
 })
 
-// BuisnessScheduleUnit.propTypes = {
-//     vendorRegData: PropTypes.object.isRequired
-// }
-
 export default connect(mapStateToProps)(BuisnessScheduleComponent)
-// export default BuisnessScheduleComponent

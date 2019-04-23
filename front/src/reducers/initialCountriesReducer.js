@@ -17,8 +17,6 @@ export default function(state = initialState, action ) {
                 dbCountries: [...state.dbCountries, action.payload.country]
             })
         case REMOVE_COUNTRY:
-            console.log(state.dbCountries);
-
             state.dbCountries.splice(state.dbCountries.indexOf(action.countryName), 1)
             return Object.assign({}, state, {
                 dbCountries: state.dbCountries

@@ -2,15 +2,26 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import axios from 'axios'
 import {fetchData} from '../../../actions/venreg/fetching'
 import {inputChange} from '../../../actions/venreg/inputChange'
 import {marked_inputChange} from '../../../actions/venreg/marked_inputChange'
 import {multiSelecChange} from '../../../actions/venreg/multiSelecChange'
 
-import BuisnessLocationGroup from './VForm-components/BuisnessLocationGroup'
+import OperatorName_FetchedInput from './VForm-components/OperatorName_FetchedInput'
+import RegData_FetchedInput from './VForm-components/RegData_FetchedInput'
 import CountrySelect from './VForm-components/CountrySelect' 
 import VenNameInput from './VForm-components/VenNameInput'
+import VenPicktureInput from './VForm-components/VenPicktureInput'
+import LicenseNumberInput from './VForm-components/LicenseNumberInput'
+import LicenseScanInput from './VForm-components/LicenseScanInput'
+import PhoneInput from './VForm-components/PhoneInput'
+import EmailInput from './VForm-components/EmailInput'
+import BuisnessLocationComponent from './VForm-components/BuisnessLocationComponent'
 import BuisnessScheduleComponent from './VForm-components/BuisnessScheduleComponent'
+import IngredientSourceComponent from './VForm-components/IngredientSourceComponent'
+import FoodGroupSelect from './VForm-components/FoodGroupSelect'
+
 
 class VForm extends Component {
     constructor(props) {
@@ -39,8 +50,20 @@ class VForm extends Component {
 
     handleSubmit(e, data) {
         e.preventDefault();
-        const Vendor = Object.assign({},data)
-        console.log(Vendor);
+        const newVendor = Object.assign({},data)
+        axios.post('/api/vendors/venRegistration', newVendor)
+        .then(res => {
+            // dispatch(setNewCountry(res.data));
+            console.log('Vendor added successfully');
+            console.log(res);
+        })
+        .catch(err => {
+            // dispatch({
+            //     type: GET_ERRORS,
+            //     payload: err.response.data
+            // });
+            console.log(err);
+        });
         // this.props.regVendor(Vendor);
     }
 
@@ -53,110 +76,34 @@ class VForm extends Component {
         const {dbCountries} = this.props.dbCountries
         const {vendorRegData} = this.props.vendorRegData
 
-        console.log(vendorRegData)
-
         if (dbCountries.length === 0) {
             return <p>Fetching data...</p>
         }
         
         return (
             <form onSubmit={(e) => this.handleSubmit(e, vendorRegData)} className="mx-3">
-                <div className="form-group">
-                    <label htmlFor="operName">Operator's name</label>
-                    <input type="text" className="form-control" placeholder="Operator's name" 
-                    value={vendorRegData.operatorName} id="operName" readOnly />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="registred">Registration date</label>
-                    <input type="text" className="form-control" placeholder="Registration date"
-                    value={vendorRegData.regDate} id="registred" readOnly />
-                </div>
+                <OperatorName_FetchedInput value={vendorRegData.operatorName} />
+                <RegData_FetchedInput value={vendorRegData.regDate} />
                 <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
                 <VenNameInput venName={vendorRegData.venName} handleInputChange={this.handleInputChange} />
-                <div className="form-group">
-                    <label htmlFor="fileVenImg">Take a picture of vendor</label>
-                    <input type="file" className="form-control-file" name="venPhotoURL" id="fileVenImg"  />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="licenseNum">License number</label>
-                    <input type="text" className="form-control" onChange={this.handleInputChange} value={vendorRegData.licNumber}
-                    name="licNumber" placeholder="License number" id="licenseNum"  />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="fileLicScan">Take skan license</label>
-                    <input type="file" className="form-control-file" name="licScan" id="fileLicScan"  />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="tel">Phone</label>
-                    <input type="tel" className="form-control" onChange={this.handleInputChange} value={vendorRegData.phone}
-                    name="phone" placeholder="Phone" id="tel" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" className="form-control" onChange={this.handleInputChange} value={vendorRegData.email}
-                    name="email" id="email" placeholder="Email"  />
-                </div>
-                {/* <BuisnessLocationGroup /> */}
-                <span>Buisness location</span>
-                <div className="row">
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="city"><small>City</small></label>
-                            <input type="text" className="form-control"  placeholder="City" id="city" name="city"
-                            onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'buisnessLocation')} value={vendorRegData.buisnessLocation[0].city || ''} />
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="street"><small>Street</small></label>
-                            <input type="text" className="form-control"  placeholder="Street" id="street" name="street"
-                            onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'buisnessLocation')} value={vendorRegData.buisnessLocation[0].street || ''} />
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="number"><small>Object number</small></label>
-                            <div className="row">
-                                <div className="col">
-                                    <input type="text" className="form-control"  placeholder="№" id="number" name="objNumber" 
-                                    onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'buisnessLocation')} 
-                                    value={vendorRegData.buisnessLocation[0].objNumber || ''}/>
-                                </div>
-                                <div className="col">
-                                    <button type="button" className="btn btn-success">Add</button>
-                                    {/* {(tag !== 'initial') && <button type="button" className="btn btn-danger" 
-                                    onClick={this.deleteLastGroup}>Delete</button>} */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                {/* TODO: Code above make as single component too... */}
+                {/* <VenPicktureInput/> */}
+                <p className="text-warning">TODO: Vendor picture input</p>
+                <LicenseNumberInput handleInputChange={this.handleInputChange} value={vendorRegData.licNumber}/>
+                {/* <LicenseScanInput /> */}
+                <p className="text-warning">TODO: License Scan input</p>
+                <PhoneInput handleInputChange={this.handleInputChange} value={vendorRegData.phone}/>
+                <EmailInput handleInputChange={this.handleInputChange} value={vendorRegData.email}/>
+                <BuisnessLocationComponent 
+                handleInputChangeWithFlag={this.handleInputChangeWithFlag}
+                /> 
                 <BuisnessScheduleComponent 
                 handleMultiSelectChange={this.handleMultiSelectChange}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 />
-                <div className="form-group">
-                    <label htmlFor="ing_source">Ingredient source</label>
-                    <div className="row">
-                        <div className="col">
-                            <input type="text" className="form-control" onChange={(e) => this.handleInputChangeWithFlag(e, 0, 'ingredientSource')} 
-                            value={vendorRegData.ingredientSource[0].source || ''} name="source" placeholder="Ingredient source" id="ing_source" />
-                        </div>
-                        <div className="col">
-                            <button type="button" className="btn btn-success">Add</button>
-                            <button type="button" className="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="f_group">Food group</label>
-                    <select className="form-control" name="foodGroup" onChange={this.handleInputChange} id="f_group">
-                        <option value={'Fructs'}>Fructs</option>
-                        <option value={'Meat'}>Meat</option>
-                        <option value={'Fast food'}>Fast food</option>
-                    </select>
-                </div>
+                <IngredientSourceComponent 
+                handleInputChangeWithFlag={this.handleInputChangeWithFlag}
+                />
+                <FoodGroupSelect handleInputChange={this.handleInputChange} />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
