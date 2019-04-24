@@ -32,11 +32,11 @@ const Vendor_Schema = new Schema({
     },
     phone: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
-        required: false
+        required: true
     },
     buisnessLocation: {
         type: Array,

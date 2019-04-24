@@ -55,7 +55,7 @@ class VForm extends Component {
         .then(res => {
             // dispatch(setNewCountry(res.data));
             console.log('Vendor added successfully');
-            console.log(res);
+            // console.log(res);
         })
         .catch(err => {
             // dispatch({

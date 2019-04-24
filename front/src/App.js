@@ -18,6 +18,7 @@ import LoginOperator from './components/LoginOperator';
 import LoginManager from './components/LoginManager';
 
 import VenRegForm from './components/venReg/VenRegForm'
+import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
@@ -74,7 +75,7 @@ class App extends Component {
   
                   <Route path="/redactPanel" component={AuthHome} />
                   <Route path="/venRegistration" component={VenRegForm}/>
-                  <Route path="/venScratchCards" render={() => <p>venScratchCards</p>}/>
+                  <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" render={() => <p>hotline</p>}/>
                   <Route path="/inspection" render={() => <p>inspection</p>}/>
                   <Route path="/report" render={() => <p>report</p>}/>

@@ -26,7 +26,7 @@ div.progress {
 
 div.regVen, div.startTransaction {
   padding: 25px;
-  background: #F8F9FA;
+  background: white;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 2px lightgray;
           box-shadow: 0 0 2px lightgray;
