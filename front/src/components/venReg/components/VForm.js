@@ -26,10 +26,6 @@ import FoodGroupSelect from './VForm-components/FoodGroupSelect'
 class VForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            venPhotoURL: '',
-            licScan: {},
-        }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleInputChangeWithFlag = this.handleInputChangeWithFlag.bind(this)
         this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this)
@@ -53,18 +49,11 @@ class VForm extends Component {
         const newVendor = Object.assign({},data)
         axios.post('/api/vendors/venRegistration', newVendor)
         .then(res => {
-            // dispatch(setNewCountry(res.data));
             console.log('Vendor added successfully');
-            // console.log(res);
         })
         .catch(err => {
-            // dispatch({
-            //     type: GET_ERRORS,
-            //     payload: err.response.data
-            // });
             console.log(err);
         });
-        // this.props.regVendor(Vendor);
     }
 
     componentDidMount() {
@@ -72,7 +61,6 @@ class VForm extends Component {
     }
 
     render() {
-        const { user } = this.props.auth
         const {dbCountries} = this.props.dbCountries
         const {vendorRegData} = this.props.vendorRegData
 
