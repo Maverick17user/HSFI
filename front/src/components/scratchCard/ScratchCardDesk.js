@@ -1,10 +1,10 @@
 import React from 'react'
+import ContentTag from '../ContentTag'
 
 const ScratchCardDesk = () => {
     return (
         <div className="container startTransaction">
-            <h2>Scratch card desk</h2>
-            <p className="text-info">Transaction form</p>
+            <ContentTag title="Scratch card desk" subscription="Transaction form" />
             <form action="">
                 <div className="form-group">
                     <label for="opName">Operators Name</label>
