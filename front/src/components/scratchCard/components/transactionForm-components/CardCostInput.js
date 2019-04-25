@@ -7,10 +7,7 @@ const CardCostInput = props => {
                 <label htmlFor="1card_cost">Cost per card</label>
                 <input type="text" className="form-control"  placeholder="Cost per card" 
                 id="1card_cost" name="cardCost" value={props.value} 
-                onChange={(e) => {
-                    props.handleInputChange(e)
-                    props.updateTotalCost()
-                }} />
+                onChange={props.handleInputChange}/>
             </div>
         </div>
     )

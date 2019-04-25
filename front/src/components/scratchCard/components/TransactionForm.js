@@ -17,7 +17,7 @@ import CardsQuantityInput from './transactionForm-components/CardsQuantityInput'
 import SerialCardNumberInput from './transactionForm-components/SerialCardNumberInput'
 import CardCostInput from './transactionForm-components/CardCostInput'
 import CurrencyInput from './transactionForm-components/CurrencyInput'
-// import TotalCostInput from './transactionForm-components/TotalCostInput'
+import TotalCostInput from './transactionForm-components/TotalCostInput'
 
 class TransactionForm extends Component {
     constructor(props) {
@@ -25,24 +25,19 @@ class TransactionForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.fetchVendorData = this.fetchVendorData.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.updateTotalCost = this.updateTotalCost.bind(this)
-    }
-
-    updateTotalCost() {
-        const scratchCardData = this.props.scratchCardData
-        if((scratchCardData.cardCost !== '') && (scratchCardData.cardsQuantity !== '') ) {
-            console.log(scratchCardData.cardCost, scratchCardData.cardsQuantity, scratchCardData.currency);
-            const totalCost = scratchCardData.cardCost + scratchCardData.cardsQuantity + scratchCardData.currency
-            store.dispatch(setTotalCost(totalCost))
-        }
     }
 
     handleInputChange(e) {
         store.dispatch(inputChange(e.target))
+        store.dispatch(setTotalCost())
+    }
+
+    componentDidMount() {
+        store.dispatch(fetchInitialData(this.props.auth.user.name))
     }
 
     fetchVendorData(vendorNumber) {
-        if(vendorNumber !== (null || '' || undefined)) {
+        if((vendorNumber !== null) || (vendorNumber !== '') || (vendorNumber !== undefined)) {
             const data = {vendorNumber}
             
             axios.post('/api/vendors/getVendor', data) 
@@ -66,10 +61,6 @@ class TransactionForm extends Component {
         // });
     }
 
-    componentDidMount() {
-        store.dispatch(fetchInitialData(this.props.auth.user.name))
-    }
-
     render() {
         const {scratchCardData} = this.props.scratchCardData
 
@@ -84,24 +75,26 @@ class TransactionForm extends Component {
                 <VendorData_FetchedInputGroup scratchCardData={scratchCardData}/>
                 <CardsQuantityInput 
                 value={scratchCardData.cardsQuantity}
-                handleInputChange={this.handleInputChange}
-                updateTotalCost={this.updateTotalCost} />
+                handleInputChange={this.handleInputChange} />
                 <SerialCardNumberInput 
                 value={scratchCardData.serialNumber}
                 handleInputChange={this.handleInputChange} />
                 <div className="row">
                     <CardCostInput 
                     value={scratchCardData.cardCost}
-                    handleInputChange={this.handleInputChange} 
-                    updateTotalCost={this.updateTotalCost}/>
+                    handleInputChange={this.handleInputChange} />
                     <CurrencyInput handleInputChange={this.handleInputChange} />
                 </div>
-                {/* <TotalCostInput value={scratchCardData.totalCost} /> */}
-                <div className="form-group">
-                    <label htmlFor="totalSum">Total cost</label>
-                    <input type="text" className="form-control" placeholder="0$" id="totalSum" 
-                    name="totalCost" readOnly />
-                </div>
+                {/* <TotalCostInput
+                value={scratchCardData.totalCost}  
+                params={[scratchCardData.cardsQuantity,scratchCardData.cardCost]}
+                updateTotalCost={this.updateTotalCost}
+                /> */}
+                <TotalCostInput
+                value={scratchCardData.totalCost}  
+                // params={[scratchCardData.cardsQuantity,scratchCardData.cardCost]}
+                // updateTotalCost={this.updateTotalCost}
+                />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
