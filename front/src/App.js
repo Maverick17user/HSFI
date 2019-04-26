@@ -19,6 +19,7 @@ import LoginManager from './components/LoginManager';
 
 import VenRegForm from './components/venReg/VenRegForm'
 import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
+import HotlineForm from './components/hotline/HotlineForm'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
@@ -37,26 +38,9 @@ if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
-
-  // const currentTime = Date.now() / 1000;
-  // if(decoded.exp < currentTime) {
-  //   store.dispatch(logoutUser());
-  //   window.location.href = '/'
-  // }
 }
 
 class App extends Component {
-    // componentDidMount() {
-    //   fetch('/api/countries/redactPanel/countryList', {
-    //       method: 'get',
-    //       headers: {
-    //           'Content-Type': 'application/json'
-    //       },
-    //   })
-    //   .then(resp => resp.json())
-    //       .then(data => this.props.putCountriesIntoStore(data))
-    //       .catch(err => console.log(err))
-    // }
     render() {
       return (
         <Provider store={ store }>
@@ -76,7 +60,7 @@ class App extends Component {
                   <Route path="/redactPanel" component={AuthHome} />
                   <Route path="/venRegistration" component={VenRegForm}/>
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
-                  <Route path="/hotline" render={() => <p>hotline</p>}/>
+                  <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" render={() => <p>inspection</p>}/>
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>

@@ -4,11 +4,13 @@ import authReducer from './authReducer';
 import initialCountriesReducer from './initialCountriesReducer'
 import venregReducer from './venregReducer'
 import scratchCardsReducer from './scratchCardsReducer'
+import hotlineReducer from './hotlineReducer'
 
 export default combineReducers({
     errors: errorReducer,
     auth: authReducer,
     dbCountries: initialCountriesReducer,
     vendorRegData: venregReducer,
-    scratchCardData: scratchCardsReducer
+    scratchCardData: scratchCardsReducer,
+    hotlineCall: hotlineReducer
 });

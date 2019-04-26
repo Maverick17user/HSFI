@@ -10,6 +10,7 @@ const operator_users = require('./routes/operator_users');
 const countries = require('./routes/country');
 const vendors = require('./routes/vendor');
 const scratchCards = require('./routes/scratchCard');
+const callLogs = require('./routes/callLog');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
@@ -29,6 +30,7 @@ app.use('/api/operatorUsers', operator_users);
 app.use('/api/countries', countries);
 app.use('/api/vendors', vendors);
 app.use('/api/cards', scratchCards);
+app.use('/api/calls', callLogs);
 
 const PORT = process.env.PORT || 5000;
 

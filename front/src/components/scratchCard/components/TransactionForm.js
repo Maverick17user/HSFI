@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import axios from 'axios'
+
 import {fetchInitialData} from '../../../actions/scratchCard/fetchInitialData'
 import {inputChange} from '../../../actions/scratchCard/inputChange'
 import {fetchVendorData} from '../../../actions/scratchCard/fetchVendorData'
