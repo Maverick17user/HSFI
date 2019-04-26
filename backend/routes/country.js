@@ -67,7 +67,6 @@ router.delete('/redactPanel/countryList', function(req, res) {
 });
 
 router.get('/redactPanel/countryList', function(req, res) {
-
     Country.find({}, 'country')
     .then(countries => res.json(countries))
     .catch(err => {

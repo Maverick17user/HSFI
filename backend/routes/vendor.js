@@ -2,21 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const Vendor = require('../models/Vendor');
-const validateCountries = require('../validation/homePanel/countries');
 
 router.post('/venRegistration', function(req, res) {
-    // const { errors, isValid } = validateCountries(req.body);
-
-    // if(!isValid) {   
-    //     return res.status(400).json(errors);
-    // }
     
     Vendor.findOne({
         licNumber: req.body.licNumber
     }).then(licNumber => {
         if(licNumber) {
             return res.status(400).json({
-                licNumber: 'Venor with this license already exists'
+                licNumber: 'Vendor with this license already exists'
             });
         }
         else {
@@ -46,5 +40,20 @@ router.post('/venRegistration', function(req, res) {
         }
     });
 });
+
+router.post('/getVendor', function(req, res) {
+
+    Vendor.findOne({licNumber: req.body.vendorNumber})
+    .then(data => {
+        if(!data) {
+            return res.status(400).json({
+                licNumber: 'Vendor with this license not found'
+            });
+        } else {
+            res.json(data)
+        }
+    })
+    .catch(err => console.log(err))  
+})
 
 module.exports = router;
