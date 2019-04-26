@@ -32,18 +32,6 @@ export default function(state = initialState, action ) {
             })
         }
         case INPUT_CHANGE_IN_TRANSACTION: {
-            // const data = action.payload
-            // const scratchCardData = state.scratchCardData
-            // let totalCost = scratchCardData.totalCost
-            
-            // if( data.name === 'cardsQuantity'  || 
-            //     data.name === 'cardCost' || 
-            //     data.name === 'currency') {
-            //     if((scratchCardData.cardCost !== '') && (scratchCardData.cardsQuantity !== '')) {
-            //         totalCost = (scratchCardData.cardCost * scratchCardData.cardsQuantity) + scratchCardData.currency
-            //     }
-            // }
-
             return Object.assign({}, state, {
                 scratchCardData: Object.assign({}, state.scratchCardData, {
                     [action.payload.name]: action.payload.value,

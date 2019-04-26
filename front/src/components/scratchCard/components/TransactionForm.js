@@ -51,14 +51,17 @@ class TransactionForm extends Component {
         console.log('Submited=>');
         console.log(data);
         
-        // const newVendor = Object.assign({},data)
-        // axios.post('/api/vendors/venRegistration', newVendor)
-        // .then(res => {
-        //     console.log('Vendor added successfully');
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // });
+        const newCard = Object.assign({},data)
+        axios.post('/api/cards/venScratchCards', newCard)
+        .then(res => {
+            console.log('yes');
+            
+            console.log('Cards added successfully');
+        })
+        .catch(err => {
+            console.log('nope');
+            console.log(err);
+        });
     }
 
     render() {

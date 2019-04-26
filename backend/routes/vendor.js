@@ -2,14 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const Vendor = require('../models/Vendor');
-const validateCountries = require('../validation/homePanel/countries');
 
 router.post('/venRegistration', function(req, res) {
-    // const { errors, isValid } = validateCountries(req.body);
-
-    // if(!isValid) {   
-    //     return res.status(400).json(errors);
-    // }
     
     Vendor.findOne({
         licNumber: req.body.licNumber
