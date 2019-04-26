@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentTag from './components/ContentTag'
+import ContentTag from '../ContentTag'
 import VForm from './components/VForm'
 
 const VenRegForm = () => {
