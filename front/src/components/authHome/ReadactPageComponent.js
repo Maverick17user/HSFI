@@ -39,7 +39,7 @@ const ReadactPageComponent = (props) => {
             <RedactPanelNav links={props.linksData} />
             <Switch>
                 <Route exact path="/redactPanel/countryList" component={RedactCountryList} />
-                <Route exact path="/redactPanel/foodGroups" component={RedactFoodGroups} />
+                {/* <Route exact path="/redactPanel/foodGroups" component={RedactFoodGroups} /> */}
                 <Route exact path="/redactPanel/organizationsList" component={RedactOrganizations} />
                 <Route exact path="/redactPanel/inspectionQuestions" component={RedactInspectionQuestions} />
                 <Route exact path="/redactPanel/NpcRequests" component={RedactNPCsRegRequests} />

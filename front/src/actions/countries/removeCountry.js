@@ -17,28 +17,6 @@ export const removeCountry = (country) => dispatch => {
                 payload: err.response.data
             });
         });
-
-    // fetch('/api/countries/redactPanel/countryList', {
-    //     method: 'delete',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(country)
-    // })
-    // .then(resp => resp.json())
-    //     .then(data => {
-    //         console.log(data);
-            
-    //         dispatch(deleteCountry(data))})
-    //     .catch(err => {
-    //         console.log(err)
-            
-    //         dispatch({
-    //             type: GET_ERRORS,
-    //             payload: err
-    //         })
-    //     }
-    //     )
 }
 
 export const deleteCountry = name => {

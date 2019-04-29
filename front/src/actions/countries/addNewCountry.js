@@ -12,7 +12,6 @@ export const addNewCountry = (newCountry) => dispatch => {
                 payload: err.response.data
             });
         });
-        
 }
 
 export const setNewCountry = name => {
