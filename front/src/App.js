@@ -1,4 +1,3 @@
-// import './App.css';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -30,7 +29,7 @@ import Popper from 'popper.js';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import AuthHome from './components/AuthHome'
+import AuthHome from './components/authHome/AuthHome'
 
 import { putCountriesIntoStore } from './actions/countries/putCountriesIntoStore'
 
@@ -73,16 +72,4 @@ class App extends Component {
 }
 
 export default App
-
-// export default connect({ putCountriesIntoStore })(withRouter(App))
-
-// const ConnectedApp = connect({putCountriesIntoStore})(withRouter(App));
-
-// export const Root = () => 
-//     <Provider store={store}>
-//       {/* <Router > */}
-//         <ConnectedApp/>
-//       {/* </Router> */}
-//     </Provider>
-
 

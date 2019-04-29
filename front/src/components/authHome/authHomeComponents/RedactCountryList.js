@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addNewCountry } from '../../actions/countries/addNewCountry'
-import { removeCountry } from '../../actions/countries/removeCountry'
+import { addNewCountry } from '../../../actions/countries/addNewCountry'
+import { removeCountry } from '../../../actions/countries/removeCountry'
 import classnames from 'classnames';
 
 import CountryList from './curCountryListComponents/CountryList'
