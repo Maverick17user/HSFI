@@ -36,8 +36,6 @@ router.post('/redactPanel/countryList', function(req, res) {
 });
 
 router.delete('/redactPanel/countryList', function(req, res) {
-    // console.log('|');
-    // console.log(req.body);
     
     const { errors, isValid } = validateCountries(req.body);
     

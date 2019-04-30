@@ -8,6 +8,6 @@ const FoodGroups_Schema = new Schema({
     },
 });
 
-const FoodGroup = mongoose.model('countries', FoodGroups_Schema);
+const FoodGroup = mongoose.model('foodGroups', FoodGroups_Schema);
 
 module.exports = FoodGroup;
