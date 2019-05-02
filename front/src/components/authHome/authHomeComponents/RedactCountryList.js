@@ -20,6 +20,8 @@ class RedactCountryList extends Component {
                 addNewDataUnit={props.addNewCountry}
                 removeDataUnit={props.removeCountry}
                 storeData={dbCountries}
+                listTitle="Curent country list"
+                placeholderText="Country name"
                 />
             </>
         )

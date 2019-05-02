@@ -7,6 +7,7 @@ import {fetchData} from '../../../actions/venreg/fetching'
 import {inputChange} from '../../../actions/venreg/inputChange'
 import {marked_inputChange} from '../../../actions/venreg/marked_inputChange'
 import {multiSelecChange} from '../../../actions/venreg/multiSelecChange'
+import {submitVenRegForm} from '../../../actions/venreg/submitVenRegForm'
 
 import OperatorName_FetchedInput from './VForm-components/OperatorName_FetchedInput'
 import RegData_FetchedInput from './VForm-components/RegData_FetchedInput'
@@ -47,13 +48,7 @@ class VForm extends Component {
     handleSubmit(e, data) {
         e.preventDefault();
         const newVendor = Object.assign({},data)
-        axios.post('/api/vendors/venRegistration', newVendor)
-        .then(res => {
-            console.log('Vendor added successfully');
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        this.props.submitVenRegForm(newVendor)
     }
 
     componentDidMount() {
@@ -105,7 +100,6 @@ VForm.propTypes = {
     inputChange: PropTypes.func.isRequired,
     marked_inputChange: PropTypes.func.isRequired,
     multiSelecChange: PropTypes.func.isRequired,
-    // errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -117,6 +111,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     fetchData, 
     inputChange,
+    submitVenRegForm,
     marked_inputChange,
     multiSelecChange
 })(VForm)

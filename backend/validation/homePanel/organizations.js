@@ -1,12 +1,12 @@
 const Validator = require('validator');
 const isEmpty = require('../is-empty');
 
-module.exports = function validateCountries(data) {
+module.exports = function validateOrganizations(data) {
     
     let errors = {};
 
-    if(Validator.isEmpty(data.country)) {
-        errors.country = 'Country input is required';
+    if(Validator.isEmpty(data.organization)) {
+        errors.organization = 'Organization input is required';
     }
     
     return {

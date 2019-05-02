@@ -2,8 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const Vendor = require('../models/Vendor');
+const validateVenRegForm = require('../validation/venreg/regForm');
 
 router.post('/venRegistration', function(req, res) {
+
+    const { errors, isValid } = validateVenRegForm(req.body);
+
+    if(!isValid) {
+        return res.status(400).json(errors);
+    }
     
     Vendor.findOne({
         licNumber: req.body.licNumber

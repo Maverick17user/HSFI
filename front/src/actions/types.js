@@ -6,6 +6,15 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const ADD_NEW_COUNTRY = 'ADD_NEW_COUNTRY';
 export const REMOVE_COUNTRY = 'REMOVE_COUNTRY';
 export const GET_DB_COUNTRIES = 'GET_DB_COUNTRIES';
+export const ADD_NEW_FOODGROUP = 'ADD_NEW_FOODGROUP';
+export const REMOVE_FOODGROUP = 'REMOVE_FOODGROUP';
+export const GET_DB_FOODGROUPES = 'GET_DB_FOODGROUPES';
+export const ADD_NEW_ORG = 'ADD_NEW_ORG';
+export const REMOVE_ORG = 'REMOVE_ORG';
+export const GET_DB_ORGS = 'GET_DB_ORGS';
+export const ADD_NEW_QUESTION = 'ADD_NEW_QUESTION';
+export const REMOVE_QUESTION = 'REMOVE_QUESTION';
+export const GET_DB_QUESTIONS = 'GET_DB_QUESTIONS';
 
 // Vendor reg form
 export const FETCH_IN_VENREG = 'FETCH_IN_VENREG';

@@ -19,6 +19,7 @@ import LoginManager from './components/LoginManager';
 import VenRegForm from './components/venReg/VenRegForm'
 import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
 import HotlineForm from './components/hotline/HotlineForm'
+import InspectionDesk from './components/inspection/InspectionDesk'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
@@ -60,7 +61,7 @@ class App extends Component {
                   <Route path="/venRegistration" component={VenRegForm}/>
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
-                  <Route path="/inspection" render={() => <p>inspection</p>}/>
+                  <Route path="/inspection" component={InspectionDesk}/>
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>

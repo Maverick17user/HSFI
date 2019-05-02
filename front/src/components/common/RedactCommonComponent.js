@@ -97,7 +97,7 @@ class RedactCommonComponent extends Component {
                                         className="form-control" 
                                         name={props.name} 
                                         value={this.state[props.name]}
-                                        placeholder="Country name" 
+                                        placeholder={props.placeholderText} 
                                         onChange={this.handleInputChange} 
                                         className={classnames('form-control form-control-lg', {
                                             'is-invalid': errors[props.name]
@@ -113,7 +113,7 @@ class RedactCommonComponent extends Component {
                                 </form>
                             </div>
                             <div className="col-4">
-                                <ListOfAddedReadactItems storeData={props.storeData}/>
+                                <ListOfAddedReadactItems listTitle={props.listTitle} storeData={props.storeData}/>
                             </div>
                         </div>
                     </div>

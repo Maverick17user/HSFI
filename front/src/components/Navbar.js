@@ -7,6 +7,9 @@ import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
+import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesIntoStore'
+import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
+import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
 
 class Navbar extends Component {
 
@@ -15,23 +18,44 @@ class Navbar extends Component {
         this.props.logoutUser(this.props.history);
     }
 
+    // TODO: import fetching into App.js
     componentDidMount() {
-      fetch('/api/countries/redactPanel/countryList', {
-          method: 'get',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-      })
-      .then(resp => resp.json())
-          .then(data => this.props.putCountriesIntoStore(data))
-          .catch(err => console.log(err))
+        const options = {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+
+        // Fetch countryList
+        fetch('/api/countries/redactPanel/countryList', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putCountriesIntoStore(data))
+            .catch(err => console.log(err))
+
+        // Fetch food group list
+        fetch('/api/foodGroups/redactPanel/foodGroups', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putFoodGroupesIntoStore(data))
+            .catch(err => console.log(err))
+
+        // Organizations list
+        fetch('/api/organizations/redactPanel/organizationsList', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putOrganizationsListIntoStore(data))
+            .catch(err => console.log(err))
+        
+        // Questions list
+        fetch('/api/questions/redactPanel/inspectionQuestions', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putInspectionQuestionsIntoStore(data))
+            .catch(err => console.log(err))
     }
 
     render() {
         const {isAuthenticated, user} = this.props.auth;
 
         const initailTaskList = [
-            {title:'Home', route:'/'},
             {title:'Vendor registration', route:'/venRegistration'},
             {title:'Scratch card desk', route:'/venScratchCards'},
             {title:'Hotline', route:'/hotline'},
@@ -55,7 +79,7 @@ class Navbar extends Component {
             }
 
             const generateOperatorTasksData = (operatorTasks) => {
-                return [{title:'Home', route:'/'}].concat(operatorTasks.map(taskName => {
+                return operatorTasks.map(taskName => {
                     switch (taskName) {
                         case 'Vendor Registration':
                             return {title: 'Vendor Registration', route: '/venRegistration'}
@@ -68,7 +92,7 @@ class Navbar extends Component {
                         default:
                             break;
                     }
-                }))
+                })
             }
 
             let tasks = (!isForOperator) ?  props.tasks : generateOperatorTasksData(props.operatorTasks)        
@@ -179,11 +203,20 @@ class Navbar extends Component {
 Navbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    putCountriesIntoStore: PropTypes.func.isRequired
+    putCountriesIntoStore: PropTypes.func.isRequired,
+    putFoodGroupesIntoStore: PropTypes.func.isRequired,
+    putOrganizationsListIntoStore: PropTypes.func.isRequired,
+    putInspectionQuestionsIntoStore: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { logoutUser, putCountriesIntoStore })(withRouter(Navbar));
+export default connect(mapStateToProps, { 
+    logoutUser, 
+    putCountriesIntoStore,
+    putFoodGroupesIntoStore,
+    putOrganizationsListIntoStore,
+    putInspectionQuestionsIntoStore
+})(withRouter(Navbar));

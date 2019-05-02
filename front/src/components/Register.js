@@ -67,6 +67,8 @@ class Register extends Component {
     render() {
 
         const { errors } = this.state;
+        const { dbCountries } = this.props.dbCountries
+        const { dborganizations } = this.props.dborganizations
 
         return(
             <div className="container" style={{ marginTop: '50px', width: '700px'}}>
@@ -74,16 +76,17 @@ class Register extends Component {
                 <p className="text-info">Form for NPC</p>
                 <form onSubmit={ this.handleSubmit }>
                     <div className="form-group">
-                        <input
-                        type="text"
-                        placeholder="Country"
-                        className={classnames('form-control form-control-lg', {
-                            'is-invalid': errors.country
-                        })}
-                        name="country"
-                        onChange={ this.handleInputChange }
-                        value={ this.state.country }
-                        />
+                        <select 
+                            placeholder="Country"
+                            className={classnames('form-control form-control-lg', {
+                                'is-invalid': errors.country
+                            })}
+                            name="country"
+                            onChange={ this.handleInputChange }>
+                                {dbCountries.map((country, i)=> {
+                                    return <option value={country} key={country+i}>{country}</option>
+                                })}
+                        </select>
                         {errors.country && (<div className="invalid-feedback">{errors.country}</div>)}
                     </div>
                     <div className="form-group">
@@ -100,16 +103,16 @@ class Register extends Component {
                         {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
                     </div>
                     <div className="form-group">
-                        <input
-                        type="text"
-                        placeholder="Organization"
-                        className={classnames('form-control form-control-lg', {
-                            'is-invalid': errors.organization
-                        })}
-                        name="organization"
-                        onChange={ this.handleInputChange }
-                        value={ this.state.organization }
-                        />
+                        <select
+                            className={classnames('form-control form-control-lg', {
+                                'is-invalid': errors.organization
+                            })}
+                            name="organization"
+                            onChange={ this.handleInputChange }>
+                                {dborganizations.map((org, i)=> {
+                                    return <option value={org} key={org+i}>{org}</option>
+                                })}
+                        </select>
                         {errors.organization && (<div className="invalid-feedback">{errors.organization}</div>)}
                     </div>
                     <div className="form-group">
@@ -190,12 +193,16 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    dbCountries: PropTypes.object.isRequired,
+    dborganizations: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
+    dbCountries: state.dbCountries,
+    dborganizations: state.dborganizations,
 });
 
 export default connect(mapStateToProps,{ registerUser })(withRouter(Register))
