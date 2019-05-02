@@ -5,7 +5,16 @@ const initialState = {};
 export default function(state = initialState, action ) {
     switch(action.type) {
         case GET_ERRORS:
-            return action.payload;
+            if ((typeof action.payload == 'object' && 
+                !(action.payload instanceof Array) &&
+                action.payload !== null) 
+                || typeof action.payload == 'string' ) {
+
+                return action.payload;
+                
+            } else {
+                return state
+            }
         default: 
             return state;
     }
