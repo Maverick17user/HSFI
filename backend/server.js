@@ -10,6 +10,8 @@ const operator_users = require('./routes/operator_users');
 
 const countries = require('./routes/country');
 const foodGroups = require('./routes/foodGroup');
+const organizations = require('./routes/organization');
+const inspectQuestions = require('./routes/inspectQuestion');
 
 const vendors = require('./routes/vendor');
 const scratchCards = require('./routes/scratchCard');
@@ -33,6 +35,8 @@ app.use('/api/operatorUsers', operator_users);
 
 app.use('/api/countries', countries);
 app.use('/api/foodGroups', foodGroups);
+app.use('/api/organizations', organizations);
+app.use('/api/questions', inspectQuestions);
 
 app.use('/api/vendors', vendors);
 app.use('/api/cards', scratchCards);

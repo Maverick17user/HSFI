@@ -4,15 +4,6 @@ const isEmpty = require('../is-empty');
 module.exports = function validateRegisterInput(data) {
     
     let errors = {};
-    data.country = !isEmpty(data.country) ? data.country : '';
-    data.name = !isEmpty(data.name) ? data.name : '';
-    data.organization = !isEmpty(data.organization) ? data.organization : '';
-    data.mailingAdress = !isEmpty(data.mailingAdress) ? data.mailingAdress : '';
-    data.phone = !isEmpty(data.phone) ? data.phone : '';
-    data.email = !isEmpty(data.email) ? data.email : '';
-    data.password = !isEmpty(data.password) ? data.password : '';
-    data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';
-    console.log(data);
 
     if(Validator.isEmpty(data.country)) {
         errors.country = 'Country field is required';

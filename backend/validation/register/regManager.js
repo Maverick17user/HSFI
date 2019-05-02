@@ -3,12 +3,6 @@ const isEmpty = require('../is-empty');
 
 module.exports = function validateRegisterInput(data) {
     let errors = {};
-    data.name = !isEmpty(data.name) ? data.name : '';
-    data.office = !isEmpty(data.office) ? data.office : '';
-    data.phone = !isEmpty(data.phone) ? data.phone : '';
-    data.email = !isEmpty(data.email) ? data.email : '';
-    data.password = !isEmpty(data.password) ? data.password : '';
-    data.password_confirm = !isEmpty(data.password_confirm) ? data.password_confirm : '';
 
     if(!Validator.isLength(data.name, { min: 1, max: 50 })) {
         errors.name = 'Name must be between 1 to 50 chars';

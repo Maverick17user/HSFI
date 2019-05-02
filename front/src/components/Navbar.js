@@ -8,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 
 import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
 import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesIntoStore'
+import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
+import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
 
 class Navbar extends Component {
 
@@ -18,26 +20,35 @@ class Navbar extends Component {
 
     // TODO: import fetching into App.js
     componentDidMount() {
-        // Fetch countryList
-        fetch('/api/countries/redactPanel/countryList', {
+        const options = {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
             },
-        })
+        }
+
+        // Fetch countryList
+        fetch('/api/countries/redactPanel/countryList', options)
         .then(resp => resp.json())
             .then(data => this.props.putCountriesIntoStore(data))
             .catch(err => console.log(err))
 
         // Fetch food group list
-        fetch('/api/foodGroups/redactPanel/foodGroups', {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
+        fetch('/api/foodGroups/redactPanel/foodGroups', options)
         .then(resp => resp.json())
             .then(data => this.props.putFoodGroupesIntoStore(data))
+            .catch(err => console.log(err))
+
+        // Organizations list
+        fetch('/api/organizations/redactPanel/organizationsList', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putOrganizationsListIntoStore(data))
+            .catch(err => console.log(err))
+        
+        // Questions list
+        fetch('/api/questions/redactPanel/inspectionQuestions', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putInspectionQuestionsIntoStore(data))
             .catch(err => console.log(err))
     }
 
@@ -193,7 +204,9 @@ Navbar.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     putCountriesIntoStore: PropTypes.func.isRequired,
-    putFoodGroupesIntoStore: PropTypes.func.isRequired
+    putFoodGroupesIntoStore: PropTypes.func.isRequired,
+    putOrganizationsListIntoStore: PropTypes.func.isRequired,
+    putInspectionQuestionsIntoStore: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -203,5 +216,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { 
     logoutUser, 
     putCountriesIntoStore,
-    putFoodGroupesIntoStore
+    putFoodGroupesIntoStore,
+    putOrganizationsListIntoStore,
+    putInspectionQuestionsIntoStore
 })(withRouter(Navbar));
