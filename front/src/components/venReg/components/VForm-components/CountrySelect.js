@@ -4,21 +4,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 
 class CountrySelect extends Component {
-    constructor() {
-        super()
-        this.state = {
-            errors: {}
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
-        }
-    }
-
     render() {
         const props = this.props
         const {dbCountries, handleMultiSelectChange} = props

@@ -2,8 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const ScratchCard = require('../models/ScratchCard');
+const validateScratchCardReg = require('../validation/scratchCard/scratchCards')
 
 router.post('/venScratchCards', function(req, res) {
+    const { errors, isValid } = validateScratchCardReg(req.body);
+
+    if(!isValid) {   
+        return res.status(400).json(errors);
+    }
+
     ScratchCard.findOne({
         serialNumber: req.body.serialNumber
     }).then(serialNumber => {

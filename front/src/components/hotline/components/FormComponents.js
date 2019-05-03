@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import {fetchInitialData} from '../../../actions/hotline/fetchInitialData'
 import {inputChange} from '../../../actions/hotline/inputChange'
+import {submitAction} from '../../../actions/hotline/submitAction'
 
 import FetchedInputGroup from './formComponent/FetchedInputGroup'
 import NationalCallerIDInput from './formComponent/NationalCallerIDInput'
@@ -29,10 +30,7 @@ class FormComponents extends Component {
 
     handleSubmit(e, callData) {
         e.preventDefault()
-        
-        axios.post('/api/calls/hotline', callData)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        store.dispatch(submitAction(callData))
     }
 
     render() {
@@ -59,13 +57,11 @@ class FormComponents extends Component {
 
 FormComponents.propTypes = {
     auth: PropTypes.object.isRequired,
-    // scratchCardData: PropTypes.object.isRequired,
     hotlineCall: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    // scratchCardData: state.scratchCardData,
     hotlineCall: state.hotlineCall,
 })
 

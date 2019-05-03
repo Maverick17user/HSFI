@@ -9,6 +9,7 @@ import {fetchInitialData} from '../../../actions/scratchCard/fetchInitialData'
 import {inputChange} from '../../../actions/scratchCard/inputChange'
 import {fetchVendorData} from '../../../actions/scratchCard/fetchVendorData'
 import {setTotalCost} from '../../../actions/scratchCard/setTotalCost'
+import {submitTransaction} from '../../../actions/scratchCard/submitTransaction'
 
 import OperatorName_FetchedInput from './transactionForm-components/OperatorName_FetchedInput'
 import TransactionDate_FetchedInput from './transactionForm-components/TransactionDate_FetchedInput'
@@ -40,29 +41,16 @@ class TransactionForm extends Component {
     fetchVendorData(vendorNumber) {
         if((vendorNumber !== null) || (vendorNumber !== '') || (vendorNumber !== undefined)) {
             const data = {vendorNumber}
-            
-            axios.post('/api/vendors/getVendor', data) 
-            .then(res => store.dispatch(fetchVendorData(res.data)))
-            .catch(err => console.log(err))
+
+            store.dispatch(fetchVendorData(data))
         }
     }
 
     handleSubmit(e, data) {
-        e.preventDefault();
-        console.log('Submited=>');
-        console.log(data);
-        
+        e.preventDefault()
         const newCard = Object.assign({},data)
-        axios.post('/api/cards/venScratchCards', newCard)
-        .then(res => {
-            console.log('yes');
-            
-            console.log('Cards added successfully');
-        })
-        .catch(err => {
-            console.log('nope');
-            console.log(err);
-        });
+
+        store.dispatch(submitTransaction(newCard))
     }
 
     render() {
@@ -89,16 +77,7 @@ class TransactionForm extends Component {
                     handleInputChange={this.handleInputChange} />
                     <CurrencyInput handleInputChange={this.handleInputChange} />
                 </div>
-                {/* <TotalCostInput
-                value={scratchCardData.totalCost}  
-                params={[scratchCardData.cardsQuantity,scratchCardData.cardCost]}
-                updateTotalCost={this.updateTotalCost}
-                /> */}
-                <TotalCostInput
-                value={scratchCardData.totalCost}  
-                // params={[scratchCardData.cardsQuantity,scratchCardData.cardCost]}
-                // updateTotalCost={this.updateTotalCost}
-                />
+                <TotalCostInput value={scratchCardData.totalCost} />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )

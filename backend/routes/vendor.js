@@ -48,6 +48,7 @@ router.post('/venRegistration', function(req, res) {
     });
 });
 
+// TODO: Make it as get request
 router.post('/getVendor', function(req, res) {
 
     Vendor.findOne({licNumber: req.body.vendorNumber})

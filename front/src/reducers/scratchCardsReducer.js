@@ -35,7 +35,6 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 scratchCardData: Object.assign({}, state.scratchCardData, {
                     [action.payload.name]: action.payload.value,
-                    // totalCost: totalCost
                 })
             })
         }
