@@ -21,6 +21,8 @@ import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
 import HotlineForm from './components/hotline/HotlineForm'
 import InspectionDesk from './components/inspection/InspectionDesk'
 
+import VendorProfile from './components/inspection/components/VendorProfile'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -62,6 +64,7 @@ class App extends Component {
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
+                  <Route path="/vendors/:vendorId" component={VendorProfile}/>
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>

@@ -4,7 +4,7 @@ import {
     MARKED_INPUT_CHANGE_IN_VENREG,
     MULTI_SELECT_CHANGE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
-    REMOVE_UNIT_FROM_VENREG
+    REMOVE_UNIT_FROM_VENREG,
 } from '../actions/types';
 
 const initialState = {

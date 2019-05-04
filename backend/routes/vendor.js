@@ -64,4 +64,12 @@ router.post('/getVendor', function(req, res) {
     .catch(err => console.log(err))  
 })
 
+// TODO: Make it as get request
+router.get('/getAllVendors', function(req, res) {
+
+    Vendor.find({})
+    .then(data => res.json(data))
+    .catch(err => console.log(err))  
+})
+
 module.exports = router;

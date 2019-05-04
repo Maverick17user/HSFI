@@ -10,6 +10,8 @@ import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStor
 import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesIntoStore'
 import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
 import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
+import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
+
 
 class Navbar extends Component {
 
@@ -26,6 +28,13 @@ class Navbar extends Component {
                 'Content-Type': 'application/json'
             },
         }
+
+        // Fetch vendors
+        fetch('/api/vendors/getAllVendors', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putVendorsIntoStore(data))
+            .catch(err => console.log(err))
+        .catch(err => console.log(err))
 
         // Fetch countryList
         fetch('/api/countries/redactPanel/countryList', options)
@@ -206,7 +215,8 @@ Navbar.propTypes = {
     putCountriesIntoStore: PropTypes.func.isRequired,
     putFoodGroupesIntoStore: PropTypes.func.isRequired,
     putOrganizationsListIntoStore: PropTypes.func.isRequired,
-    putInspectionQuestionsIntoStore: PropTypes.func.isRequired
+    putInspectionQuestionsIntoStore: PropTypes.func.isRequired,
+    putVendorsIntoStore: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -218,5 +228,6 @@ export default connect(mapStateToProps, {
     putCountriesIntoStore,
     putFoodGroupesIntoStore,
     putOrganizationsListIntoStore,
-    putInspectionQuestionsIntoStore
+    putInspectionQuestionsIntoStore,
+    putVendorsIntoStore,
 })(withRouter(Navbar));
