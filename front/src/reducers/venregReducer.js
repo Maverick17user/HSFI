@@ -21,7 +21,12 @@ const initialState = {
         buisnessLocation: [{id:0}],
         buisnessSchedule: [{id:0}],
         ingredientSource: [{id:0}],
-        foodGroup: ''
+        foodGroup: '',
+        flagStatus: '',
+        hasBeenFlagged: false,
+        oss: '',
+        isOpen: true,
+        gps: ''
     }
 }
 
@@ -73,7 +78,7 @@ export default function(state = initialState, action ) {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
                 })
-            })}
+            })} 
         default: 
             return state;
     }

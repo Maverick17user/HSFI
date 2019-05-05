@@ -8,127 +8,134 @@ const Profile = props => {
             <h3 className="venProfile-h3">Vendor profile</h3>
             <div className="row">
                 <div className="col-3">
-                    <div className="container">
-                        <img src={venData.venPhotoURL} alt="Vendor" width="200px" />
+                    <div className="container d-flex justify-content-center align-items-center flex-column">
+                        <img src={venData.venPhotoURL} alt="Vendor" className="vendorPhoto"/>
+                        <div className="w-100 d-flex justify-content-around align-items-center">
+                            <span className="vName">{venData.venName}</span>
+                        </div>
+                        <div className="w-100 d-flex justify-content-around align-items-center">
+                            {(venData.flagStatus === "is flagged") 
+                                ? <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
+                                : <button type="button" className="btn btn-outline-primary venInspectBut">Inspect</button>
+                            }
+                            <button type="button" className="btn btn-outline-info venInspectBut">Edit</button>
+                        </div>
                     </div>
                 </div>
                 <div className="col-4">
                     <div className="container">
-                        <p>
-                            <span className="lead">Name</span><br/>
-                            <span className="profileData">{venData.venName}</span>
-                        </p>
-                        <p>
-                            <span className="lead">Country</span><br/>
-                            <span className="profileData">
+                        <section>
+                            <label className="lead">Country</label>
+                            <ul className="profileData">
                                 {venData.country.map((unit,i) => {
-                                    return unit.country.map(locUnit => <div key={locUnit+1}>{locUnit}</div>)
+                                    return unit.country.map(locUnit => <li className="venProfile-country--item" key={locUnit+1}>{locUnit}</li>)
                                 })}
-                            </span>
-                        </p>
-                        <p>
-                            <span className="lead">License number</span><br/>
+                            </ul>
+                        </section>
+                        <section>
+                            <label className="lead">License number</label>
                             <span className="profileData">{venData.licNumber}</span>
-                        </p>
+                        </section>
                         {venData.phone && 
-                            <p>
-                                <span className="lead">Phone</span><br/>
+                            <section>
+                                <label className="lead">Phone</label>
                                 <span className="profileData">{venData.phone}</span>
-                            </p>
+                            </section>
                         }
                         <address>
-                            <span className="lead">E-mail</span><br/>
+                            <label className="lead">E-mail</label>
                             <a href="mailto:#">{venData.email}</a>
                         </address>
-                        <p>
-                            <span className="lead">Food group</span><br/>
+                        <section>
+                            <label className="lead">Food group</label>
                             <span className="profileData">{venData.foodGroup}</span>
-                        </p>
-                        <p>
-                            <span className="lead">OSS</span><br/>
-                            <span className="profileData text-success">4</span>
-                        </p>
+                        </section>
+                        <section>
+                            <label className="lead">OSS value</label>
+                            <span className="profileData text-info">
+                                {(!venData.oss) ? 'No' : venData.oss}
+                            </span>
+                        </section>
+                        <section>
+                            <label className="lead">Was been flaged?</label>
+                            <span className="profileData">
+                                {(venData.hasBeenFlagged) ? 'Yes' : 'No'}
+                            </span>
+                        </section>
+                        <section>
+                            <label className="lead">Stars</label>
+                            <span className="profileData">
+                                {(!venData.stars) ? '0' : venData.stars}
+                            </span>
+                        </section>
                     </div>
                 </div>
                 <div className="col-5">
                     <div className="container">
                         <div className="table-wrap">
-                            <p>
-                                <span className="lead">Business location</span><br/>
-                            </p>
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Street</th>
-                                        <th scope="col">№</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Gomel</td>
-                                        <td>Kojara</td>
-                                        <td>65</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Minsk</td>
-                                        <td>Zibickaia</td>
-                                        <td>126a</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Pinsk</td>
-                                        <td>Pobedi</td>
-                                        <td>2</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <section className="rightItem">
+                                <label className="lead">Business location</label>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">City</th>
+                                            <th scope="col">Street</th>
+                                            <th scope="col">№</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {venData.buisnessLocation.map((loc,index) => {
+                                            return (
+                                                <tr key={loc.id}>
+                                                    <th scope="row">{index+1}</th>
+                                                    <td>{loc.city}</td>
+                                                    <td>{loc.street}</td>
+                                                    <td>{loc.objNumber}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </section>
                         </div>
                         <div className="table-wrap">
-                            <p>
-                                <span className="lead">Business schedule</span><br/>
-                            </p>
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Day</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">To</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Monday</td>
-                                        <td>10:00</td>
-                                        <td>17:00</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Thursday</td>
-                                        <td>10:00</td>
-                                        <td>17:00</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Sunday</td>
-                                        <td>12:30</td>
-                                        <td>21:00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <section className="rightItem">
+                                <label className="lead">Business schedule</label>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">From</th>
+                                            <th scope="col">To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {venData.buisnessSchedule.map((schedule,index) => {
+                                            return (
+                                                <tr key={schedule.id}>
+                                                    <th scope="row">{index+1}</th>
+                                                    <td>
+                                                        {schedule.day.map(day => <div key={day+1}>{day}</div>)}
+                                                    </td>
+                                                    <td>{schedule.from}</td>
+                                                    <td>{schedule.to}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </section>
                         </div>
-                        <div>
-                            <span className="lead">Ingradient sources</span><br/>
+                        <section className="rightItem">
+                            <label className="lead">Ingradient sources</label>
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item"><span className="profileData">OAO "Miasnoy"</span></li>
-                                <li className="list-group-item"><span className="profileData">Farmer Alex</span></li>
+                                {venData.ingredientSource.map(sourceUnit => 
+                                    <li key={sourceUnit.id} className="list-group-item">{sourceUnit.source}</li>
+                                )}
                             </ul>
-                        </div>  
+                        </section>  
                     </div>
                 </div>
             </div>

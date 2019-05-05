@@ -14,11 +14,11 @@ const TableRow = props => {
                     return <div key={loc.city+1}>{loc.city}</div> 
                 })}
             </td>
-            <td>{props.status}</td>
+            <td>{(props.isOpen) ? 'Open' : 'Close'}</td>
             <td>{props.foodGroup}</td>
-            <td className="text-success">{props.oss}</td>
-            <td><img src="" alt={props.flag} /></td>
-            <td>{props.stars}</td> 
+            <td className="text-success">{(!props.oss) ? '-' : props.oss}</td>
+            <td>{(!props.flagStatus) ? '-' : props.flagStatus}</td>
+            <td>{(!props.stars) ? '-' : props.stars}</td> 
         </tr>
     )
 }

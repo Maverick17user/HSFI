@@ -1,6 +1,6 @@
 import { 
     FETCH_IN_HOTLINE,
-    INPUT_CHANGE_IN_HOTLINE
+    INPUT_CHANGE_IN_HOTLINE,
 } from '../actions/types';
 
 const initialState = {

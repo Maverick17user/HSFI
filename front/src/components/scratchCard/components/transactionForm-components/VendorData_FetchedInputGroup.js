@@ -2,8 +2,7 @@ import React from 'react'
 
 const VendorData_FetchedInputGroup = props => {
     const scratchCardData = props.scratchCardData
-    // console.log(scratchCardData);
-    
+
     return (
         <>
             <div className="form-group">
@@ -12,7 +11,7 @@ const VendorData_FetchedInputGroup = props => {
                 value={scratchCardData.venName || ''} id="venName" readOnly/>
             </div>
             <div className="venPicture-wrap">
-                <img src={scratchCardData.venPhotoURL || ''} alt="Input License number to load vendor's picture"/>
+                {scratchCardData.venPhotoURL && <img src={scratchCardData.venPhotoURL} alt="Vendor"/>}
                 <span>Vendor's picture</span>
             </div>
             <div className="form-group">

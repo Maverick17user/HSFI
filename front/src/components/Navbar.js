@@ -89,6 +89,8 @@ class Navbar extends Component {
 
             const generateOperatorTasksData = (operatorTasks) => {
                 return operatorTasks.map(taskName => {
+                    console.log(taskName);
+                    
                     switch (taskName) {
                         case 'Vendor Registration':
                             return {title: 'Vendor Registration', route: '/venRegistration'}

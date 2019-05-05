@@ -16,8 +16,12 @@ div.multiSelect-wrap {
 }
 
 header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   -webkit-box-shadow: 0 0 2px lightgray;
           box-shadow: 0 0 2px lightgray;
+  z-index: 99;
 }
 
 div.progress {
@@ -116,7 +120,7 @@ div.viewVendors table.vendors__table {
 div.tableSort-wrap {
   position: -webkit-sticky;
   position: sticky;
-  top: 1%;
+  top: 10%;
 }
 
 div.map-wrap {
@@ -186,5 +190,55 @@ div.reportForm div.form-check label.form-check-label {
 
 div.reportForm div.form-check input {
   cursor: pointer;
+}
+
+div.vProfile span.vName {
+  margin: 10px 0 10px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+div.vProfile span.venProfile-country--item {
+  display: block;
+}
+
+div.vProfile label.lead {
+  font-family: Montserrat-Regular;
+  display: block;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+div.vProfile span.profileData, div.vProfile li, div.vProfile td, div.vProfile a {
+  font-size: 1.1em;
+  color: #1F5C6B;
+}
+
+div.vProfile section {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+div.vProfile section.rightItem {
+  padding: 0;
+  margin: 0;
+}
+
+div.vProfile ul.profileData {
+  margin: 0;
+  padding-left: 20px;
+}
+
+div.vProfile img.vendorPhoto {
+  width: 200px;
+}
+
+div.vProfile button.venInspectBut {
+  width: 90px;
+}
+
+div.vProfile button[disabled] {
+  opacity: 0.25;
 }
 /*# sourceMappingURL=style.css.map */

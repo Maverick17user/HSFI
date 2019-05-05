@@ -1,15 +1,11 @@
 import React from 'react'
 import TableRow from './venTableComponents/TableRow'
-import {Redirect, Link} from 'react-router-dom'
 
 const VendorsTable = props => {
     const dbVendors = props.dbVendors
-    // console.log(props);
-    
 
     const getVenFrofile = (id) => {
         let selectedVendor = dbVendors.find(someVendor => someVendor._id === id)
-        console.log(selectedVendor._id);
         props.history.push(`/vendors/${selectedVendor._id}`)
     }
     
@@ -37,15 +33,18 @@ const VendorsTable = props => {
                             number={number+1} 
                             country={vendor.country}
                             buisnessLocation={vendor.buisnessLocation}
-                            status='Open' //vendor.status
                             foodGroup={vendor.foodGroup}
-                            oss='-' //vendor.oss
-                            flag="No" //vendor.flag
-                            stars="0" //vendor.stars
+                            flagStatus={vendor.flagStatus} 
+                            hasBeenFlagged={vendor.hasBeenFlagged} 
+                            oss={vendor.oss} 
+                            isOpen={vendor.isOpen}
+                            gps={vendor.gps}
+                            stars={vendor.stars}
                             key={number+1}
                             {...props}
                             getVenFrofile={getVenFrofile}
                             />
+                            
                         )}
                     </tbody>
                 </table>
