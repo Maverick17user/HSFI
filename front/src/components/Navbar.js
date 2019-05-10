@@ -12,6 +12,8 @@ import { putOrganizationsListIntoStore } from '../actions/organizations/putOrgan
 import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
 import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
 
+import UserBar from './navBarComponents/UserBar'
+
 
 class Navbar extends Component {
 
@@ -117,20 +119,6 @@ class Navbar extends Component {
             )
         }
 
-        // TODO: split to separated components
-        const UserBar = (props) => {
-            return (
-                <div className="authedUser_label_wrap">
-                    <img src={props.avatar} alt={props.name} title={props.name} className="rounded-circle"
-                    style={{ width: '25px', marginRight: '5px'}} />
-                    <span className="text-info">{props.name} ({props.role})</span>
-                    <a href="#" className="nav-link" onClick={props.toLogOut} style={{display: 'inline'}}>
-                        Log Out    
-                    </a>
-                </div>
-            )
-        }
-
         let authLinks
 
         switch (user.role) {
@@ -138,7 +126,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
@@ -146,7 +134,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
@@ -154,7 +142,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList operatorTasks={user.task} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;

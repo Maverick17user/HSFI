@@ -24,18 +24,6 @@ router.post('/hotline', function(req, res) {
         }
         else {
 
-            // CallLog.find({
-            //     scratchCardserialNumber: req.body.scratchCardserialNumber
-            // }).then(callLogs => {
-            //     callLogs.forEach(log => {
-            //         if(log.callerNationalID === req.body.callerNationalID) {
-            //             return res.status(400).json({
-            //                 callerNationalID: `Ununique national callerID for scratch card's serial "${req.body.scratchCardserialNumber}" `
-            //             });
-            //         }
-            //     })       
-            // })
-
             const newLog = new CallLog({
                 operatorName: req.body.operatorName,
                 callDate: req.body.callDate,

@@ -1,9 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import {
+    SORT_BY_ALL_VENDORS,
+    SORT_BY_COUNTRIES_VENDORS,
+    SORT_BY_ISOPEN_VENDORS,
+} from '../../../actions/types'
 
 const SortBar = props => {
     const {dbCountries} = props.dbCountries 
     const {dbFoodGroups} = props.dbFoodGroups
+    const dbVendors = props.dbVendors
 
     return (
         <div className="col-3">
@@ -12,13 +18,16 @@ const SortBar = props => {
                 <div className="tableSort">
                     <form action="">
                         <div className="form-group">
-                            <button type="button" className="btn btn-outline-primary btn-sm">
+                            <button type="button" 
+                            className="btn btn-outline-primary btn-sm"
+                            onClick={() => props.sortBy_ALL(dbVendors)}>
                                 All vendors
                             </button>
                         </div>
                         <div className="form-group">
                             <label htmlFor="country">Country</label>
-                            <select multiple className="selectpicker form-control" required id="country">
+                            <select multiple className="selectpicker form-control" id="country"
+                            onChange={e => props.sortBy_Countries(e, dbVendors)}>
                                 {dbCountries.map(country =>
                                     <option key={country+1} value={country}>{country}</option>
                                 )}
@@ -26,7 +35,7 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="city">City</label>
-                            <select multiple className="selectpicker form-control" required id="city">
+                            <select multiple className="selectpicker form-control" id="city">
                                 <option value="">Oslo</option>
                                 <option value="">Bergen</option>
                                 <option value="">Tromso</option>
@@ -36,14 +45,16 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="status_o/c">Open / Closed</label>
-                            <select className="selectpicker form-control" required id="status_o/c" title="Nothing selected">
-                                <option value="Open">Open</option>
-                                <option value="Closed">Closed</option>
+                            <select className="selectpicker form-control" id="status_o/c" title="Nothing selected" 
+                            onChange={e => props.sortBy_isOpen(e, dbVendors)} defaultValue={'DEFAULT'}>
+                                <option value={"DEFAULT"} disabled>Choose status ...</option>
+                                <option value={"Open"}>Open</option>
+                                <option value={"Closed"}>Closed</option>
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="f_group">Food group</label>
-                            <select multiple className="selectpicker form-control" required id="f_group">
+                            <select multiple className="selectpicker form-control" id="f_group">
                                 {dbFoodGroups.map(group =>
                                     <option key={group+1} value={group}>{group}</option>
                                 )}
@@ -51,7 +62,7 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="oss">OSS</label>
-                            <select className="selectpicker form-control" required id="oss/c" title="OSS value">
+                            <select className="selectpicker form-control" id="oss/c" title="OSS value">
                                 <option value="> 0">{"> 0"}</option>
                                 <option value="< 0">{"< 0"}</option>
                                 <option value="0">{"0"}</option>
@@ -60,7 +71,7 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="flag">Flag</label>
-                            <select className="selectpicker form-control" required id="flag" title="Nothing selected">
+                            <select className="selectpicker form-control" id="flag" title="Nothing selected">
                                 <option value="">Yes (red flag)</option>
                                 <option value="">No (green flag)</option>
                             </select>
@@ -81,4 +92,35 @@ const mapStateToProps = (state) => ({
     dbFoodGroups: state.dbFoodGroups,
 })
 
-export default connect(mapStateToProps)(SortBar)
+const mapDispatchToProps = dispatch => {
+    return {
+        sortBy_isOpen: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_ISOPEN_VENDORS,
+                payload: {
+                    isOpen: e.target.value,
+                    allVens: dbVendors,
+                }
+            })
+        },
+
+        sortBy_ALL: (dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_ALL_VENDORS,
+                all: dbVendors
+            })
+        },
+
+        sortBy_Countries: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_COUNTRIES_VENDORS,
+                payload: {
+                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    allVens: dbVendors,
+                }
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortBar)

@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
 const Profile = props => {
     const venData = props.venData
+    const userRole = props.auth.user.role
     
     return (
         <div className="container vProfile">
@@ -14,11 +16,14 @@ const Profile = props => {
                             <span className="vName">{venData.venName}</span>
                         </div>
                         <div className="w-100 d-flex justify-content-around align-items-center">
-                            {(venData.flagStatus === "is flagged") 
-                                ? <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
-                                : <button type="button" className="btn btn-outline-primary venInspectBut">Inspect</button>
+                            {(venData.flagStatus === "red flagged") 
+                                ? <button type="button" className="btn btn-outline-primary venInspectBut">Inspect</button>
+                                : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
                             }
-                            <button type="button" className="btn btn-outline-info venInspectBut">Edit</button>
+                            {(userRole !== 'operator')
+                                ? <button type="button" className="btn btn-outline-info venInspectBut">Edit</button>
+                                : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Edit</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -143,4 +148,8 @@ const Profile = props => {
     )
 }
 
-export default Profile
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+})
+
+export default connect(mapStateToProps)(Profile)

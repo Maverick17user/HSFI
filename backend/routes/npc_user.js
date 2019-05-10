@@ -88,7 +88,11 @@ router.post('/login', (req, res) => {
                             name: user.name,
                             avatar: user.avatar,
                             role: user.role,
-                            date: user.date
+                            date: user.date,
+                            phone: user.phone,
+                            email: user.email,
+                            organization: user.organization,
+                            country: user.country
                         }
                         jwt.sign(payload, 'secret', {
                             expiresIn: 3600

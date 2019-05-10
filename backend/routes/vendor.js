@@ -99,7 +99,7 @@ router.put('/changeFlagState', function(req, res) {
             if (originalCallLogs.length === 1 || originalCallLogs.length === 2) {
                 flagStatus = "is flagged"
             }
-            else if (originalCallLogs.length === 3) {
+            else if (originalCallLogs.length >= 3) {
                 flagStatus = "red flagged"
                 hasBeenFlagged = true
             }
