@@ -8,6 +8,8 @@ import questionsReducer from './questionsReducer'
 import venregReducer from './venregReducer'
 import scratchCardsReducer from './scratchCardsReducer'
 import hotlineReducer from './hotlineReducer'
+import putAllVendorsIntoStoreReducer from './putAllVendorsIntoStoreReducer'
+import sortVendorsReducer from './sortVendorsReducer'
 
 export default combineReducers({
     errors: errorReducer,
@@ -16,7 +18,9 @@ export default combineReducers({
     dbFoodGroups: foodGroupsReducer,
     dborganizations: orgsReducer,
     dbquestions: questionsReducer,
+    dbVendors: putAllVendorsIntoStoreReducer,
     vendorRegData: venregReducer,
     scratchCardData: scratchCardsReducer,
     hotlineCall: hotlineReducer,
+    sortedVens: sortVendorsReducer,
 });

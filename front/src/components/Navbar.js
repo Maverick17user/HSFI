@@ -10,6 +10,10 @@ import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStor
 import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesIntoStore'
 import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
 import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
+import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
+
+import UserBar from './navBarComponents/UserBar'
+
 
 class Navbar extends Component {
 
@@ -26,6 +30,13 @@ class Navbar extends Component {
                 'Content-Type': 'application/json'
             },
         }
+
+        // Fetch vendors
+        fetch('/api/vendors/getAllVendors', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putVendorsIntoStore(data))
+            .catch(err => console.log(err))
+        .catch(err => console.log(err))
 
         // Fetch countryList
         fetch('/api/countries/redactPanel/countryList', options)
@@ -80,6 +91,8 @@ class Navbar extends Component {
 
             const generateOperatorTasksData = (operatorTasks) => {
                 return operatorTasks.map(taskName => {
+                    console.log(taskName);
+                    
                     switch (taskName) {
                         case 'Vendor Registration':
                             return {title: 'Vendor Registration', route: '/venRegistration'}
@@ -106,20 +119,6 @@ class Navbar extends Component {
             )
         }
 
-        // TODO: split to separated components
-        const UserBar = (props) => {
-            return (
-                <div className="authedUser_label_wrap">
-                    <img src={props.avatar} alt={props.name} title={props.name} className="rounded-circle"
-                    style={{ width: '25px', marginRight: '5px'}} />
-                    <span className="text-info">{props.name} ({props.role})</span>
-                    <a href="#" className="nav-link" onClick={props.toLogOut} style={{display: 'inline'}}>
-                        Log Out    
-                    </a>
-                </div>
-            )
-        }
-
         let authLinks
 
         switch (user.role) {
@@ -127,7 +126,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
@@ -135,7 +134,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
@@ -143,7 +142,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList operatorTasks={user.task} />
-                        <UserBar avatar={user.avatar} name={user.name} role={user.role} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
                     </>
                 )
                 break;
@@ -206,7 +205,8 @@ Navbar.propTypes = {
     putCountriesIntoStore: PropTypes.func.isRequired,
     putFoodGroupesIntoStore: PropTypes.func.isRequired,
     putOrganizationsListIntoStore: PropTypes.func.isRequired,
-    putInspectionQuestionsIntoStore: PropTypes.func.isRequired
+    putInspectionQuestionsIntoStore: PropTypes.func.isRequired,
+    putVendorsIntoStore: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -218,5 +218,6 @@ export default connect(mapStateToProps, {
     putCountriesIntoStore,
     putFoodGroupesIntoStore,
     putOrganizationsListIntoStore,
-    putInspectionQuestionsIntoStore
+    putInspectionQuestionsIntoStore,
+    putVendorsIntoStore,
 })(withRouter(Navbar));

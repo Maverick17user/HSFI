@@ -16,8 +16,12 @@ div.multiSelect-wrap {
 }
 
 header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   -webkit-box-shadow: 0 0 2px lightgray;
           box-shadow: 0 0 2px lightgray;
+  z-index: 99;
 }
 
 div.progress {
@@ -71,21 +75,21 @@ div.venPicture-wrap span {
   margin-top: 10px;
 }
 
-div.vProfile img {
+div.vProfile img, div.uProfile img {
   border-radius: 3px;
   border: 1px solid lightgray;
 }
 
-div.vProfile h3.venProfile-h3 {
+div.vProfile h3.venProfile-h3, div.vProfile h3.usProfile-h3, div.uProfile h3.venProfile-h3, div.uProfile h3.usProfile-h3 {
   margin-left: 15px;
   margin-bottom: 15px;
 }
 
-div.vProfile span.profileData, div.vProfile a {
+div.vProfile span.profileData, div.vProfile a, div.uProfile span.profileData, div.uProfile a {
   font-size: 1em;
 }
 
-div.vProfile div.table-wrap {
+div.vProfile div.table-wrap, div.uProfile div.table-wrap {
   margin-bottom: 40px;
 }
 
@@ -116,7 +120,7 @@ div.viewVendors table.vendors__table {
 div.tableSort-wrap {
   position: -webkit-sticky;
   position: sticky;
-  top: 1%;
+  top: 10%;
 }
 
 div.map-wrap {
@@ -186,5 +190,57 @@ div.reportForm div.form-check label.form-check-label {
 
 div.reportForm div.form-check input {
   cursor: pointer;
+}
+
+div.vProfile span.vName, div.vProfile span.uName, div.uProfile span.vName, div.uProfile span.uName {
+  margin: 10px 0 10px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+div.vProfile span.venProfile-country--item,
+div.vProfile span.userProfile-task--item, div.uProfile span.venProfile-country--item,
+div.uProfile span.userProfile-task--item {
+  display: block;
+}
+
+div.vProfile label.lead, div.uProfile label.lead {
+  font-family: Montserrat-Regular;
+  display: block;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+div.vProfile span.profileData, div.vProfile li, div.vProfile td, div.vProfile a, div.uProfile span.profileData, div.uProfile li, div.uProfile td, div.uProfile a {
+  font-size: 1.1em;
+  color: #1F5C6B;
+}
+
+div.vProfile section, div.uProfile section {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+div.vProfile section.rightItem, div.uProfile section.rightItem {
+  padding: 0;
+  margin: 0;
+}
+
+div.vProfile ul.profileData, div.uProfile ul.profileData {
+  margin: 0;
+  padding-left: 20px;
+}
+
+div.vProfile img.vendorPhoto, div.vProfile img.userPhoto, div.uProfile img.vendorPhoto, div.uProfile img.userPhoto {
+  width: 200px;
+}
+
+div.vProfile button.venInspectBut, div.uProfile button.venInspectBut {
+  width: 90px;
+}
+
+div.vProfile button[disabled], div.uProfile button[disabled] {
+  opacity: 0.25;
 }
 /*# sourceMappingURL=style.css.map */

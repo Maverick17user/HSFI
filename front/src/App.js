@@ -21,18 +21,16 @@ import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
 import HotlineForm from './components/hotline/HotlineForm'
 import InspectionDesk from './components/inspection/InspectionDesk'
 
+import UserProfile from './components/UserProfile'
+import UserProfileEdit from './components/userProfileComponents/edit/UserProfileEdit'
+
+import VendorProfile from './components/inspection/components/VendorProfile'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js';
-import $ from 'jquery';
-import Popper from 'popper.js';
 
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import AuthHome from './components/authHome/AuthHome'
-
-import { putCountriesIntoStore } from './actions/countries/putCountriesIntoStore'
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -56,12 +54,16 @@ class App extends Component {
                   <Route exact path="/loginManager" component={LoginManager} />
                   <Route exact path="/loginOperator" component={LoginOperator} />
                   <Route exact path="/login" component={LogIn} />
+
+                  <Route exact path="/userProfile/:userId" component={UserProfile} />
+                  <Route exact path="/userProfile/:userId/edit" component={UserProfileEdit} />
   
                   <Route path="/redactPanel" component={AuthHome} />
                   <Route path="/venRegistration" component={VenRegForm}/>
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
+                  <Route path="/vendors/:vendorId" component={VendorProfile}/>
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>

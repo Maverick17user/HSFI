@@ -4,7 +4,7 @@ import {
     MARKED_INPUT_CHANGE_IN_VENREG,
     MULTI_SELECT_CHANGE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
-    REMOVE_UNIT_FROM_VENREG
+    REMOVE_UNIT_FROM_VENREG,
 } from '../actions/types';
 
 const initialState = {
@@ -21,7 +21,12 @@ const initialState = {
         buisnessLocation: [{id:0}],
         buisnessSchedule: [{id:0}],
         ingredientSource: [{id:0}],
-        foodGroup: ''
+        foodGroup: '',
+        flagStatus: '',
+        hasBeenFlagged: false,
+        oss: '',
+        isOpen: true,
+        gps: ''
     }
 }
 
@@ -73,7 +78,7 @@ export default function(state = initialState, action ) {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
                 })
-            })}
+            })} 
         default: 
             return state;
     }

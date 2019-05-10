@@ -53,6 +53,24 @@ const Vendor_Schema = new Schema({
     foodGroup: {
         type: String,
         required: true
+    },
+    flagStatus: {
+        type: String,
+    },
+    hasBeenFlagged: {
+        type: Boolean,
+    },
+    oss: {
+        type: String,
+    },
+    isOpen: {
+        type: Boolean,
+    },
+    gps: {
+        type: String,
+    },
+    stars: {
+        type: String,
     }
 });
 

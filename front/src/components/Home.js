@@ -10,8 +10,7 @@ import UnAuthHome from './UnAuthHome';
 class Home extends Component {
 
     render() {
-        console.log(this.props);
-        
+
         const {isAuthenticated, user} = this.props.auth
 
         // TODO: Operator home without redirect

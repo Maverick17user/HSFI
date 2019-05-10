@@ -162,7 +162,7 @@ class RegisterOperator extends Component {
                             'is-invalid': errors.task
                         })} id="task" name="task"  onChange={ this.handleMultiSelectChange }>
                             <option value={ 'Vendor Registration' }>Vendor Registration</option>
-                            <option value={ 'Scrathc card desk' }>Scrathc card desk</option>
+                            <option value={ 'Scratch card desk' }>Scratch card desk</option>
                             <option value={ 'Hotline' }>Hotline</option>
                             <option value={ 'Inspection' }>Inspection</option>
                         </select>
