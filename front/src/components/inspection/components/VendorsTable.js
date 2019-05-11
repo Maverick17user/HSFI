@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import TableRow from './venTableComponents/TableRow'
+import store from '../../../store'
+import {SORT_BY_ALL_VENDORS} from '../../../actions/types'
 
 class VendorsTable extends Component {
     constructor(props) {
         super(props)
-
         this.getVenFrofile = this.getVenFrofile.bind(this)
     }
 
@@ -16,10 +17,9 @@ class VendorsTable extends Component {
     }
 
     render() {
-        const output = this.props.dbVendors
         
-        console.log(output);
-            
+        const output = this.props.sortedVens 
+        
         return (
             <div className="col-9">
                 <p className="text-info">Table ({output.length})</p>

@@ -42,7 +42,7 @@ router.post('/venRegistration', function(req, res) {
                 oss: '',
                 isOpen: true,
                 gps: '',
-                stars: ''
+                stars: 0
             });
             newVendor.save()
                 .then(ven => {

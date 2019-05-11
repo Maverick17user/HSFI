@@ -23,16 +23,14 @@ class InspectionDesk extends Component {
                 <TopBar />
                 <div className="row">
                     <Switch>
-                        <Route exact path="/inspection/table" render={() => 
-                            <VendorsTable 
+                        <Route exact path="/inspection/table" render={() => {
+                            // console.log(dbVendors);
+                            
+                            return <VendorsTable 
                             {...this.props} 
                             sortedVens={sortedVens}
-                            //     (sortedVens.length === 0) 
-                            //     ? dbVendors 
-                            //     : sortedVens
-                            // }
                             dbVendors={dbVendors}/>
-                        } />
+                        }} />
                         <Route exact path="/inspection/map" render={() => <VendorsMap {...this.props} dbVendors={dbVendors}/>} />
                     </Switch>
                     <SortBar dbVendors={dbVendors} />

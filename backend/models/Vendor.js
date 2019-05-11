@@ -70,7 +70,7 @@ const Vendor_Schema = new Schema({
         type: String,
     },
     stars: {
-        type: String,
+        type: Number,
     }
 });
 
