@@ -63,7 +63,9 @@ class App extends Component {
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
+
                   <Route path="/vendors/:vendorId" component={VendorProfile}/>
+
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>

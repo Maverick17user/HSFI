@@ -138,7 +138,7 @@ div.question-wrap {
 }
 
 div.question-wrap span {
-  width: 100px;
+  min-width: 125px;
 }
 
 div.question-wrap div.ball {
@@ -242,5 +242,9 @@ div.vProfile button.venInspectBut, div.uProfile button.venInspectBut {
 
 div.vProfile button[disabled], div.uProfile button[disabled] {
   opacity: 0.25;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w {
+  width: 50%;
 }
 /*# sourceMappingURL=style.css.map */
