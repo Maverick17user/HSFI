@@ -31,7 +31,12 @@ class InspectionDesk extends Component {
                             sortedVens={sortedVens}
                             dbVendors={dbVendors}/>
                         }} />
-                        <Route exact path="/inspection/map" render={() => <VendorsMap {...this.props} dbVendors={dbVendors}/>} />
+                        <Route exact path="/inspection/map" render={() => 
+                            <div className="col-9" >
+                                <p className="text-info">Map ({0})</p>
+                                <VendorsMap isMarkerShown {...this.props} dbVendors={dbVendors}/> 
+                            </div>}
+                        />
                     </Switch>
                     <SortBar dbVendors={dbVendors} />
                 </div>
