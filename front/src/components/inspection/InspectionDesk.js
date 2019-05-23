@@ -23,18 +23,21 @@ class InspectionDesk extends Component {
                 <TopBar />
                 <div className="row">
                     <Switch>
-                        <Route exact path="/inspection/table" render={() => {
-                            // console.log(dbVendors);
-                            
-                            return <VendorsTable 
+                        <Route exact path="/inspection/table" render={() => 
+                            <VendorsTable 
                             {...this.props} 
                             sortedVens={sortedVens}
                             dbVendors={dbVendors}/>
-                        }} />
+                        } />
                         <Route exact path="/inspection/map" render={() => 
                             <div className="col-9" >
-                                <p className="text-info">Map ({0})</p>
-                                <VendorsMap isMarkerShown {...this.props} dbVendors={dbVendors}/> 
+                                <p className="text-info">Map ({sortedVens.length})</p>
+                                <VendorsMap 
+                                isMarkerShown 
+                                {...this.props} 
+                                sortedVens={sortedVens}
+                                dbVendors={dbVendors}
+                                /> 
                             </div>}
                         />
                     </Switch>
@@ -47,7 +50,7 @@ class InspectionDesk extends Component {
 
 const mapStateToProps = (state) => ({
     dbVendors: state.dbVendors,
-    sortedVens: state.sortedVens
+    sortedVens: state.sortedVens,
 })
 
 export default connect(mapStateToProps)(InspectionDesk)

@@ -2,6 +2,12 @@
   font-family: Montserrat-Medium, Arial, Helvetica, sans-serif;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 input {
   cursor: pointer;
 }
@@ -22,6 +28,10 @@ header {
   -webkit-box-shadow: 0 0 2px lightgray;
           box-shadow: 0 0 2px lightgray;
   z-index: 99;
+}
+
+div.hellotext-wrap h2, div.hellotext-wrap p {
+  text-align: center;
 }
 
 div.progress {
