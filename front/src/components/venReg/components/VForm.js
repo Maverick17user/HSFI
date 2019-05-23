@@ -59,6 +59,16 @@ class VForm extends Component {
         this.props.fetchData(this.props.auth.user.name)
     }
 
+    componentWillReceiveProps(newProp) {
+        const {vendorRegData} = newProp.vendorRegData
+        const {city, street, objNumber} = vendorRegData.buisnessLocation[0]
+        if(city && street && objNumber) {
+            console.log('yolo');
+            
+            this.props.getLocationCoordinates(this.props.vendorRegData.vendorRegData)
+        }
+    }
+
     render() {
         const {dbCountries} = this.props.dbCountries
         const {vendorRegData} = this.props.vendorRegData

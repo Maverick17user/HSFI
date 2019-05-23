@@ -81,9 +81,11 @@ export default function(state = initialState, action ) {
                 })
             })} 
         case SET_SINGLE_MAP_MARK_COORDINATES: {
+            console.log(state.vendorRegData.gps);
+            const gps = [...state.vendorRegData.gps, action.locationData]
             return Object.assign({}, state, {
-                vendorRegData: Object.assign({}, state, {
-                    gps: state.gps.push(action.locationData)
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    gps
                 })
             })} 
         default: 
