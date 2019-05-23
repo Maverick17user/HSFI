@@ -8,6 +8,7 @@ import {inputChange} from '../../../actions/venreg/inputChange'
 import {marked_inputChange} from '../../../actions/venreg/marked_inputChange'
 import {multiSelecChange} from '../../../actions/venreg/multiSelecChange'
 import {submitVenRegForm} from '../../../actions/venreg/submitVenRegForm'
+import {getLocationCoordinates} from '../../../actions/venreg/getLocationCoordinates'
 
 import OperatorName_FetchedInput from './VForm-components/OperatorName_FetchedInput'
 import RegData_FetchedInput from './VForm-components/RegData_FetchedInput'
@@ -38,6 +39,9 @@ class VForm extends Component {
     }
     
     handleInputChangeWithFlag(e, index, prop) {
+        // if (prop === 'buisnessLocation') {
+        //     this.props.getLocationCoordinates(this.props.vendorRegData)
+        // }
         this.props.marked_inputChange(e.target, index, prop)
     }
 
@@ -55,6 +59,16 @@ class VForm extends Component {
         this.props.fetchData(this.props.auth.user.name)
     }
 
+    componentWillReceiveProps(newProp) {
+        const {vendorRegData} = newProp.vendorRegData
+        const {city, street, objNumber} = vendorRegData.buisnessLocation[0]
+        if(city && street && objNumber) {
+            console.log('yolo');
+            
+            this.props.getLocationCoordinates(this.props.vendorRegData.vendorRegData)
+        }
+    }
+
     render() {
         const {dbCountries} = this.props.dbCountries
         const {vendorRegData} = this.props.vendorRegData
@@ -64,7 +78,8 @@ class VForm extends Component {
         }
         
         return (
-            <form onSubmit={(e) => this.handleSubmit(e, vendorRegData)} className="mx-3">
+            <form 
+            onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
                 <OperatorName_FetchedInput value={vendorRegData.operatorName} />
                 <RegData_FetchedInput value={vendorRegData.regDate} />
                 <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
@@ -100,6 +115,7 @@ VForm.propTypes = {
     inputChange: PropTypes.func.isRequired,
     marked_inputChange: PropTypes.func.isRequired,
     multiSelecChange: PropTypes.func.isRequired,
+    getLocationCoordinates: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -113,5 +129,6 @@ export default connect(mapStateToProps, {
     inputChange,
     submitVenRegForm,
     marked_inputChange,
-    multiSelecChange
+    multiSelecChange,
+    getLocationCoordinates
 })(VForm)

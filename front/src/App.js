@@ -43,7 +43,6 @@ class App extends Component {
       return (
         <Provider store={ store }>
           <Router >
-            <div>
               <Navbar history={this.props.history}/>
               <div className="container">
                 <Switch>
@@ -63,11 +62,12 @@ class App extends Component {
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
+
                   <Route path="/vendors/:vendorId" component={VendorProfile}/>
+
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>
-            </div>
           </Router>
         </Provider> 
       );

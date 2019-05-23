@@ -50,9 +50,12 @@ export default function(state = initialState, action ) {
         case SET_TOTAL_COST_IN_TRANSACTION: {
             const scratchCardData = state.scratchCardData
             let totalCost = scratchCardData.totalCost
+
             if((scratchCardData.cardCost !== '') && (scratchCardData.cardsQuantity !== '')) {
                 totalCost = (scratchCardData.cardCost * scratchCardData.cardsQuantity) + scratchCardData.currency
             }
+            console.log(totalCost);
+            
             return Object.assign({}, state, {
                 scratchCardData: Object.assign({}, state.scratchCardData, {
                     totalCost: totalCost

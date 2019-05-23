@@ -12,11 +12,15 @@
     "react": "^16.8.6",
     "react-bootstrap-select": "^0.14.0",
     "react-dom": "^16.8.6",
+    "react-google-maps": "^9.4.5",
     "react-redux": "^6.0.1",
+    "react-responsive-modal": "^4.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0",
     "uuid": "^3.3.2"
   },
   "scripts": {

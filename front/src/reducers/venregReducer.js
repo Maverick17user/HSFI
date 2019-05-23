@@ -5,6 +5,7 @@ import {
     MULTI_SELECT_CHANGE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
     REMOVE_UNIT_FROM_VENREG,
+    SET_SINGLE_MAP_MARK_COORDINATES
 } from '../actions/types';
 
 const initialState = {
@@ -26,7 +27,7 @@ const initialState = {
         hasBeenFlagged: false,
         oss: '',
         isOpen: true,
-        gps: ''
+        gps: []
     }
 }
 
@@ -77,6 +78,14 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
+                })
+            })} 
+        case SET_SINGLE_MAP_MARK_COORDINATES: {
+            console.log(state.vendorRegData.gps);
+            const gps = [...state.vendorRegData.gps, action.locationData]
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    gps
                 })
             })} 
         default: 

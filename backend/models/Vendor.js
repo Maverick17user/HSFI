@@ -67,10 +67,10 @@ const Vendor_Schema = new Schema({
         type: Boolean,
     },
     gps: {
-        type: String,
+        type: Array,
     },
     stars: {
-        type: String,
+        type: Number,
     }
 });
 

@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import {
     SORT_BY_ALL_VENDORS,
     SORT_BY_COUNTRIES_VENDORS,
+    SORT_BY_CITIES_VENDORS,
     SORT_BY_ISOPEN_VENDORS,
+    SORT_BY_FOODGROUP_VENDORS,
+    SORT_BY_OSS_VENDORS,
+    SORT_BY_FLAG_VENDORS,
+    SORT_BY_STARS_VENDORS
 } from '../../../actions/types'
 
 const SortBar = props => {
@@ -14,9 +19,9 @@ const SortBar = props => {
     return (
         <div className="col-3">
             <div className="tableSort-wrap">
-                <p className="text-info">Tabel sort form</p>
+                <p className="text-info">Tabel sort form (single)</p>
                 <div className="tableSort">
-                    <form action="">
+                    <form>
                         <div className="form-group">
                             <button type="button" 
                             className="btn btn-outline-primary btn-sm"
@@ -35,12 +40,14 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="city">City</label>
-                            <select multiple className="selectpicker form-control" id="city">
-                                <option value="">Oslo</option>
-                                <option value="">Bergen</option>
-                                <option value="">Tromso</option>
-                                <option value="">Tronheim</option>
-                                <option value="">Sandefjord</option>
+                            {/* TODO: Refactoring for this select... */}
+                            <select multiple className="selectpicker form-control" id="city"
+                            onChange={e => props.sortBy_Cities(e, dbVendors)}>
+                                <option value="Gomel">Gomel</option>
+                                <option value="Minsk">Minsk</option>
+                                <option value="Oslo">Oslo</option>
+                                <option value="Berlin">Berlin</option>
+                                <option value="Druskinenkai">Druskinenkai</option>
                             </select>
                         </div>
                         <div className="form-group">
@@ -54,7 +61,8 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="f_group">Food group</label>
-                            <select multiple className="selectpicker form-control" id="f_group">
+                            <select multiple className="selectpicker form-control" id="f_group"
+                            onChange={e => props.sortBy_foogGroup(e, dbVendors)}>
                                 {dbFoodGroups.map(group =>
                                     <option key={group+1} value={group}>{group}</option>
                                 )}
@@ -62,7 +70,9 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="oss">OSS</label>
-                            <select className="selectpicker form-control" id="oss/c" title="OSS value">
+                            <select className="selectpicker form-control" id="oss/c" title="OSS value"
+                            onChange={e => props.sortBy_oss(e, dbVendors)} defaultValue={'DEFAULT'}>
+                                <option value={"DEFAULT"} disabled>Choose OSS marker ...</option>
                                 <option value="> 0">{"> 0"}</option>
                                 <option value="< 0">{"< 0"}</option>
                                 <option value="0">{"0"}</option>
@@ -71,14 +81,17 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="flag">Flag</label>
-                            <select className="selectpicker form-control" id="flag" title="Nothing selected">
-                                <option value="">Yes (red flag)</option>
-                                <option value="">No (green flag)</option>
+                            <select className="selectpicker form-control" id="flag" title="Nothing selected"
+                            onChange={e => props.sortBy_flag(e, dbVendors)} defaultValue={'DEFAULT'}>
+                                <option value={"DEFAULT"} disabled>Choose flag marker ...</option>
+                                <option value="red flagged">Yes (red flag)</option>
+                                <option value="other flag">No (green flag)</option>
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="stars">Stars</label>
-                            <input type="number" id="oss" className="form-control" placeholder="0" min="0" />
+                            <input type="number" id="oss" className="form-control" placeholder="0" min="0" 
+                            onBlur={e => props.sortBy_stars(e, dbVendors)} />
                         </div>
                     </form>
                 </div>
@@ -94,6 +107,33 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
     return {
+        sortBy_ALL: (dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_ALL_VENDORS,
+                allVens: dbVendors,
+            })
+        },
+
+        sortBy_Countries: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_COUNTRIES_VENDORS,
+                payload: {
+                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    allVens: dbVendors,
+                }
+            })
+        },
+
+        sortBy_Cities: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_CITIES_VENDORS,
+                payload: {
+                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    allVens: dbVendors,
+                }
+            })
+        },
+
         sortBy_isOpen: (e, dbVendors) => {
             dispatch({ 
                 type: SORT_BY_ISOPEN_VENDORS,
@@ -104,18 +144,41 @@ const mapDispatchToProps = dispatch => {
             })
         },
 
-        sortBy_ALL: (dbVendors) => {
+        sortBy_foogGroup: (e, dbVendors) => {
             dispatch({ 
-                type: SORT_BY_ALL_VENDORS,
-                all: dbVendors
+                type: SORT_BY_FOODGROUP_VENDORS,
+                payload: {
+                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    allVens: dbVendors,
+                }
             })
         },
 
-        sortBy_Countries: (e, dbVendors) => {
+        sortBy_oss: (e, dbVendors) => {
             dispatch({ 
-                type: SORT_BY_COUNTRIES_VENDORS,
+                type: SORT_BY_OSS_VENDORS,
                 payload: {
-                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    ossMarker: e.target.value,
+                    allVens: dbVendors,
+                }
+            })
+        },
+
+        sortBy_flag: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_FLAG_VENDORS,
+                payload: {
+                    flagMarker: e.target.value,
+                    allVens: dbVendors,
+                }
+            })
+        },
+
+        sortBy_stars: (e, dbVendors) => {
+            dispatch({ 
+                type: SORT_BY_STARS_VENDORS,
+                payload: {
+                    starsCount: e.target.value,
                     allVens: dbVendors,
                 }
             })

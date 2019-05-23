@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import InspectionForm from './InspectionForm'
+import Modal from 'react-responsive-modal'
 
 const Profile = props => {
     const venData = props.venData
     const userRole = props.auth.user.role
-    
+    const [open, setOpen] = React.useState(false)
+
     return (
         <div className="container vProfile">
             <h3 className="venProfile-h3">Vendor profile</h3>
@@ -17,7 +20,8 @@ const Profile = props => {
                         </div>
                         <div className="w-100 d-flex justify-content-around align-items-center">
                             {(venData.flagStatus === "red flagged") 
-                                ? <button type="button" className="btn btn-outline-primary venInspectBut">Inspect</button>
+                                ? <button type="button" className="btn btn-outline-primary venInspectBut" 
+                                  onClick={() => setOpen(true)}>Inspect</button>
                                 : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
                             }
                             {(userRole !== 'operator')
@@ -143,6 +147,11 @@ const Profile = props => {
                         </section>  
                     </div>
                 </div>
+            </div>
+            <div>
+                <Modal open={open} onClose={() => setOpen(false)} center>
+                    <InspectionForm {...props}/>
+                </Modal>
             </div>
         </div>
     )
