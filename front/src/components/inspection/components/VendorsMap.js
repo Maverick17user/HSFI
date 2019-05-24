@@ -21,24 +21,32 @@ const VendorsMap = compose(
     withScriptjs,
     withGoogleMap
 )(props => {
+
+    const getVenFrofile = (id) => {
+        const dbVendors = props.dbVendors
+        let selectedVendor = dbVendors.find(someVendor => someVendor._id === id)
+        
+        props.history.push(`/vendors/${selectedVendor._id}`)
+    }
+
     return (
         <>
             <GoogleMap defaultZoom={1} defaultCenter={{ lat: 0, lng: 0 }}>
                 {props.isMarkerShown &&
-                    props.sortedVens.map(ven => {
-                        console.log(ven.gps);
-                        
-                        // return ven.gps.map((cordinates, index) => {
-                        //     return (
-                        //         <Marker
-                        //         key={ven.name + index}
-                        //         position={{
-                        //             lat: cordinates.lat,
-                        //             lng: cordinates.lng
-                        //         }}>
-                        //         </Marker>
-                        //     )
-                        // })
+                    props.sortedVens.map(vendor => {
+                        return vendor.gps.map(cordinates => {
+                            return (
+                                <Marker
+                                onClick={() => getVenFrofile(vendor._id)}
+                                name = {vendor.name}
+                                key={cordinates.id}
+                                position={{
+                                    lat: cordinates.lat,
+                                    lng: cordinates.lng
+                                }}>
+                                </Marker>
+                            )
+                        })
                     })
                 }
             </GoogleMap>

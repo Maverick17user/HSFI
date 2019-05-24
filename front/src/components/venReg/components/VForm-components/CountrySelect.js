@@ -14,13 +14,16 @@ class CountrySelect extends Component {
                 onChange={(e) => handleMultiSelectChange(e, 0, "country")} 
                 id="country"
                 className={classnames('form-control form-control-lg', {
-                    'is-invalid': props.errors.country
+                    'is-invalid': props.errors.country,
                 })}>
                     {dbCountries.map((countryName, id) => {
                         return <option key={id.toString()} value={countryName}>{countryName}</option>
                     })}
                 </select>
-                {props.errors.country && (<div className="invalid-feedback">{props.errors.country}</div>)}
+                {props.errors.country 
+                    && (<div className="invalid-feedback">{props.errors.country}</div>)
+                    && (<div className="valid-feedback">Done</div>)
+                }
             </div>
         )
     }

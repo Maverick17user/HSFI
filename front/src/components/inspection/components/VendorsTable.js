@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import TableRow from './venTableComponents/TableRow'
-import store from '../../../store'
-import {SORT_BY_ALL_VENDORS} from '../../../actions/types'
 
 class VendorsTable extends Component {
     constructor(props) {
