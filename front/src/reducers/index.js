@@ -10,6 +10,7 @@ import scratchCardsReducer from './scratchCardsReducer'
 import hotlineReducer from './hotlineReducer'
 import putAllVendorsIntoStoreReducer from './putAllVendorsIntoStoreReducer'
 import sortVendorsReducer from './sortVendorsReducer'
+import userProfileEditReducer from './userProfileEditReducer'
 
 export default combineReducers({
     errors: errorReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
     scratchCardData: scratchCardsReducer,
     hotlineCall: hotlineReducer,
     sortedVens: sortVendorsReducer,
+    userEditData: userProfileEditReducer,
 });
