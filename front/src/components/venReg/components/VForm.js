@@ -24,7 +24,6 @@ import BuisnessScheduleComponent from './VForm-components/BuisnessScheduleCompon
 import IngredientSourceComponent from './VForm-components/IngredientSourceComponent'
 import FoodGroupSelect from './VForm-components/FoodGroupSelect'
 
-
 class VForm extends Component {
     constructor(props) {
         super(props)
@@ -39,10 +38,22 @@ class VForm extends Component {
     }
     
     handleInputChangeWithFlag(e, index, prop) {
-        // if (prop === 'buisnessLocation') {
-        //     this.props.getLocationCoordinates(this.props.vendorRegData)
-        // }
         this.props.marked_inputChange(e.target, index, prop)
+
+        if (prop === 'buisnessLocation') {
+            const {vendorRegData} = this.props.vendorRegData
+            const locations = vendorRegData.buisnessLocation
+            const currentLocationUnit = locations.find(location => location.id === index)
+
+            if(currentLocationUnit) {
+                const {city, street, objNumber} = currentLocationUnit
+
+                if(city && street && objNumber) {
+                    this.props.getLocationCoordinates(city, street, objNumber, index)
+                }
+            }
+         
+        }
     }
 
     handleMultiSelectChange(e, index, prop) {
@@ -57,16 +68,6 @@ class VForm extends Component {
 
     componentDidMount() {
         this.props.fetchData(this.props.auth.user.name)
-    }
-
-    componentWillReceiveProps(newProp) {
-        const {vendorRegData} = newProp.vendorRegData
-        const {city, street, objNumber} = vendorRegData.buisnessLocation[0]
-        if(city && street && objNumber) {
-            console.log('yolo');
-            
-            this.props.getLocationCoordinates(this.props.vendorRegData.vendorRegData)
-        }
     }
 
     render() {

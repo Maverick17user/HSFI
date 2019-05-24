@@ -67,22 +67,41 @@ export default function(state = initialState, action ) {
             })}
         case CREATE_UNIT_IN_VENREG: {
             data.push({id: data[data.length-1].id+1})
-            console.log(data);
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
                 })
             })}
+        // TODO: gps dinamic removing by id
         case REMOVE_UNIT_FROM_VENREG: {
+
+            // let gps = [...state.vendorRegData.gps]
+            // let changedGpsUnitIndex = state.vendorRegData.gps.findIndex(gpsUnit => gpsUnit.id === action.index)
+
             data.splice(data.indexOf(changed[0]), 1)
+            // gps.splice(gps.indexOf(changedGpsUnitIndex), 1)
+
+            // console.log(gps);
+
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
+                    // gps
                 })
             })} 
         case SET_SINGLE_MAP_MARK_COORDINATES: {
-            console.log(state.vendorRegData.gps);
-            const gps = [...state.vendorRegData.gps, action.locationData]
+            const gpsWhatWasCreatedWithThisID = state.vendorRegData.gps.find(gpsUnit => gpsUnit.id === action.locationData.id)
+            let gps
+
+            if (!gpsWhatWasCreatedWithThisID) {
+                gps = [...state.vendorRegData.gps, action.locationData]
+            } else {
+                let changedGpsUnitIndex = state.vendorRegData.gps.findIndex(gpsUnit => gpsUnit.id === action.locationData.id)
+                gps = [...state.vendorRegData.gps]
+                gps[changedGpsUnitIndex] = action.locationData
+            }
+
+            console.log(gps);
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     gps
