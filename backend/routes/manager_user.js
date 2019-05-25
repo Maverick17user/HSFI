@@ -21,7 +21,7 @@ router.post('/registerManager', function(req, res) {
     }).then(user => {
         if(user) {
             return res.status(400).json({
-                email: 'Email already exists'
+                email: 'User with this email already exists'
             });
         }
         else {
@@ -109,6 +109,74 @@ router.post('/loginManager', (req, res) => {
                 });
         });
 });
+
+router.post('/edit', (req, res) => {
+    // const { errors, isValid } = validateEdit(req.body);
+
+    // if(!isValid) {
+    //     return res.status(400).json(errors);
+    // }
+
+    const {data} = req.body
+    const {
+        name, email, country, phone, password_cur, password
+    } = data
+    const currentUser = req.body.user
+    const userID = currentUser.id
+    const dataForNewObject = [{name}, {email}, {country}, {phone}, {password}]
+
+    Manager_User.findOne({_id: userID})
+    .then(foundedUser => {
+        // if(foundedUser.email === email) {
+        //     errors.email = 'User with this email already exists';
+        //     return res.status(400).json(errors);
+        // }
+
+        // if(foundedUser.name === name) {
+        //     errors.email = 'User with this name already exists';
+        //     return res.status(400).json(errors);
+        // }
+
+        bcrypt.compare(password_cur, foundedUser.password)
+        .then(isMatch => {
+            if(isMatch) {
+                const validData = dataForNewObject.filter(unit => Object.values(unit)[0])
+                let editedData = Object.assign({}, ...validData)
+
+                if(editedData.password) {
+                    bcrypt.genSalt(10, (err, salt) => {
+                        if(err) console.error('There was an error', err);
+                        else {
+                            bcrypt.hash(password, salt, (err, hash) => {
+                                if(err) console.error('There was an error', err);
+                                else {
+                                    editedData.password = hash
+                                    saveInDB(editedData ,userID)
+                                }
+                            });
+                        }
+                    })
+                }
+                else {
+                    saveInDB(editedData ,userID)
+                }
+            }
+            // else {
+            //     errors.password = 'Incorrect current password';
+            //     return res.status(400).json(errors);
+            // }
+        });
+    })
+    .catch(err => console.log(err))
+
+    const saveInDB = (data, id) => {
+        Manager_User.findOneAndUpdate(
+            {_id: id}, 
+            {$set: data}
+        )
+        .then(user => res.json(user))
+    }
+})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

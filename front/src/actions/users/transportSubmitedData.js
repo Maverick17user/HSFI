@@ -1,10 +1,11 @@
 import { GET_ERRORS } from '../types'
 import axios from 'axios'
+import {logoutUser} from '../authentication'
 
-export const transportSubmitedData = (data, {_id, role}) => dispatch => {
+export const transportSubmitedData = (data, user, history) => dispatch => {
     let route
 
-    switch (role) {
+    switch (user.role) {
         case 'manager':
             route = "/api/managerUsers"
             break;
@@ -18,13 +19,18 @@ export const transportSubmitedData = (data, {_id, role}) => dispatch => {
             break;
     }
     
-    axios.post(`${route}/edit`, data)
-        // .then(res => history.push('/login'))
-        .then(res => console.log(res))
-        .catch(err => {
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            });
-        });
+    axios.post(`${route}/edit`, {data, user})
+    .then(res => {
+        (() => {
+            logoutUser(history)
+        })()
+    })
+    .catch(err => {
+        console.log(err);
+        
+        // dispatch({
+        //     type: GET_ERRORS,
+        //     payload: err.response.data
+        // });
+    });
 }

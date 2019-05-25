@@ -14,11 +14,6 @@ const UserProfileEdit = props => {
         name, email, country, phone, password_cur, password
     } = props.userEditData
 
-    if(user.id !== props.match.params.userId) {
-        props.history.push('/')
-        return null
-    }
-
     const handleSubmit = (e, userEditData) => {
         e.preventDefault()
         const {
@@ -34,7 +29,7 @@ const UserProfileEdit = props => {
             password,
         }
 
-        props.transportSubmitedData(editData, user)
+        props.transportSubmitedData(editData, user, props.history)
     }
     
     return (
