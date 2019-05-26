@@ -40,7 +40,7 @@ export default function(state = initialState, action ) {
         }
 
         case SORT_BY_CITIES_VENDORS: {
-            const {selectedValues, allVens} = action.payload
+            const {cityName, allVens} = action.payload
 
             let venCitiesList
 
@@ -49,9 +49,7 @@ export default function(state = initialState, action ) {
                     return loc.city
                 })
 
-                return selectedValues.every((selectedValueItem) => 
-                    (venCitiesList.indexOf(selectedValueItem) !== -1) ? true : false
-                ) === true 
+                return (venCitiesList.indexOf(cityName) !== -1) ? true : false
             })
 
             return Object.assign({}, state, {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import NameInput from './formUnits/NameInput'
 import EmailInput from './formUnits/EmailInput'
-import CountryInput from './formUnits/EmailInput'
+import CountryInput from './formUnits/CountryInput'
 import PhoneInput from './formUnits/PhoneInput'
 import CurrentPasswordInput from './formUnits/CurrentPasswordInput'
 import NewPasswordInput from './formUnits/NewPasswordInput'
@@ -10,7 +10,7 @@ import NewPasswordInput from './formUnits/NewPasswordInput'
 const UserEditForm = props => {
     const user = props.user
     const {
-        name, email, country, phone, password_cur, password
+        name, email, phone, password_cur, password
     } = props.userEditData
     return (
         <form onSubmit={e => props.handleSubmit(e, props.userEditData)}>
@@ -28,8 +28,8 @@ const UserEditForm = props => {
             />
             {(user.role !== 'manager') && (
                 <CountryInput 
+                dbCountries={props.dbCountries}
                 user={user} 
-                country={country}
                 catchInputData={props.catchInputData}
                 errors={props.errors}
                 />

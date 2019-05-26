@@ -40,15 +40,8 @@ const SortBar = props => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="city">City</label>
-                            {/* TODO: Refactoring for this select... */}
-                            <select multiple className="selectpicker form-control" id="city"
-                            onChange={e => props.sortBy_Cities(e, dbVendors)}>
-                                <option value="Gomel">Gomel</option>
-                                <option value="Minsk">Minsk</option>
-                                <option value="Oslo">Oslo</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Druskinenkai">Druskinenkai</option>
-                            </select>
+                            <input type="text" id="city" className="form-control" placeholder="Type in city name" 
+                            onBlur={e => props.sortBy_Cities(e, dbVendors)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="status_o/c">Open / Closed</label>
@@ -128,7 +121,7 @@ const mapDispatchToProps = dispatch => {
             dispatch({ 
                 type: SORT_BY_CITIES_VENDORS,
                 payload: {
-                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
+                    cityName: e.target.value,
                     allVens: dbVendors,
                 }
             })

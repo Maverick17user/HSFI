@@ -10,6 +10,7 @@ import {logoutUser} from '../../../actions/authentication'
 
 const UserProfileEdit = props => {
     const user = props.auth.user
+    const {dbCountries} = props.dbCountries
 
     const handleSubmit = (e, editData) => {
         e.preventDefault()
@@ -26,6 +27,7 @@ const UserProfileEdit = props => {
         <div className="container">
             <ContentTag title="Edit profile"/>
             <UserEditForm 
+            dbCountries={dbCountries}
             handleSubmit={handleSubmit}
             catchInputData={props.catchInputData}
             user={user}
@@ -45,7 +47,8 @@ UserProfileEdit.propTypes = {
 const mapStateToProps = state => ({
     auth: state.auth,
     userEditData: state.userEditData,
-    errors: state.errors
+    errors: state.errors,
+    dbCountries: state.dbCountries,
 });
 
 export default connect(mapStateToProps, {

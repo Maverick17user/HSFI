@@ -22,7 +22,6 @@ class CountrySelect extends Component {
                 </select>
                 {props.errors.country 
                     && (<div className="invalid-feedback">{props.errors.country}</div>)
-                    && (<div className="valid-feedback">Done</div>)
                 }
             </div>
         )

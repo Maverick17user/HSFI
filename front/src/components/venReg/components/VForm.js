@@ -72,6 +72,7 @@ class VForm extends Component {
 
     render() {
         const {dbCountries} = this.props.dbCountries
+        const {dbFoodGroups} = this.props.dbFoodGroups
         const {vendorRegData} = this.props.vendorRegData
 
         if (dbCountries.length === 0) {
@@ -102,7 +103,10 @@ class VForm extends Component {
                 <IngredientSourceComponent 
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 />
-                <FoodGroupSelect handleInputChange={this.handleInputChange} />
+                <FoodGroupSelect 
+                dbFoodGroups={dbFoodGroups}
+                handleInputChange={this.handleInputChange} 
+                />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         )
@@ -111,18 +115,20 @@ class VForm extends Component {
 
 VForm.propTypes = {
     auth: PropTypes.object.isRequired,
+    dbFoodGroups: PropTypes.object.isRequired,   
     dbCountries: PropTypes.object.isRequired,
     fetchData: PropTypes.func.isRequired,
     inputChange: PropTypes.func.isRequired,
     marked_inputChange: PropTypes.func.isRequired,
     multiSelecChange: PropTypes.func.isRequired,
-    getLocationCoordinates: PropTypes.func.isRequired
+    getLocationCoordinates: PropTypes.func.isRequired,   
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
     dbCountries: state.dbCountries,
-    vendorRegData: state.vendorRegData
+    vendorRegData: state.vendorRegData,
+    dbFoodGroups: state.dbFoodGroups
 })
 
 export default connect(mapStateToProps, {
