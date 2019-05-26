@@ -9,6 +9,8 @@ const validateLoginInput = require('../validation/login');
 
 const Operator_User = require('../models/Operator_User');
 
+const editLogic = require('./logic/edit')
+
 router.post('/registerOperator', function(req, res) {
 
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -112,6 +114,8 @@ router.post('/loginOperator', (req, res) => {
                 });
         });
 });
+
+router.post('/edit', (req, res) => {editLogic(req, res)})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

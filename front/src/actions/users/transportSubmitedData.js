@@ -1,8 +1,7 @@
 import { GET_ERRORS } from '../types'
 import axios from 'axios'
-import {logoutUser} from '../authentication'
 
-export const transportSubmitedData = (data, user, history) => dispatch => {
+export const transportSubmitedData = (data, user) => dispatch => {
     let route
 
     switch (user.role) {
@@ -19,18 +18,17 @@ export const transportSubmitedData = (data, user, history) => dispatch => {
             break;
     }
     
-    axios.post(`${route}/edit`, {data, user})
-    .then(res => {
-        (() => {
-            logoutUser(history)
-        })()
-    })
-    .catch(err => {
-        console.log(err);
-        
-        // dispatch({
-        //     type: GET_ERRORS,
-        //     payload: err.response.data
-        // });
-    });
+    return new Promise((resolve, reject) => {
+        axios.post(`${route}/edit`, {data, user})
+        .then(() => {
+            resolve('Success')
+        })
+        .catch(err => {
+            reject('Fail')
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            });
+        });
+    }) 
 }

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register/regNPC');
 const validateLoginInput = require('../validation/login');
+const editLogic = require('./logic/edit')
 
 const NPC_User = require('../models/NPC_User');
 
@@ -113,6 +114,8 @@ router.post('/login', (req, res) => {
                 });
         });
 });
+
+router.post('/edit', (req, res) => {editLogic(req, res)})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({
