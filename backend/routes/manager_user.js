@@ -9,6 +9,8 @@ const validateLoginInput = require('../validation/login');
 
 const Manager_User = require('../models/Manager_User');
 
+const editLogic = require('./logic/edit')
+
 router.post('/registerManager', function(req, res) {
 
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -21,7 +23,7 @@ router.post('/registerManager', function(req, res) {
     }).then(user => {
         if(user) {
             return res.status(400).json({
-                email: 'Email already exists'
+                email: 'User with this email already exists'
             });
         }
         else {
@@ -109,6 +111,8 @@ router.post('/loginManager', (req, res) => {
                 });
         });
 });
+
+router.post('/edit', (req, res) => {editLogic(req, res)})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

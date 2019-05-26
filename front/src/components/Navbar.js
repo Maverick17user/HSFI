@@ -14,7 +14,6 @@ import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
 
 import UserBar from './navBarComponents/UserBar'
 
-
 class Navbar extends Component {
 
     onLogout(e) {

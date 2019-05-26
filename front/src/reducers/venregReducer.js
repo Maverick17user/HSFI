@@ -95,13 +95,13 @@ export default function(state = initialState, action ) {
 
             if (!gpsWhatWasCreatedWithThisID) {
                 gps = [...state.vendorRegData.gps, action.locationData]
-            } else {
+            } 
+            else {
                 let changedGpsUnitIndex = state.vendorRegData.gps.findIndex(gpsUnit => gpsUnit.id === action.locationData.id)
                 gps = [...state.vendorRegData.gps]
                 gps[changedGpsUnitIndex] = action.locationData
             }
 
-            console.log(gps);
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     gps

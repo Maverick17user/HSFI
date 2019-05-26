@@ -35,8 +35,8 @@ require('./passport')(passport);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/api/users', npc_users);
 app.use('/api/managerUsers', manager_users);
+app.use('/api/users', npc_users);
 app.use('/api/operatorUsers', operator_users);
 
 app.use('/api/countries', countries);
