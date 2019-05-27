@@ -4,7 +4,6 @@ export const submitAction = (callData) => dispatch => {
     axios.post('/api/calls/hotline', callData)
         .then(res => {
             console.log('CallLog added successfully');
-            console.log(res.data);
             
             axios.put('/api/vendors/changeFlagState', res.data) 
                 .then(() => console.log('ok'))

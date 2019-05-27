@@ -19,6 +19,6 @@ const VendorProfile = props => {
 
 const mapStateToProps = (state) => ({
     dbVendors: state.dbVendors
-  })
+})
   
 export default connect(mapStateToProps)(VendorProfile)
