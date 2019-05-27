@@ -1,15 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import {
-    SORT_BY_ALL_VENDORS,
-    SORT_BY_COUNTRIES_VENDORS,
-    SORT_BY_CITIES_VENDORS,
-    SORT_BY_ISOPEN_VENDORS,
-    SORT_BY_FOODGROUP_VENDORS,
-    SORT_BY_OSS_VENDORS,
-    SORT_BY_FLAG_VENDORS,
-    SORT_BY_STARS_VENDORS
-} from '../../../actions/types'
+    sortBy_ALL,
+    sortBy_Countries,
+    sortBy_Cities,
+    sortBy_isOpen,
+    sortBy_foogGroup,
+    sortBy_oss,
+    sortBy_flag,
+    sortBy_stars
+} from '../../../actions/sort/tableSort'
+import {
+    sortBy_Countries_Markers,
+    sortBy_Cities_Markers
+} from '../../../actions/sort/mapSort'
 
 const SortBar = props => {
     const {dbCountries} = props.dbCountries 
@@ -32,7 +36,11 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="country">Country</label>
                             <select multiple className="selectpicker form-control" id="country"
-                            onChange={e => props.sortBy_Countries(e, dbVendors)}>
+                            onChange={e => {
+                                (props.history.location.pathname === '/inspection/table')
+                                ? props.sortBy_Countries(e, dbVendors)
+                                : props.sortBy_Countries_Markers(e, dbVendors)
+                            }}>
                                 {dbCountries.map(country =>
                                     <option key={country+1} value={country}>{country}</option>
                                 )}
@@ -41,12 +49,16 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="city">City</label>
                             <input type="text" id="city" className="form-control" placeholder="Type in city name" 
-                            onBlur={e => props.sortBy_Cities(e, dbVendors)} />
+                            onBlur={e => {
+                                (props.history.location.pathname === '/inspection/table')
+                                ? props.sortBy_Cities(e, dbVendors)
+                                : props.sortBy_Cities_Markers(e, dbVendors)
+                            }}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="status_o/c">Open / Closed</label>
                             <select className="selectpicker form-control" id="status_o/c" title="Nothing selected" 
-                            onChange={e => props.sortBy_isOpen(e, dbVendors)} defaultValue={'DEFAULT'}>
+                            onChange={e => {props.sortBy_isOpen(e, dbVendors)}}>
                                 <option value={"DEFAULT"} disabled>Choose status ...</option>
                                 <option value={"Open"}>Open</option>
                                 <option value={"Closed"}>Closed</option>
@@ -55,7 +67,7 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="f_group">Food group</label>
                             <select multiple className="selectpicker form-control" id="f_group"
-                            onChange={e => props.sortBy_foogGroup(e, dbVendors)}>
+                            onChange={e => {props.sortBy_foogGroup(e, dbVendors) }}>
                                 {dbFoodGroups.map(group =>
                                     <option key={group+1} value={group}>{group}</option>
                                 )}
@@ -64,7 +76,8 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="oss">OSS</label>
                             <select className="selectpicker form-control" id="oss/c" title="OSS value"
-                            onChange={e => props.sortBy_oss(e, dbVendors)} defaultValue={'DEFAULT'}>
+                            onChange={e => {props.sortBy_oss(e, dbVendors)}}
+                            defaultValue={'DEFAULT'}>
                                 <option value={"DEFAULT"} disabled>Choose OSS marker ...</option>
                                 <option value="> 0">{"> 0"}</option>
                                 <option value="< 0">{"< 0"}</option>
@@ -75,16 +88,17 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="flag">Flag</label>
                             <select className="selectpicker form-control" id="flag" title="Nothing selected"
-                            onChange={e => props.sortBy_flag(e, dbVendors)} defaultValue={'DEFAULT'}>
+                            onChange={e => {props.sortBy_flag(e, dbVendors)}}
+                            defaultValue={'DEFAULT'}>
                                 <option value={"DEFAULT"} disabled>Choose flag marker ...</option>
                                 <option value="red flagged">Yes (red flag)</option>
-                                <option value="other flag">No (green flag)</option>
+                                <option value="no red flag">No (green flag)</option>
                             </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="stars">Stars</label>
                             <input type="number" id="oss" className="form-control" placeholder="0" min="0" 
-                            onBlur={e => props.sortBy_stars(e, dbVendors)} />
+                            onBlur={e => {props.sortBy_stars(e, dbVendors)}} />
                         </div>
                     </form>
                 </div>
@@ -98,85 +112,18 @@ const mapStateToProps = (state) => ({
     dbFoodGroups: state.dbFoodGroups,
 })
 
-const mapDispatchToProps = dispatch => {
-    return {
-        sortBy_ALL: (dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_ALL_VENDORS,
-                allVens: dbVendors,
-            })
-        },
-
-        sortBy_Countries: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_COUNTRIES_VENDORS,
-                payload: {
-                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_Cities: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_CITIES_VENDORS,
-                payload: {
-                    cityName: e.target.value,
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_isOpen: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_ISOPEN_VENDORS,
-                payload: {
-                    isOpen: e.target.value,
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_foogGroup: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_FOODGROUP_VENDORS,
-                payload: {
-                    selectedValues: [...e.target.selectedOptions].map(o => o.value),
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_oss: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_OSS_VENDORS,
-                payload: {
-                    ossMarker: e.target.value,
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_flag: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_FLAG_VENDORS,
-                payload: {
-                    flagMarker: e.target.value,
-                    allVens: dbVendors,
-                }
-            })
-        },
-
-        sortBy_stars: (e, dbVendors) => {
-            dispatch({ 
-                type: SORT_BY_STARS_VENDORS,
-                payload: {
-                    starsCount: e.target.value,
-                    allVens: dbVendors,
-                }
-            })
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortBar)
+export default connect(mapStateToProps, {
+    // For table sort only
+    sortBy_Countries,
+    sortBy_Cities,
+    //Only for map
+    sortBy_Countries_Markers,
+    sortBy_Cities_Markers,
+    // Common for table and map
+    sortBy_ALL,
+    sortBy_isOpen,
+    sortBy_foogGroup,
+    sortBy_oss,
+    sortBy_flag,
+    sortBy_stars,
+})(SortBar)

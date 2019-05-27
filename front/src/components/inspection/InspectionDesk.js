@@ -12,11 +12,11 @@ class InspectionDesk extends Component {
 
     render() {
         const {dbVendors} = this.props.dbVendors
-        const {sortedVens} = this.props.sortedVens
+        let {sortedVens} = this.props.sortedVens
 
         if(this.props.location.pathname === '/inspection') {
             return <Redirect from="/inspection" to="/inspection/table" />
-        }
+        } 
         
         return (
             <div className="container viewVendors">
@@ -41,7 +41,7 @@ class InspectionDesk extends Component {
                             </div>}
                         />
                     </Switch>
-                    <SortBar dbVendors={dbVendors} />
+                    <SortBar history={this.props.history} dbVendors={dbVendors} />
                 </div>
             </div>
         )

@@ -93,7 +93,7 @@ router.put('/changeFlagState', function(req, res) {
 
             // Get original call logs by callerID
             const originalCallLogs = getCallLogs_ByOriginalIDs(callLogs)
-            let flagStatus, hasBeenFlagged
+            let updatedData ,flagStatus, hasBeenFlagged
             
             // Change vendor's flag
             if (originalCallLogs.length === 1 || originalCallLogs.length === 2) {
@@ -104,11 +104,21 @@ router.put('/changeFlagState', function(req, res) {
                 hasBeenFlagged = true
             }
             
+            if (hasBeenFlagged == true) {
+                updatedData = Object.assign({},{flagStatus},{hasBeenFlagged})
+            }
+            else {
+                updatedData = {flagStatus}
+            }
+
+            console.log(updatedData);
+            
+
             // Find user and change his flag status
             Vendor.findOneAndUpdate(
                 {licNumber: scdata.licNumber}, 
-                {flagStatus, hasBeenFlagged}
-            )
+                updatedData
+            ).then(()=> console.log('ok'))
 
         })
     })

@@ -25,6 +25,7 @@ import UserProfile from './components/UserProfile'
 import UserProfileEdit from './components/userProfileComponents/edit/UserProfileEdit'
 
 import VendorProfile from './components/inspection/components/VendorProfile'
+import VendorProfileEdit from './components/inspection/components/venProfileComponents/VendorProfileEdit'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
@@ -63,7 +64,8 @@ class App extends Component {
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
 
-                  <Route path="/vendors/:vendorId" component={VendorProfile}/>
+                  <Route exact path="/vendors/:vendorId" component={VendorProfile}/>
+                  <Route exact path="/vendors/:vendorId/edit" component={VendorProfileEdit}/>
 
                   <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>

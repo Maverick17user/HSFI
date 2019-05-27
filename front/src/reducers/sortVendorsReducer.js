@@ -6,7 +6,9 @@ import {
     SORT_BY_FOODGROUP_VENDORS,
     SORT_BY_OSS_VENDORS,
     SORT_BY_FLAG_VENDORS,
-    SORT_BY_STARS_VENDORS
+    SORT_BY_STARS_VENDORS,
+    SORT_BY_COUNTRIES_VENDORS_MAP,
+    SORT_BY_CITIES_VENDORS_MAP,
 } from '../actions/types';
 
 const initialState = {
@@ -113,7 +115,7 @@ export default function(state = initialState, action ) {
             const sortedVendors = allVens.filter(ven => {
                 return (flagMarker === 'red flagged')
                 ? ven.flagStatus === flagMarker
-                : ven.flagStatus !== flagMarker
+                : ven.flagStatus !== 'red flagged'
             })
 
             return Object.assign({}, state, {
@@ -123,15 +125,53 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_STARS_VENDORS: {
             const {starsCount, allVens} = action.payload
-
+    
             const sortedVendors = allVens.filter(ven => {
-                return ven.stars === starsCount
+                // TODO: fix == to ===
+                return Number(ven.stars) == starsCount
             })
 
             return Object.assign({}, state, {
                 sortedVens: sortedVendors
             }) 
         }
+
+        // For map markers sort only
+        // case SORT_BY_COUNTRIES_VENDORS_MAP: {
+        //     const {selectedValues, allVens} = action.payload
+
+        //     let venCountryList
+
+        //     const countriesSortedVendors = allVens.filter(ven => {
+        //         venCountryList = ven.country[0].country
+
+        //         return selectedValues.every((selectedValueItem) => 
+        //             (venCountryList.indexOf(selectedValueItem) !== -1) ? true : false
+        //         ) === true 
+        //     })
+
+        //     return Object.assign({}, state, {
+        //         sortedVens: countriesSortedVendors
+        //     })    
+        // }
+
+        // case SORT_BY_CITIES_VENDORS_MAP: {
+        //     const {cityName, allVens} = action.payload
+
+        //     let venCitiesList
+
+        //     const citiesSortedVendors = allVens.filter(ven => {
+        //         venCitiesList = ven.buisnessLocation.map(loc => {
+        //             return loc.city
+        //         })
+
+        //         return (venCitiesList.indexOf(cityName) !== -1) ? true : false
+        //     })
+
+        //     return Object.assign({}, state, {
+        //         sortedVens: citiesSortedVendors
+        //     })    
+        // }
 
         default: 
             return state;
