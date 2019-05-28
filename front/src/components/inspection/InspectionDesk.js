@@ -6,9 +6,15 @@ import VendorsMap from './components/VendorsMap'
 import TopBar from './components/TopBar'
 import SortBar from './components/SortBar'
 
+import {sortBy_ALL} from '../../actions/sort/tableSort'
+
 import {Switch, Route, Redirect} from 'react-router-dom'
 
 class InspectionDesk extends Component {
+
+    componentDidMount() {
+        this.props.sortBy_ALL(this.props.dbVendors.dbVendors)
+    }
 
     render() {
         const {dbVendors} = this.props.dbVendors
@@ -53,5 +59,7 @@ const mapStateToProps = (state) => ({
     sortedVens: state.sortedVens,
 })
 
-export default connect(mapStateToProps)(InspectionDesk)
+export default connect(mapStateToProps, {
+    sortBy_ALL
+})(InspectionDesk)
 

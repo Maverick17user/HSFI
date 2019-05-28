@@ -18,6 +18,8 @@ const initialState = {
 export default function(state = initialState, action ) {
     switch(action.type) {
         case SORT_BY_ALL_VENDORS: {
+            console.log(action.allVens);
+            
             return {
                 sortedVens: action.allVens
             }

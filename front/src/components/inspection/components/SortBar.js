@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {
     sortBy_ALL,
@@ -36,11 +36,7 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="country">Country</label>
                             <select multiple className="selectpicker form-control" id="country"
-                            onChange={e => {
-                                (props.history.location.pathname === '/inspection/table')
-                                ? props.sortBy_Countries(e, dbVendors)
-                                : props.sortBy_Countries_Markers(e, dbVendors)
-                            }}>
+                            onChange={e => props.sortBy_Countries(e, dbVendors)}>
                                 {dbCountries.map(country =>
                                     <option key={country+1} value={country}>{country}</option>
                                 )}
@@ -49,11 +45,7 @@ const SortBar = props => {
                         <div className="form-group">
                             <label htmlFor="city">City</label>
                             <input type="text" id="city" className="form-control" placeholder="Type in city name" 
-                            onBlur={e => {
-                                (props.history.location.pathname === '/inspection/table')
-                                ? props.sortBy_Cities(e, dbVendors)
-                                : props.sortBy_Cities_Markers(e, dbVendors)
-                            }}/>
+                            onBlur={e => props.sortBy_Cities(e, dbVendors)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="status_o/c">Open / Closed</label>
