@@ -183,8 +183,7 @@ class Navbar extends Component {
             <header>
                 <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
                     <Link className="navbar-brand" to="/">
-                        {/* <img src="/./logo.png" alt="HSFI"/> */}
-                        HSFI
+                        <img src="/img/logo.png" className="logo" alt="HSFI" height="30px"/>
                     </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

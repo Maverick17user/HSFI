@@ -30,10 +30,6 @@ header {
   z-index: 99;
 }
 
-header img.logo {
-  margin-bottom: 5px;
-}
-
 div.hellotext-wrap h2, div.hellotext-wrap p {
   text-align: center;
 }

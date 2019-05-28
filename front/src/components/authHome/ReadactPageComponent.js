@@ -43,6 +43,7 @@ const ReadactPageComponent = (props) => {
                 <Route exact path="/redactPanel/organizationsList" component={RedactOrganizations} />
                 <Route exact path="/redactPanel/inspectionQuestions" component={RedactInspectionQuestions} />
                 <Route exact path="/redactPanel/NpcRequests" component={RedactNPCsRegRequests} />
+                <Route exact path="/redactPanel/OperatorRequests" component={RedactNPCsRegRequests} />
                 {autoRegirectFromHome()}
             </Switch>
         </>

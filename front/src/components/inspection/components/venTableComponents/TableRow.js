@@ -17,7 +17,11 @@ const TableRow = props => {
             <td>{(props.isOpen) ? 'Open' : 'Close'}</td>
             <td>{props.foodGroup}</td>
             <td className="text-success">{(!props.oss) ? '-' : props.oss}</td>
-            <td>{(!props.flagStatus) ? '-' : props.flagStatus}</td>
+            <td>{
+                (props.flagStatus !== 'red flagged') 
+                ? <img src="/img/flag-green.png" alt="No" /> 
+                : <img src="/img/flag-red.png" alt="Yes" />
+            }</td>
             <td>{props.stars}</td> 
         </tr>
     )

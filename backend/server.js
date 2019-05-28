@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./db');
-const cors = require('cors');
 
 const npc_users = require('./routes/npc_user'); 
 const manager_users = require('./routes/manager_user');
@@ -25,9 +24,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 
 const app = express();
 
-app.use(express.static('public'));
-
-app.use(express.static(__dirname + './public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 app.use(passport.initialize());
 require('./passport')(passport);

@@ -15,6 +15,7 @@ const RoleHomeComponent = props => {
 
     let npcNavLinksData = [
         {title: 'Organizations', target: '/redactPanel/organizationsList'},
+        {title: 'Operator"s reg. requests', target: '/redactPanel/OperatorRequests'},
     ]
     
     switch (props.userRole) {
