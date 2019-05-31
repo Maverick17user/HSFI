@@ -11,6 +11,7 @@ import hotlineReducer from './hotlineReducer'
 import putAllVendorsIntoStoreReducer from './putAllVendorsIntoStoreReducer'
 import sortVendorsReducer from './sortVendorsReducer'
 import userProfileEditReducer from './userProfileEditReducer'
+import inspectionFormReducer from './inspectionFormReducer'
 
 export default combineReducers({
     errors: errorReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
     hotlineCall: hotlineReducer,
     sortedVens: sortVendorsReducer,
     userEditData: userProfileEditReducer,
+    inspectionFormData: inspectionFormReducer,
 });

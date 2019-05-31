@@ -1,4 +1,5 @@
 import React from 'react' 
+import classnames from 'classnames';
 
 const TableRow = props => {
     return (
@@ -16,12 +17,20 @@ const TableRow = props => {
             </td>
             <td>{(props.isOpen) ? 'Open' : 'Close'}</td>
             <td>{props.foodGroup}</td>
-            <td className="text-success">{(!props.oss) ? '-' : props.oss}</td>
-            <td>{
-                (props.flagStatus !== 'red flagged') 
-                ? <img src="/img/flag-green.png" alt="No" /> 
-                : <img src="/img/flag-red.png" alt="Yes" />
-            }</td>
+            <td className="text-success"
+            className={classnames('text-success', {
+                'text-danger': props.oss < 0
+            })}
+            >
+                {(!props.oss) ? '-' : props.oss}
+            </td>
+            <td>
+                {
+                    (props.flagStatus !== 'red flagged') 
+                    ? <img src="/img/flag-green.png" alt="No" /> 
+                    : <img src="/img/flag-red.png" alt="Yes" />
+                }
+            </td>
             <td>{props.stars}</td> 
         </tr>
     )

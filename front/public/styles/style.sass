@@ -80,32 +80,25 @@ div.tableSort-wrap
     top: 10%
 div.map-wrap
     height: 400px
-div.question-wrap
-    display: flex
-    align-items: center
-    margin-bottom: 10px
-    span
-        min-width: 125px
-    div.ball
+div.questions
+    padding: 5px
+    border-radius: 5px
+    border: 1px solid #CED4DA
+    margin-top: 20px
+    div.questions-wrap
         display: flex
         align-items: center
-        div.plus, div.minus
-            cursor: pointer
-            width: 25px
-            height: 25px
-            border-radius: 50%
-            background: lightgray
+        margin-bottom: 10px
+        span.question
+            min-width: 125px
+            font-size: 0.9em
+            margin-left: 25px
+        div.ball
             display: flex
-            justify-content: center
             align-items: center
-            font-size: 1.3em
-            margin-right: 5px
-            &:hover
-                border: 1px solid gray
-                color: #17A2B8
-        div.plus.--active, div.minus.--active
-            background: #17A2B8
-            color: white
+            label.form-check-label
+                font-family: Montserrat-Bold, Arial, Helvetica, sans-serif
+                color: #8E8F91
 div.reportForm
     div.form-check
         padding: 0
