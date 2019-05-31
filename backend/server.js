@@ -17,6 +17,8 @@ const vendors = require('./routes/vendor');
 const scratchCards = require('./routes/scratchCard');
 const callLogs = require('./routes/callLog');
 
+const inspections = require('./routes/inspection')
+
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database'+ err)}
@@ -44,6 +46,8 @@ app.use('/api/questions', inspectQuestions);
 app.use('/api/vendors', vendors);
 app.use('/api/cards', scratchCards);
 app.use('/api/calls', callLogs);
+
+app.use('/api/inspection', inspections);
 
 const PORT = process.env.PORT || 5000;
 

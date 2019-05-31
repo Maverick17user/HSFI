@@ -2,11 +2,17 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {initialFetch} from '../../../../actions/inspection/initialFetch'
 import {changeOSS} from '../../../../actions/inspection/changeOSS'
+import {submitInspectionAction} from '../../../../actions/inspection/submitAction' 
 
 class InspectionForm extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+        this.state = {
+            errors: {}
+        }
+
         this.radioHendler = this.radioHendler.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount() {
@@ -27,6 +33,19 @@ class InspectionForm extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
+    handleSubmit = (e, formData) => {
+        e.preventDefault()
+        this.props.submitInspectionAction(formData)
+    }
+
     radioHendler = e => {
         this.props.changeOSS(e.target) 
     }
@@ -45,13 +64,12 @@ class InspectionForm extends Component {
             totalOSS
         } = this.props.inspectionFormData
 
-        console.log(questionsStatus);
+        const err = this.state.errors
         
-
         return (
             <div className="container inspF">
                 <h2>Inspection</h2>
-                <form action="" className="px-4 py-3">
+                <form action="" className="px-4 py-3" onSubmit={e => this.handleSubmit(e, this.props.inspectionFormData)}>
                     <div className="form-group">
                         <label htmlFor="opName">Operator's Name</label>
                         <input type="text" className="form-control" value={operatorName} id="opName" readOnly />
@@ -76,7 +94,7 @@ class InspectionForm extends Component {
                         <label htmlFor="fGroup">Food group</label>
                         <input type="text" className="form-control" value={foodGroup} id="fGroup" readOnly />
                     </div>
-                    <div className="form-group questions">
+                    <div className='form-group questions'>
                         <label>Questions</label>
                         {dbquestions.map((question, i) => 
                             <div key={question} className="questions-wrap">
@@ -96,6 +114,7 @@ class InspectionForm extends Component {
                             </div>
                         )}
                     </div>
+                    {(err.questions) ? <p className="text-danger">{`${err.questions}`}</p> : null}
                     <div className="form-group">
                         <label htmlFor="totalOSS">Total OSS</label>
                         <input type="text" className="form-control" value={totalOSS}
@@ -112,10 +131,12 @@ class InspectionForm extends Component {
 const mapStateToProps = (state) => ({
     dbquestions: state.dbquestions,
     inspectionFormData: state.inspectionFormData,
+    errors: state.errors,
 })
 
 export default connect(mapStateToProps, {
     initialFetch,
-    changeOSS
+    changeOSS,
+    submitInspectionAction
 })(InspectionForm)
 

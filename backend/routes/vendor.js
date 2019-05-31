@@ -88,7 +88,8 @@ router.put('/changeFlagState', function(req, res) {
 
         // Find all call logs for this card's serial number
         CallLog.find({
-            scratchCardserialNumber: scdata.serialNumber
+            scratchCardserialNumber: scdata.serialNumber,
+            beenInspected: false
         }).then(callLogs => {
 
             // Get original call logs by callerID
@@ -111,14 +112,11 @@ router.put('/changeFlagState', function(req, res) {
                 updatedData = {flagStatus}
             }
 
-            console.log(updatedData);
-            
-
             // Find user and change his flag status
             Vendor.findOneAndUpdate(
                 {licNumber: scdata.licNumber}, 
                 updatedData
-            ).then(()=> console.log('ok'))
+            ).then(() => res.status(200))
 
         })
     })

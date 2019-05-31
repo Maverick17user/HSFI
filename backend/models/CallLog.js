@@ -18,6 +18,10 @@ const CallLogs_Schema = new Schema({
         type: String,
         required: true
     },
+    beenInspected: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const CallLog = mongoose.model('call_logs', CallLogs_Schema);
