@@ -89,7 +89,7 @@ class RedactCommonComponent extends Component {
                     <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div className="row">
                             <div className="col-8">
-                                <p className="text-primary">{props.title}</p>
+                                <p className="text-black">{props.title}</p>
                                 <form className="form" onSubmit={this.handleAddSubmit}>
                                     <div className="form-group">
                                         <input 
@@ -108,7 +108,6 @@ class RedactCommonComponent extends Component {
                                     <div className="form-group">
                                         <button onClick={() => this.actionFlag('add')} type="submit" className="btn btn-success">Add</button>
                                         <button onClick={() => this.actionFlag('remove')} type="submit" className="btn btn-danger">Remove</button>
-                                        <button onClick={() => this.actionFlag('edit')} type="submit" className="btn btn-info">Edit</button>
                                     </div>
                                 </form>
                             </div>

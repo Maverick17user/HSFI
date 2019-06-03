@@ -11,6 +11,8 @@ import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesInt
 import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
 import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
 import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
+import {fetchNpcs} from '../actions/confirmReg/confirmNpc'
+import {fetchOperators} from '../actions/confirmReg/confirmOperator'
 
 import UserBar from './navBarComponents/UserBar'
 
@@ -23,6 +25,7 @@ class Navbar extends Component {
 
     // TODO: import fetching into App.js
     componentDidMount() {
+        const {user} = this.props.auth;
         const options = {
             method: 'get',
             headers: {
@@ -60,6 +63,15 @@ class Navbar extends Component {
         .then(resp => resp.json())
             .then(data => this.props.putInspectionQuestionsIntoStore(data))
             .catch(err => console.log(err))
+
+        // Fetch users to reg confirm
+        // const currentUserData = props.auth.user 
+        if (user.role === 'manager') {
+            this.props.fetchNpcs()
+        } 
+        else if (user.role === 'npc') {
+            this.props.fetchOperators()
+        }
     }
 
     render() {
@@ -204,7 +216,9 @@ Navbar.propTypes = {
     putFoodGroupesIntoStore: PropTypes.func.isRequired,
     putOrganizationsListIntoStore: PropTypes.func.isRequired,
     putInspectionQuestionsIntoStore: PropTypes.func.isRequired,
-    putVendorsIntoStore: PropTypes.func.isRequired
+    putVendorsIntoStore: PropTypes.func.isRequired,
+    fetchNpcs: PropTypes.func.isRequired,
+    fetchOperators: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -218,4 +232,6 @@ export default connect(mapStateToProps, {
     putOrganizationsListIntoStore,
     putInspectionQuestionsIntoStore,
     putVendorsIntoStore,
+    fetchNpcs,
+    fetchOperators
 })(withRouter(Navbar));

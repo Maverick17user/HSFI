@@ -22,7 +22,7 @@ router.post('/register', function(req, res) {
     }).then(user => {
         if(user) {
             return res.status(400).json({
-                email: 'Email already exists'
+                email: 'Email already used'
             });
         }
         else {
@@ -41,6 +41,7 @@ router.post('/register', function(req, res) {
                 email: req.body.email,
                 password: req.body.password,
                 avatar,
+                status: 'unconfirmed', 
                 role
             });    
             
@@ -76,46 +77,62 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
 
     NPC_User.findOne({email})
-        .then(user => {
-            if(!user) {
-                errors.email = 'User not found'
-                return res.status(404).json(errors);
-            }
+    .then(user => {
+        if(!user) {
+            errors.email = 'User not found'
+            return res.status(404).json(errors);
+        }
+        else if(user.status === 'unconfirmed') {
+            errors.status = 'Please, waite while manager confirm your register'
+            return res.status(404).json(errors);
+        }
+        else if(user.status === 'rejected') {
+            errors.status = 'Manager has reject your register vote'
+            return res.status(404).json(errors);
+        }
+        else if(user.status === 'confirmed') {
             bcrypt.compare(password, user.password)
-                .then(isMatch => {
-                    if(isMatch) {
-                        const payload = {
-                            id: user.id,
-                            name: user.name,
-                            avatar: user.avatar,
-                            role: user.role,
-                            date: user.date,
-                            phone: user.phone,
-                            email: user.email,
-                            organization: user.organization,
-                            country: user.country
+            .then(isMatch => {
+                if(isMatch) {
+                    const payload = {
+                        id: user.id,
+                        name: user.name,
+                        avatar: user.avatar,
+                        role: user.role,
+                        date: user.date,
+                        phone: user.phone,
+                        email: user.email,
+                        organization: user.organization,
+                        country: user.country
+                    }
+                    jwt.sign(payload, 'secret', {
+                        expiresIn: 3600
+                    }, (err, token) => {
+                        if(err) console.error('There is some error in token', err);
+                        else {
+                            res.json({
+                                success: true,
+                                token: `Bearer ${token}`
+                            });
                         }
-                        jwt.sign(payload, 'secret', {
-                            expiresIn: 3600
-                        }, (err, token) => {
-                            if(err) console.error('There is some error in token', err);
-                            else {
-                                res.json({
-                                    success: true,
-                                    token: `Bearer ${token}`
-                                });
-                            }
-                        });
-                    }
-                    else {
-                        errors.password = 'Incorrect Password';
-                        return res.status(400).json(errors);
-                    }
-                });
-        });
+                    });
+                }
+                else {
+                    errors.password = 'Incorrect Password';
+                    return res.status(400).json(errors);
+                }
+            });
+        }
+    });
 });
 
 router.post('/edit', (req, res) => {editLogic(req, res)})
+
+router.get('/fetch', (req, res) => {
+    NPC_User.find({status: 'unconfirmed'}, '_id name status email')
+    .then(npcs => res.json(npcs))
+    .catch(err => console.log(err))  
+})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

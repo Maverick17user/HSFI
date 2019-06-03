@@ -27,14 +27,21 @@ const Operator_UserSchema = new Schema({
         required: true
     },
     avatar: {
-        type: String
+        type: String,
+        required: true
     },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
     },
     role: {
-        type: String
+        type: String,
+        required: true
     }
 });
 

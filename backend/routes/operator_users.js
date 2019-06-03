@@ -41,6 +41,7 @@ router.post('/registerOperator', function(req, res) {
                 password: req.body.password,
                 task: req.body.task,
                 avatar,
+                status: 'unconfirmed',
                 role
             });
             
@@ -81,7 +82,16 @@ router.post('/loginOperator', (req, res) => {
                 errors.email = 'User not found'
                 return res.status(404).json(errors);
             }
-            bcrypt.compare(password, user.password)
+            else if(user.status === 'unconfirmed') {
+                errors.status = 'Please, waite while NPC confirm your register'
+                return res.status(404).json(errors);
+            }
+            else if(user.status === 'rejected') {
+                errors.status = 'NPS has reject your register vote'
+                return res.status(404).json(errors);
+            }
+            else if(user.status === 'confirmed') {
+                bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if(isMatch) {
                         const payload = {
@@ -111,11 +121,18 @@ router.post('/loginOperator', (req, res) => {
                         errors.password = 'Incorrect Password';
                         return res.status(400).json(errors);
                     }
-                });
-        });
-});
+                })
+            }
+        })
+})
 
 router.post('/edit', (req, res) => {editLogic(req, res)})
+
+router.get('/fetch', (req, res) => {
+    Operator_User.find({status: 'unconfirmed'}, '_id name status email')
+    .then(operators => res.json(operators))
+    .catch(err => console.log(err))  
+})
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 const SerialCardNumberInput = props => {
     return (
         <div className="form-group">
-            <label htmlFor="serial">First card's serial no.</label>
+            <label htmlFor="serial">Card's serial number</label>
             <input 
             type="text" 
             className={classnames('form-control', {

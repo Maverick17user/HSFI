@@ -63,6 +63,9 @@ export const REPORT_CHECKBOX_HANDLING = 'REPORT_CHECKBOX_HANDLING'
 // Report donwload
 export const PREPARE_DONWLOAD_DATA = 'PREPARE_DONWLOAD_DATA'
 
+// Confirm registration at admin panel
+export const FETCH_IN_CONFIRM = 'FETCH_IN_CONFIRM'
+
 
 
 

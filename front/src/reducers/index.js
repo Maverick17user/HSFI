@@ -14,6 +14,7 @@ import userProfileEditReducer from './userProfileEditReducer'
 import inspectionFormReducer from './inspectionFormReducer'
 import reportReducer from './reportReducer'
 import reportDonwloadReducer from './reportDonwloadReducer'
+import confirmNpcReducer from './confirmNpcReducer'
 
 export default combineReducers({
     errors: errorReducer,
@@ -31,4 +32,5 @@ export default combineReducers({
     inspectionFormData: inspectionFormReducer,
     reportState: reportReducer,
     reportFileData: reportDonwloadReducer,
+    usersToConfirm: confirmNpcReducer,
 });

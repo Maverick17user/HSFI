@@ -1,0 +1,25 @@
+import axios from 'axios'
+import { FETCH_IN_CONFIRM } from '../types'
+
+export const rejectRegister = (user, role) => dispatch => {
+    let url
+
+    if (role === 'manager') {
+        url = '/api/users'
+    }
+    else if (role === 'npc') {
+        url = '/api/operatorUsers'
+    }
+
+    axios.post(`${url}/reject`, user)
+    .then(res => {
+        dispatch({
+            type: FETCH_IN_CONFIRM,
+            users: res.data
+        })
+        alert('Rejected')
+    })
+    .catch(err => {
+        throw new Error(err)
+    });
+}
