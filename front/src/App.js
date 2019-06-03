@@ -20,6 +20,7 @@ import VenRegForm from './components/venReg/VenRegForm'
 import ScratchCardDesk from './components/scratchCard/ScratchCardDesk'
 import HotlineForm from './components/hotline/HotlineForm'
 import InspectionDesk from './components/inspection/InspectionDesk'
+import ReportForm from './components/report/ReportForm'
 
 import UserProfile from './components/UserProfile'
 import UserProfileEdit from './components/userProfileComponents/edit/UserProfileEdit'
@@ -63,11 +64,10 @@ class App extends Component {
                   <Route path="/venScratchCards" component={ScratchCardDesk}/>
                   <Route path="/hotline" component={HotlineForm}/>
                   <Route path="/inspection" component={InspectionDesk}/>
+                  <Route path="/report" component={ReportForm}/>
 
                   <Route exact path="/vendors/:vendorId" component={VendorProfile}/>
                   <Route exact path="/vendors/:vendorId/edit" component={VendorProfileEdit}/>
-
-                  <Route path="/report" render={() => <p>report</p>}/>
                 </Switch>
               </div>
           </Router>

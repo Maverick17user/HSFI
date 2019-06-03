@@ -18,8 +18,9 @@ const scratchCards = require('./routes/scratchCard');
 const callLogs = require('./routes/callLog');
 
 const inspections = require('./routes/inspection')
+const reports = require('./routes/report')
 
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+mongoose.connect(config.DB, { useNewUrlParser: true }).then(     
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database'+ err)}
 );
@@ -48,6 +49,7 @@ app.use('/api/cards', scratchCards);
 app.use('/api/calls', callLogs);
 
 app.use('/api/inspection', inspections);
+app.use('/api/report', reports)
 
 const PORT = process.env.PORT || 5000;
 

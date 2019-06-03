@@ -33,7 +33,7 @@ const initialState = {
 
 export default function(state = initialState, action ) {
     let data, changed;
-    if (action.prop !== undefined) {
+    if (action.prop) {
         data = state.vendorRegData[action.prop]
         changed = data.filter(unit => unit.id === action.index)
     }
@@ -80,7 +80,6 @@ export default function(state = initialState, action ) {
 
             data.splice(data.indexOf(changed[0]), 1)
             // gps.splice(gps.indexOf(changedGpsUnitIndex), 1)
-
             // console.log(gps);
 
             return Object.assign({}, state, {
