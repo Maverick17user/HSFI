@@ -12,6 +12,8 @@ import putAllVendorsIntoStoreReducer from './putAllVendorsIntoStoreReducer'
 import sortVendorsReducer from './sortVendorsReducer'
 import userProfileEditReducer from './userProfileEditReducer'
 import inspectionFormReducer from './inspectionFormReducer'
+import reportReducer from './reportReducer'
+import reportDonwloadReducer from './reportDonwloadReducer'
 
 export default combineReducers({
     errors: errorReducer,
@@ -27,4 +29,6 @@ export default combineReducers({
     sortedVens: sortVendorsReducer,
     userEditData: userProfileEditReducer,
     inspectionFormData: inspectionFormReducer,
+    reportState: reportReducer,
+    reportFileData: reportDonwloadReducer,
 });

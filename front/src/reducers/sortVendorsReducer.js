@@ -7,8 +7,6 @@ import {
     SORT_BY_OSS_VENDORS,
     SORT_BY_FLAG_VENDORS,
     SORT_BY_STARS_VENDORS,
-    SORT_BY_COUNTRIES_VENDORS_MAP,
-    SORT_BY_CITIES_VENDORS_MAP,
 } from '../actions/types';
 
 const initialState = {
@@ -18,8 +16,6 @@ const initialState = {
 export default function(state = initialState, action ) {
     switch(action.type) {
         case SORT_BY_ALL_VENDORS: {
-            console.log(action.allVens);
-            
             return {
                 sortedVens: action.allVens
             }
