@@ -8,14 +8,10 @@ import { Redirect, Switch, Route } from 'react-router-dom'
 import UnAuthHome from './UnAuthHome';
 
 class Home extends Component {
-
     render() {
-
         const {isAuthenticated, user} = this.props.auth
-
         // TODO: Operator home without redirect
         // let toAuthHome = (user.role === 'operator') ? null:
-
         return isAuthenticated ? (
             <Redirect to="/redactPanel"/>
             ) : (

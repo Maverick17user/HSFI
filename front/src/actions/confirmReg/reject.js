@@ -19,7 +19,6 @@ export const rejectRegister = (user, role) => dispatch => {
                 type: FETCH_IN_CONFIRM,
                 users: res.data
             });
-            alert('Rejected')
         })
     })
     .catch(err => {

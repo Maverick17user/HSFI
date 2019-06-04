@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import axios from 'axios'
+
 import {fetchData} from '../../../actions/venreg/fetching'
+import {fetchCountry} from '../../../actions/venreg/fetchCountry'
 import {inputChange} from '../../../actions/venreg/inputChange'
 import {marked_inputChange} from '../../../actions/venreg/marked_inputChange'
 import {multiSelecChange} from '../../../actions/venreg/multiSelecChange'
@@ -13,6 +15,7 @@ import {getLocationCoordinates} from '../../../actions/venreg/getLocationCoordin
 import OperatorName_FetchedInput from './VForm-components/OperatorName_FetchedInput'
 import RegData_FetchedInput from './VForm-components/RegData_FetchedInput'
 import CountrySelect from './VForm-components/CountrySelect' 
+import CountrySelectFetched from './VForm-components/CountrySelectFetched' 
 import VenNameInput from './VForm-components/VenNameInput'
 import VenPicktureInput from './VForm-components/VenPicktureInput'
 import LicenseNumberInput from './VForm-components/LicenseNumberInput'
@@ -62,6 +65,8 @@ class VForm extends Component {
 
     handleSubmit(e, data) {
         e.preventDefault();
+        console.log(data);
+        
         const newVendor = Object.assign({},data)
         this.props.submitVenRegForm(newVendor)
     }
@@ -78,12 +83,16 @@ class VForm extends Component {
         if (dbCountries.length === 0) {
             return <p>Fetching data...</p>
         }
-        
+
         return (
             <form 
             onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
                 <OperatorName_FetchedInput value={vendorRegData.operatorName} />
                 <RegData_FetchedInput value={vendorRegData.regDate} />
+                {/* {(dbCountries.length === 1)
+                    ? <CountrySelectFetched dbCountries={dbCountries} />
+                    : <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
+                } */}
                 <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
                 <VenNameInput venName={vendorRegData.venName} handleInputChange={this.handleInputChange} />
                 {/* <VenPicktureInput/> */}
@@ -132,7 +141,7 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {
-    fetchData, 
+    fetchData,
     inputChange,
     submitVenRegForm,
     marked_inputChange,

@@ -7,6 +7,8 @@ const initialState = {
 export default function(state = initialState, action ) {
     switch(action.type) {
         case GET_DB_COUNTRIES:
+            console.log(action.payload);
+            
             const dbCountryList = action.payload.map(countryData => countryData.country)
             return {
                 ...state,

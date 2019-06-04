@@ -19,7 +19,6 @@ export const confirmRegister = (user, role) => dispatch => {
                 type: FETCH_IN_CONFIRM,
                 users: res.data
             });
-            alert('Confirmed')
         })
     })
     .catch(err => {

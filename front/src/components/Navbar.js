@@ -36,14 +36,34 @@ class Navbar extends Component {
         // Fetch vendors
         fetch('/api/vendors/getAllVendors', options)
         .then(resp => resp.json())
-            .then(data => this.props.putVendorsIntoStore(data))
+            .then(data => {
+                if(user.role === 'manager') {
+                    this.props.putVendorsIntoStore(data)
+                } 
+                else {
+                    const sortedVendorsByCountry = data.filter(ven => {
+                        const venCountryList = ven.country[0].country
+                        return venCountryList.every(country => country === user.country) === true 
+                    })
+                    
+                    this.props.putVendorsIntoStore(sortedVendorsByCountry)
+                }
+            })
             .catch(err => console.log(err))
         .catch(err => console.log(err))
 
         // Fetch countryList
         fetch('/api/countries/redactPanel/countryList', options)
         .then(resp => resp.json())
-            .then(data => this.props.putCountriesIntoStore(data))
+            .then(data => {
+                if(user.role === 'npc' || user.role === 'operator') {
+                    const userCountry = data.filter(dataUnit => dataUnit.country === user.country) 
+                    this.props.putCountriesIntoStore(userCountry)
+                } 
+                else {
+                    this.props.putCountriesIntoStore(data)
+                } 
+            })
             .catch(err => console.log(err))
 
         // Fetch food group list

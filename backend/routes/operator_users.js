@@ -87,7 +87,7 @@ router.post('/loginOperator', (req, res) => {
                 return res.status(404).json(errors);
             }
             else if(user.status === 'rejected') {
-                errors.status = 'NPS has reject your register vote'
+                errors.status = 'NPC has reject your register vote'
                 return res.status(404).json(errors);
             }
             else if(user.status === 'confirmed') {
