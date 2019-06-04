@@ -82,6 +82,7 @@ class LoginOperator extends Component {
                         value={ this.state.password }
                         />
                         {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                        {errors.status && (<div className="text-primary">{errors.status}</div>)}
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">

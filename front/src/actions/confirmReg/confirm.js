@@ -13,9 +13,13 @@ export const confirmRegister = (user, role) => dispatch => {
 
     axios.post(`${url}/confirm`, user)
     .then(res => {
-        dispatch({
-            type: FETCH_IN_CONFIRM,
-            users: res.data
+        axios.get(`${url}/fetch`)
+        .then(res => {
+            dispatch({
+                type: FETCH_IN_CONFIRM,
+                users: res.data
+            });
+            alert('Confirmed')
         })
     })
     .catch(err => {

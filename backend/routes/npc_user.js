@@ -134,6 +134,18 @@ router.get('/fetch', (req, res) => {
     .catch(err => console.log(err))  
 })
 
+router.post('/confirm', (req, res) => {
+    NPC_User.findOneAndUpdate({_id: req.body._id}, {$set: {status: 'confirmed'}})
+    .then(result => res.json(result))
+    .catch(err => console.log(err))  
+})
+
+router.post('/reject', (req, res) => {
+    NPC_User.findOneAndUpdate({_id: req.body._id}, {$set: {status: 'rejected'}})
+    .then(result => res.json(result))
+    .catch(err => console.log(err))  
+})
+
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
     return res.json({
         id: req.user.id,

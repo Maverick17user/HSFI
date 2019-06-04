@@ -8,15 +8,24 @@ import {rejectRegister} from '../../../actions/confirmReg/reject'
 const RedactNPCsRegRequests = props => {
     const currentUserData = props.auth.user 
     const usersToConfirm = props.usersToConfirm
-
+    console.log(usersToConfirm.users);
+    
     return (
         <div className="col-9">
-            <p>NPC's Reg. Requests content.</p>
-            <ConfirmRegistrationBlock 
-            usersToConfirm={usersToConfirm} 
-            role={currentUserData.role}
-            confirmRegister={props.confirmRegister}
-            rejectRegister={props.rejectRegister}/>
+            {(currentUserData.role === "manager")
+                ? <p>NPC users confirming</p>
+                : <p>Operator users confirming</p>
+            }
+            {(usersToConfirm.users.length === 0)
+                ? <em className="text-primary"><small>Here is no users to confirm!</small></em>
+                : (
+                    <ConfirmRegistrationBlock 
+                    usersToConfirm={usersToConfirm} 
+                    role={currentUserData.role}
+                    confirmRegister={props.confirmRegister}
+                    rejectRegister={props.rejectRegister}/>
+                )
+            }
         </div>
     )
 }

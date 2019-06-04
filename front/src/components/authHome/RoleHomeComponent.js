@@ -10,12 +10,12 @@ const RoleHomeComponent = props => {
         {title: 'Food groups', target: '/redactPanel/foodGroups'},
         {title: 'Organizations', target: '/redactPanel/organizationsList'},
         {title: 'Inspection questions', target: '/redactPanel/inspectionQuestions'},
-        {title: 'NPC"s reg. requests', target: '/redactPanel/NpcRequests'},
+        {title: 'NPCs register confirm', target: '/redactPanel/NpcRequests'},
     ]
 
     let npcNavLinksData = [
         {title: 'Organizations', target: '/redactPanel/organizationsList'},
-        {title: 'Operator"s reg. requests', target: '/redactPanel/OperatorRequests'},
+        {title: 'Operators register confirm', target: '/redactPanel/NpcRequests'},
     ]
     
     switch (props.userRole) {

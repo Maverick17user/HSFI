@@ -82,6 +82,7 @@ class LogIn extends Component {
                         value={ this.state.password }
                         />
                         {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                        {errors.status && (<small className="text-primary">{errors.status}</small>)}
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">

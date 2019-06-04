@@ -13,11 +13,14 @@ export const rejectRegister = (user, role) => dispatch => {
 
     axios.post(`${url}/reject`, user)
     .then(res => {
-        dispatch({
-            type: FETCH_IN_CONFIRM,
-            users: res.data
+        axios.get(`${url}/fetch`)
+        .then(res => {
+            dispatch({
+                type: FETCH_IN_CONFIRM,
+                users: res.data
+            });
+            alert('Rejected')
         })
-        alert('Rejected')
     })
     .catch(err => {
         throw new Error(err)
