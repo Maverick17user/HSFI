@@ -1,97 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authentication';
-import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-
-import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
-import { putFoodGroupesIntoStore } from '../actions/foodGroups/putFoodGroupesIntoStore'
-import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
-import { putInspectionQuestionsIntoStore } from '../actions/questions/putInspectionQuestionsIntoStore'
-import { putVendorsIntoStore } from '../actions/venreg/putVendorsIntoStore'
-import {fetchNpcs} from '../actions/confirmReg/confirmNpc'
-import {fetchOperators} from '../actions/confirmReg/confirmOperator'
+import { withRouter } from 'react-router-dom';
 
 import UserBar from './navBarComponents/UserBar'
 
-class Navbar extends Component {
+import { logoutUser } from '../actions/authentication';
 
+class Navbar extends Component {
+    constructor() {
+        super()
+        this.onLogout = this.onLogout.bind(this)
+    }
     onLogout(e) {
         e.preventDefault();
-        this.props.logoutUser(this.props.history);
-    }
-
-    // TODO: import fetching into App.js
-    componentDidMount() {
-        const {user} = this.props.auth;
-        const options = {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }
-
-        // Fetch vendors
-        fetch('/api/vendors/getAllVendors', options)
-        .then(resp => resp.json())
-            .then(data => {
-                if(user.role === 'manager') {
-                    this.props.putVendorsIntoStore(data)
-                } 
-                else {
-                    const sortedVendorsByCountry = data.filter(ven => {
-                        const venCountryList = ven.country[0].country
-                        return venCountryList.every(country => country === user.country) === true 
-                    })
-                    
-                    this.props.putVendorsIntoStore(sortedVendorsByCountry)
-                }
-            })
-            .catch(err => console.log(err))
-        .catch(err => console.log(err))
-
-        // Fetch countryList
-        fetch('/api/countries/redactPanel/countryList', options)
-        .then(resp => resp.json())
-            .then(data => {
-                if(user.role === 'npc' || user.role === 'operator') {
-                    const userCountry = data.filter(dataUnit => dataUnit.country === user.country) 
-                    this.props.putCountriesIntoStore(userCountry)
-                } 
-                else {
-                    this.props.putCountriesIntoStore(data)
-                } 
-            })
-            .catch(err => console.log(err))
-
-        // Fetch food group list
-        fetch('/api/foodGroups/redactPanel/foodGroups', options)
-        .then(resp => resp.json())
-            .then(data => this.props.putFoodGroupesIntoStore(data))
-            .catch(err => console.log(err))
-
-        // Organizations list
-        fetch('/api/organizations/redactPanel/organizationsList', options)
-        .then(resp => resp.json())
-            .then(data => this.props.putOrganizationsListIntoStore(data))
-            .catch(err => console.log(err))
+        console.log(this.props.history);
         
-        // Questions list
-        fetch('/api/questions/redactPanel/inspectionQuestions', options)
-        .then(resp => resp.json())
-            .then(data => this.props.putInspectionQuestionsIntoStore(data))
-            .catch(err => console.log(err))
-
-        // Fetch users to reg confirm
-        // const currentUserData = props.auth.user 
-        if (user.role === 'manager') {
-            this.props.fetchNpcs()
-        } 
-        else if (user.role === 'npc') {
-            this.props.fetchOperators()
-        }
+        this.props.logoutUser(this.props.history);
     }
 
     render() {
@@ -157,7 +83,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout} />
                     </>
                 )
                 break;
@@ -165,7 +91,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList tasks={initailTaskList} />
-                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout} />
                     </>
                 )
                 break;
@@ -173,7 +99,7 @@ class Navbar extends Component {
                 authLinks = (
                     <>
                         <TaskList operatorTasks={user.task} />
-                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout.bind(this)} />
+                        <UserBar avatar={user.avatar} name={user.name} user={user} toLogOut={this.onLogout} />
                     </>
                 )
                 break;
@@ -229,29 +155,11 @@ class Navbar extends Component {
         )
     }
 }
-Navbar.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    putCountriesIntoStore: PropTypes.func.isRequired,
-    putFoodGroupesIntoStore: PropTypes.func.isRequired,
-    putOrganizationsListIntoStore: PropTypes.func.isRequired,
-    putInspectionQuestionsIntoStore: PropTypes.func.isRequired,
-    putVendorsIntoStore: PropTypes.func.isRequired,
-    fetchNpcs: PropTypes.func.isRequired,
-    fetchOperators: PropTypes.func.isRequired,
-}
 
 const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { 
-    logoutUser, 
-    putCountriesIntoStore,
-    putFoodGroupesIntoStore,
-    putOrganizationsListIntoStore,
-    putInspectionQuestionsIntoStore,
-    putVendorsIntoStore,
-    fetchNpcs,
-    fetchOperators
-})(withRouter(Navbar));
+export default connect(mapStateToProps, {
+    logoutUser
+})(withRouter(Navbar))

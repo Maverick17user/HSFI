@@ -1,5 +1,6 @@
 import { 
     FETCH_IN_VENREG, 
+    FETCH_COUNTRY_IN_VENREG,
     INPUT_CHANGE_IN_VENREG, 
     MARKED_INPUT_CHANGE_IN_VENREG,
     MULTI_SELECT_CHANGE_IN_VENREG,
@@ -43,6 +44,12 @@ export default function(state = initialState, action ) {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     operatorName: action.payload,
                     regDate: new Date().toLocaleString().slice(0,10)
+                })
+            })}
+        case FETCH_COUNTRY_IN_VENREG: {
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    country: [{id:0, country: action.payload}]
                 })
             })}
         case INPUT_CHANGE_IN_VENREG: {

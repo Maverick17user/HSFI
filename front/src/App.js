@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authentication';
+import { setCurrentUser } from './actions/authentication';
 import store from './store';
 
 import Navbar from './components/Navbar';
@@ -44,7 +44,7 @@ class App extends Component {
     render() {
       return (
         <Provider store={ store }>
-          <Router >
+          <Router >    
               <Navbar history={this.props.history}/>
               <div className="container">
                 <Switch>

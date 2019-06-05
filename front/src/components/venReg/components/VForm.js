@@ -89,11 +89,10 @@ class VForm extends Component {
             onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
                 <OperatorName_FetchedInput value={vendorRegData.operatorName} />
                 <RegData_FetchedInput value={vendorRegData.regDate} />
-                {/* {(dbCountries.length === 1)
+                {(dbCountries.length === 1)
                     ? <CountrySelectFetched dbCountries={dbCountries} />
                     : <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
-                } */}
-                <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
+                }
                 <VenNameInput venName={vendorRegData.venName} handleInputChange={this.handleInputChange} />
                 {/* <VenPicktureInput/> */}
                 <p className="text-warning">TODO: Vendor picture input</p>

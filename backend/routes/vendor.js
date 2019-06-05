@@ -56,24 +56,17 @@ router.post('/venRegistration', function(req, res) {
     });
 });
 
-// TODO: Make it as get request
 router.post('/getVendor', function(req, res) {
-
-    Vendor.findOne({licNumber: req.body.vendorNumber})
-    .then(data => {
-        if(!data) {
-            return res.status(400).json({
-                licNumber: 'Vendor with this license not found'
-            });
-        } else {
-            res.json(data)
-        }
-    })
-    .catch(err => console.log(err))  
+    const vendor = req.body.vendors.find(vendor => vendor.licNumber === req.body.inputedLicNumber)
+    if (vendor !== undefined) {
+        res.json(vendor)
+    }
+    else {
+        return res.status(400).json({licNumber: 'Vendor with this license not found'});
+    } 
 })
 
 router.get('/getAllVendors', function(req, res) {
-
     Vendor.find({})
     .then(data => res.json(data))
     .catch(err => console.log(err))  

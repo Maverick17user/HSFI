@@ -21,6 +21,7 @@ module.exports = function validateVenRegForm(data) {
 
     // deepIsEmpty(data.country, 'country', 'Country field is required')
 
+    
     data.country.forEach(unit => {
         if(!unit.country) {
             errors.country = 'Country field is required';

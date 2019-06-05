@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 
 const LicenseNumberInput = props => {
+    const {dbVendors} = props.dbVendors
+    
     return (
         <div className="form-group">
             <label htmlFor="licNum">License number</label>
@@ -16,7 +18,7 @@ const LicenseNumberInput = props => {
             value={props.value} 
             name="licNumber" 
             onChange={props.handleInputChange} 
-            onBlur={() => props.fetchVendorData(props.value)}/>
+            onBlur={() => props.fetchVendorData(props.value, dbVendors)}/>
             {props.errors.licNumber && (<div className="invalid-feedback">{props.errors.licNumber}</div>)}
         </div>
     ) 
@@ -27,7 +29,8 @@ LicenseNumberInput.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    errors: state.errors
+    errors: state.errors,
+    dbVendors: state.dbVendors
 })
 
 export  default connect(mapStateToProps)(LicenseNumberInput)

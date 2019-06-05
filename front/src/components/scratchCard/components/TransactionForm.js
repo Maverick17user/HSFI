@@ -38,18 +38,15 @@ class TransactionForm extends Component {
         store.dispatch(fetchInitialData(this.props.auth.user.name))
     }
 
-    fetchVendorData(vendorNumber) {
-        if((vendorNumber !== null) || (vendorNumber !== '') || (vendorNumber !== undefined)) {
-            const data = {vendorNumber}
-
-            store.dispatch(fetchVendorData(data))
+    fetchVendorData(vendorNumber, dbVendors) {
+        if((vendorNumber)) {
+            store.dispatch(fetchVendorData(vendorNumber, dbVendors))
         }
     }
 
     handleSubmit(e, data) {
         e.preventDefault()
         const newCard = Object.assign({},data)
-
         store.dispatch(submitTransaction(newCard))
     }
 
