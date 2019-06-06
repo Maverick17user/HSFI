@@ -8,16 +8,63 @@ import UserBar from './navBarComponents/UserBar'
 
 import { logoutUser } from '../actions/authentication';
 import { resetState } from '../actions/resetState';
+import { putCountriesIntoStore } from '../actions/countries/putCountriesIntoStore'
+import { putOrganizationsListIntoStore } from '../actions/organizations/putOrganizationsListIntoStore'
 
 class Navbar extends Component {
     constructor() {
         super()
         this.onLogout = this.onLogout.bind(this)
     }
+
     onLogout(e) {
         e.preventDefault();
-        this.props.logoutUser(this.props.history);
         this.props.resetState()
+        this.props.logoutUser(this.props.history);
+
+        const options = {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+        
+        // Fetch countryList
+        fetch('/api/countries/redactPanel/countryList', options)
+        .then(resp => resp.json())
+            .then(data => {
+                this.props.putCountriesIntoStore(data)
+            })
+            .catch(err => console.log(err))
+        
+        // Organizations list
+        fetch('/api/organizations/redactPanel/organizationsList', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putOrganizationsListIntoStore(data))
+            .catch(err => console.log(err))
+    }
+
+    componentDidMount() {
+        const options = {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+
+        // Fetch countryList
+        fetch('/api/countries/redactPanel/countryList', options)
+        .then(resp => resp.json())
+            .then(data => {
+                this.props.putCountriesIntoStore(data)
+            })
+            .catch(err => console.log(err))
+        
+        // Organizations list
+        fetch('/api/organizations/redactPanel/organizationsList', options)
+        .then(resp => resp.json())
+            .then(data => this.props.putOrganizationsListIntoStore(data))
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -166,5 +213,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     logoutUser,
-    resetState
+    resetState,
+    putCountriesIntoStore,
+    putOrganizationsListIntoStore
 })(withRouter(Navbar))

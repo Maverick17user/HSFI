@@ -45,7 +45,6 @@ class RegisterOperator extends Component {
             password_confirm: this.state.password_confirm,
             task: this.state.task,
         }
-        console.log(this.state.task);
         this.props.registerOperatorUser(Operator_user, this.props.history);
     }
 
