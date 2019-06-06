@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-import axios from 'axios'
 
 import {fetchData} from '../../../actions/venreg/fetching'
 import {fetchCountry} from '../../../actions/venreg/fetchCountry'
@@ -65,8 +63,6 @@ class VForm extends Component {
 
     handleSubmit(e, data) {
         e.preventDefault();
-        console.log(data);
-        
         const newVendor = Object.assign({},data)
         this.props.submitVenRegForm(newVendor)
     }

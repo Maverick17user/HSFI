@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import {fetchCountry} from '../../../../actions/venreg/fetchCountry'
+import {fetchCountry} from '../../../actions/report/fetchCountry'
 
-class CountrySelectFetched extends Component {
+class CountriesSelectFetched extends Component {
     componentDidMount() {
         const {dbCountries} = this.props.dbCountries
         if (dbCountries.length === 1) {
@@ -11,34 +11,29 @@ class CountrySelectFetched extends Component {
     }
 
     render() {
-        const {vendorRegData} = this.props.vendorRegData
-        const countryList = vendorRegData.country[0].country
-        const {errors} = this.props
+        const countries = this.props.reportState.countries
         let countryInput
 
-        if(countryList === undefined) {
+        if(countries === undefined) {
             countryInput = <input type="text" className="form-control" value={'Data loading ...'} readOnly disabled/>
         }
-        else if (countryList.length === 1) {
-            countryInput = <input type="text" className="form-control" value={countryList[0]} readOnly />
+        else if (countries.length === 1) {
+            countryInput = <input type="text" className="form-control" value={countries[0]} readOnly />
         }
 
         return (
             <div className="form-group">
                 <label>Country</label>
                 {countryInput}
-                {errors.country && (
-                    <div className="invalid-feedback">{errors.country}</div>
-                )}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    errors: state.errors,
     vendorRegData: state.vendorRegData,
+    reportState: state.reportState,
     dbCountries: state.dbCountries
 })
 
-export default connect(mapStateToProps, {fetchCountry})(CountrySelectFetched)
+export default connect(mapStateToProps, {fetchCountry})(CountriesSelectFetched)

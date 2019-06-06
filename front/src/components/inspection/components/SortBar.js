@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import {
     sortBy_ALL,
@@ -19,7 +19,8 @@ const SortBar = props => {
     const {dbCountries} = props.dbCountries 
     const {dbFoodGroups} = props.dbFoodGroups
     const dbVendors = props.dbVendors
-
+    console.log(dbVendors);
+    
     return (
         <div className="col-3">
             <div className="tableSort-wrap">
@@ -33,7 +34,8 @@ const SortBar = props => {
                                 All vendors
                             </button>
                         </div>
-                        <div className="form-group">
+                        {dbCountries.length > 1 && (
+                            <div className="form-group">
                             <label htmlFor="country">Country</label>
                             <select multiple className="selectpicker form-control" id="country"
                             onChange={e => props.sortBy_Countries(e, dbVendors)}>
@@ -42,6 +44,7 @@ const SortBar = props => {
                                 )}
                             </select>
                         </div>
+                        )}
                         <div className="form-group">
                             <label htmlFor="city">City</label>
                             <input type="text" id="city" className="form-control" placeholder="Type in city name" 
@@ -105,13 +108,10 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {
-    // For table sort only
     sortBy_Countries,
     sortBy_Cities,
-    //Only for map
     sortBy_Countries_Markers,
     sortBy_Cities_Markers,
-    // Common for table and map
     sortBy_ALL,
     sortBy_isOpen,
     sortBy_foogGroup,

@@ -7,6 +7,7 @@ import ButtonSubmit from '../common/ButtonSubmit'
 import ReportDateInput from './components/ReportDateInput'
 import ReportPeriod from './components/ReportPeriod'
 import CountriesSelect from './components/CountriesSelect'
+import CountriesSelectFetched from './components/CountriesSelectFetched'
 import CheckboxGroup from './components/CheckboxGroup'
 import DownloadContent from './components/DownloadContent'
 
@@ -44,7 +45,13 @@ class ReportForm extends Component {
 
     handleSubmit(e, data) {
         e.preventDefault();
-        this.props.submitAction(data)
+        const userRole = this.props.auth.user.role
+        if (userRole === 'manager') {
+            this.props.submitAction(data)
+        } 
+        else {
+            this.props.submitAction(data, 'noManager')
+        }
     }
 
     render() {
@@ -66,11 +73,15 @@ class ReportForm extends Component {
                     to={to} 
                     handleInputChange={this.handleInputChange}
                     errors={errors}/>
-                    <CountriesSelect 
-                    handleMultiSelectChangeHandler={this.handleMultiSelectChangeHandler} 
-                    dbCountries={dbCountries}
-                    errors={this.props.errors}
-                    errors={errors} />
+                    {(dbCountries.length === 1)
+                        ? <CountriesSelectFetched />
+                        : (
+                            <CountriesSelect 
+                            handleMultiSelectChangeHandler={this.handleMultiSelectChangeHandler} 
+                            dbCountries={dbCountries}
+                            errors={errors} />
+                        )
+                    }
                     <CheckboxGroup checkboxHendler={this.checkboxHendler} errors={errors}/>
                     <ButtonSubmit text='Create' />
                     {(reportFileData.length !== 0) && <DownloadContent name={'report.txt'} content={reportFileData} />}
@@ -89,6 +100,7 @@ ReportForm.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     reportState: state.reportState,
     dbVendors: state.dbVendors,
     dbCountries: state.dbCountries,

@@ -20,7 +20,7 @@ router.post('/createFileData', function(req, res) {
 
     const formData = req.body
     const {
-        reportDate, from, to, countries, reportQueries
+        reportDate, from, to, countries, reportQueries, isManager
     } = formData
 
     Promise.all([
@@ -30,7 +30,7 @@ router.post('/createFileData', function(req, res) {
         FoodGroup.find({})
     ])
     .then(data => {
-        const sortedVens = filterByTimePeriod(from, to, filterVendorsByCountry(data[0], countries), "regDate")
+        const sortedVens = filterByTimePeriod(from, to, filterVendorsByCountry(data[0], countries, isManager), "regDate")
         const sortedScratchCards = filterByTimePeriod(from, to, data[1], "transactionDate")
         const sortedCallLog = filterByTimePeriod(from, to, data[2], "callDate")
 
@@ -145,13 +145,18 @@ module.exports = router;
 
 // TODO: Put into separate modules
 
-const filterVendorsByCountry = (data, countries) => {
+const filterVendorsByCountry = (data, countries, isManager) => {
     return data.filter(ven => {
         const venCountryList = ven.country[0].country
-
-        return countries.every((selectedValueItem) => {
-            return (venCountryList.indexOf(selectedValueItem) !== -1) ? true : false
-        }) === true 
+        
+        if(isManager) {
+            return countries.every((selectedValueItem) => {
+                return (venCountryList.indexOf(selectedValueItem) !== -1) ? true : false
+            }) === true 
+        }
+        else {
+            return venCountryList.every(country => country === countries[0]) === true 
+        }
     })
 }
 

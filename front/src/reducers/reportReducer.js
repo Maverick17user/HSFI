@@ -1,5 +1,6 @@
 import { 
     FETCH_IN_REPORT,
+    FETCH_COUNTRY_IN_REPORT,
     INPUT_CHANGE_IN_REPORT,
     MULTI_SELECT_IN_REPORT,
     REPORT_CHECKBOX_HANDLING
@@ -18,6 +19,11 @@ export default function(state = initialState, action ) {
         case FETCH_IN_REPORT: {
             return Object.assign({}, state, {
                 reportDate: action.reportDate
+            })
+        }
+        case FETCH_COUNTRY_IN_REPORT: {
+            return Object.assign({}, state, {
+                countries: action.payload
             })
         }
         case INPUT_CHANGE_IN_REPORT: {
