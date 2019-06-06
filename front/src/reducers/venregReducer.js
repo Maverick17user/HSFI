@@ -5,8 +5,8 @@ import {
     MARKED_INPUT_CHANGE_IN_VENREG,
     MULTI_SELECT_CHANGE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
-    REMOVE_UNIT_FROM_VENREG,
-    SET_SINGLE_MAP_MARK_COORDINATES
+    SET_SINGLE_MAP_MARK_COORDINATES,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -78,22 +78,6 @@ export default function(state = initialState, action ) {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.prop]: data,
                 })
-            })}
-        // TODO: gps dinamic removing by id
-        case REMOVE_UNIT_FROM_VENREG: {
-
-            // let gps = [...state.vendorRegData.gps]
-            // let changedGpsUnitIndex = state.vendorRegData.gps.findIndex(gpsUnit => gpsUnit.id === action.index)
-
-            data.splice(data.indexOf(changed[0]), 1)
-            // gps.splice(gps.indexOf(changedGpsUnitIndex), 1)
-            // console.log(gps);
-
-            return Object.assign({}, state, {
-                vendorRegData: Object.assign({}, state.vendorRegData, {
-                    [action.prop]: data,
-                    // gps
-                })
             })} 
         case SET_SINGLE_MAP_MARK_COORDINATES: {
             const gpsWhatWasCreatedWithThisID = state.vendorRegData.gps.find(gpsUnit => gpsUnit.id === action.locationData.id)
@@ -112,7 +96,9 @@ export default function(state = initialState, action ) {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     gps
                 })
-            })} 
+            })}
+        case RESET:
+            return initialState    
         default: 
             return state;
     }

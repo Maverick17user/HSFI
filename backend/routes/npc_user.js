@@ -77,7 +77,7 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
 
     NPC_User.findOne({email})
-    .then(user => {
+    .then(user => { 
         if(!user) {
             errors.email = 'User not found'
             return res.status(404).json(errors);

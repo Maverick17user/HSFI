@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import UserBar from './navBarComponents/UserBar'
 
 import { logoutUser } from '../actions/authentication';
+import { resetState } from '../actions/resetState';
 
 class Navbar extends Component {
     constructor() {
@@ -15,9 +16,8 @@ class Navbar extends Component {
     }
     onLogout(e) {
         e.preventDefault();
-        console.log(this.props.history);
-        
         this.props.logoutUser(this.props.history);
+        this.props.resetState()
     }
 
     render() {
@@ -165,5 +165,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    logoutUser
+    logoutUser,
+    resetState
 })(withRouter(Navbar))

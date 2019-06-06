@@ -3,7 +3,8 @@ import {
     FETCH_COUNTRY_IN_REPORT,
     INPUT_CHANGE_IN_REPORT,
     MULTI_SELECT_IN_REPORT,
-    REPORT_CHECKBOX_HANDLING
+    REPORT_CHECKBOX_HANDLING,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -43,6 +44,8 @@ export default function(state = initialState, action ) {
                 reportQueries: state.reportQueries.set(action.target.name, action.target.checked)
             })
         }
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

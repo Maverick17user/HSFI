@@ -7,6 +7,7 @@ import {
     SORT_BY_OSS_VENDORS,
     SORT_BY_FLAG_VENDORS,
     SORT_BY_STARS_VENDORS,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -133,44 +134,8 @@ export default function(state = initialState, action ) {
                 sortedVens: sortedVendors
             }) 
         }
-
-        // For map markers sort only
-        // case SORT_BY_COUNTRIES_VENDORS_MAP: {
-        //     const {selectedValues, allVens} = action.payload
-
-        //     let venCountryList
-
-        //     const countriesSortedVendors = allVens.filter(ven => {
-        //         venCountryList = ven.country[0].country
-
-        //         return selectedValues.every((selectedValueItem) => 
-        //             (venCountryList.indexOf(selectedValueItem) !== -1) ? true : false
-        //         ) === true 
-        //     })
-
-        //     return Object.assign({}, state, {
-        //         sortedVens: countriesSortedVendors
-        //     })    
-        // }
-
-        // case SORT_BY_CITIES_VENDORS_MAP: {
-        //     const {cityName, allVens} = action.payload
-
-        //     let venCitiesList
-
-        //     const citiesSortedVendors = allVens.filter(ven => {
-        //         venCitiesList = ven.buisnessLocation.map(loc => {
-        //             return loc.city
-        //         })
-
-        //         return (venCitiesList.indexOf(cityName) !== -1) ? true : false
-        //     })
-
-        //     return Object.assign({}, state, {
-        //         sortedVens: citiesSortedVendors
-        //     })    
-        // }
-
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

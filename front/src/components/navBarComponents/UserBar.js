@@ -103,8 +103,6 @@ class UserBar extends Component {
     }  
 }
 
-// export default UserBar
-
 UserBar.propTypes = {
     auth: PropTypes.object.isRequired,
     putCountriesIntoStore: PropTypes.func.isRequired,

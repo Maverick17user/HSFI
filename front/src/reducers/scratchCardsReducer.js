@@ -2,7 +2,8 @@ import {
     FETCH_IN_TRANSACTION,
     INPUT_CHANGE_IN_TRANSACTION,
     FETCH_VENDOR_DATA_IN_TRANSACTION,
-    SET_TOTAL_COST_IN_TRANSACTION
+    SET_TOTAL_COST_IN_TRANSACTION,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -54,7 +55,6 @@ export default function(state = initialState, action ) {
             if((scratchCardData.cardCost !== '') && (scratchCardData.cardsQuantity !== '')) {
                 totalCost = (scratchCardData.cardCost * scratchCardData.cardsQuantity) + scratchCardData.currency
             }
-            console.log(totalCost);
             
             return Object.assign({}, state, {
                 scratchCardData: Object.assign({}, state.scratchCardData, {
@@ -62,6 +62,8 @@ export default function(state = initialState, action ) {
                 })
             })
         }
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

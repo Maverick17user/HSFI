@@ -1,4 +1,9 @@
-import { GET_DB_FOODGROUPES, ADD_NEW_FOODGROUP, REMOVE_FOODGROUP } from '../actions/types';
+import { 
+    GET_DB_FOODGROUPES, 
+    ADD_NEW_FOODGROUP, 
+    REMOVE_FOODGROUP, 
+    RESET 
+} from '../actions/types';
 
 const initialState = {
     dbFoodGroups: []
@@ -21,7 +26,8 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 dbFoodGroups: state.dbFoodGroups
             })
-                
+        case RESET:
+            return initialState           
         default: 
             return state;
     }

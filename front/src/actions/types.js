@@ -1,6 +1,8 @@
 // Auth
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+// Exit
+export const RESET = 'RESET';
 
 // Admin-panel 
 export const ADD_NEW_COUNTRY = 'ADD_NEW_COUNTRY';

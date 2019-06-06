@@ -1,4 +1,9 @@
-import { GET_DB_ORGS, ADD_NEW_ORG, REMOVE_ORG } from '../actions/types';
+import { 
+    GET_DB_ORGS, 
+    ADD_NEW_ORG, 
+    REMOVE_ORG,
+    RESET 
+} from '../actions/types';
 
 const initialState = {
     dborganizations: []
@@ -21,7 +26,8 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 dborganizations: state.dborganizations
             })
-                
+        case RESET:
+            return initialState           
         default: 
             return state;
     }

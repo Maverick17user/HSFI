@@ -1,4 +1,7 @@
-import { GET_DB_VENDORS } from '../actions/types';
+import { 
+    GET_DB_VENDORS,
+    RESET
+} from '../actions/types';
 
 const initialState = {
     dbVendors: []
@@ -11,6 +14,8 @@ export default function(state = initialState, action ) {
                 ...state,
                 dbVendors: action.payload
             }   
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

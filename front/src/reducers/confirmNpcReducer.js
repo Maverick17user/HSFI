@@ -1,5 +1,6 @@
 import { 
     FETCH_IN_CONFIRM,
+    RESET,
 } from '../actions/types';
 
 const initialState = {
@@ -13,6 +14,8 @@ export default function(state = initialState, action ) {
                 users: action.users
             })
         }
+    case RESET:
+        return initialState   
         default: 
             return state;
     }

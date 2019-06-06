@@ -1,6 +1,7 @@
 import { 
     FETCH_IN_HOTLINE,
     INPUT_CHANGE_IN_HOTLINE,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +30,8 @@ export default function(state = initialState, action ) {
                 })
             })
         }
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

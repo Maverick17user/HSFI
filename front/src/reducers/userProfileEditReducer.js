@@ -1,5 +1,6 @@
 import {
     HANDLE_INPUT_CHANGE_IN_USER_PROFILE_EDIT,
+    RESET
 } from '../actions/types'
 
 const initialState = {
@@ -17,6 +18,8 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 [action.name]: action.value,
             })}
+        case RESET:
+            return initialState   
         default:
             return state;
     }

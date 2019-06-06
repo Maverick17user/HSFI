@@ -1,6 +1,7 @@
 import { 
     FETCH_IN_INSPECTION,
-    SET_TOTAL_OSS_IN_INSPECTION
+    SET_TOTAL_OSS_IN_INSPECTION,
+    RESET
 } from '../actions/types';
 
 const initialState = {
@@ -66,6 +67,8 @@ export default function(state = initialState, action ) {
                 return state
             }
         }
+        case RESET:
+            return initialState   
         default: 
             return state;
     }

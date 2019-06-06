@@ -1,4 +1,4 @@
-import { GET_DB_COUNTRIES, ADD_NEW_COUNTRY, REMOVE_COUNTRY } from '../actions/types';
+import { GET_DB_COUNTRIES, ADD_NEW_COUNTRY, REMOVE_COUNTRY,RESET } from '../actions/types';
 
 const initialState = {
     dbCountries: []
@@ -23,7 +23,8 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 dbCountries: state.dbCountries
             })
-                
+        case RESET:
+            return initialState        
         default: 
             return state;
     }

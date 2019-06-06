@@ -1,4 +1,9 @@
-import { GET_DB_QUESTIONS, ADD_NEW_QUESTION, REMOVE_QUESTION } from '../actions/types';
+import { 
+    GET_DB_QUESTIONS, 
+    ADD_NEW_QUESTION, 
+    REMOVE_QUESTION,
+    RESET 
+} from '../actions/types';
 
 const initialState = {
     dbquestions: []
@@ -21,7 +26,8 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 dbquestions: state.dbquestions
             })
-                
+        case RESET:
+            return initialState           
         default: 
             return state;
     }
