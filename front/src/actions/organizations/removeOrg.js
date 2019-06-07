@@ -7,11 +7,9 @@ export const removeOrg = (organization) => dispatch => {
       
     axios.delete('/api/organizations/redactPanel/organizationsList', {headers, data})
         .then(res => {
-            console.log(res.data);
             dispatch(deleteOrg(res.data));
         })
         .catch(err => {
-            console.log(err.response.data);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

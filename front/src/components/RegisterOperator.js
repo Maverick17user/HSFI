@@ -66,12 +66,11 @@ class RegisterOperator extends Component {
     }
 
     render() {
-
         const { errors } = this.state;
         const { dbCountries } = this.props.dbCountries 
         const { dborganizations } = this.props.dborganizations
 
-        return(
+        return (
             <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Registration</h2>
                 <p className="text-info">Form for Operator</p>

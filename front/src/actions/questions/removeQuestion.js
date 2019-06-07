@@ -7,11 +7,9 @@ export const removeQuestion = (question) => dispatch => {
       
     axios.delete('/api/questions/redactPanel/inspectionQuestions', {headers, data})
         .then(res => {
-            console.log(res.data);
             dispatch(deleteQuestion(res.data));
         })
         .catch(err => {
-            console.log(err.response.data);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data

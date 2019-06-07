@@ -18,6 +18,7 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 [action.name]: action.value,
             })}
+            
         case RESET:
             return initialState   
         default:

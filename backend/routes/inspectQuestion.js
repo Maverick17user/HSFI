@@ -1,75 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const Question = require('../models/Questions');
-const validateInspectionQuestions = require('../validation/homePanel/questions');
+const validate = require('./logic/question/validate');
+const addQuestion = require('./logic/question/addQuestion');
+const deleteQuestion = require('./logic/question/deleteQuestion');
+const getQuestion = require('./logic/question/getQuestion');
 
-router.post('/redactPanel/inspectionQuestions', function(req, res) {
-    const { errors, isValid } = validateInspectionQuestions(req.body);
-
-    if(!isValid) {   
-        return res.status(400).json(errors);
-    }
-
-    Question.findOne({
-        question: req.body.question
-    }).then(question => {
-        if(question) {
-            return res.status(400).json({
-                question: 'Food group already exists'
-            });
-        }
-        else {
-            const newquestion = new Question({
-                question: req.body.question,
-            });
-            newquestion.save()
-            .then(question => {
-                console.log(req.body.question + ' added!');
-                res.json(question)
-            })
-            .catch(err => {
-                console.log(err);
-            })                                    
-        }
-    });
-});
-
-router.delete('/redactPanel/inspectionQuestions', function(req, res) {
-    
-    const { errors, isValid } = validateInspectionQuestions(req.body);
-    
-    if(!isValid) {
-        return res.status(400).json(errors);
-    }
-
-    Question.findOne({
-        question: req.body.question
-    }).then(question => {
-        if(!question) {
-            return res.status(400).json({
-                question: 'Question not found'
-            });
-        }
-        else {
-            Question.deleteOne({question: req.body.question})
-            .then(() => {
-                console.log(req.body.question + ' removed!');
-                res.json(req.body.question)
-            })
-            .catch(err => {
-                console.log(err);
-            })                                    
-        }
-    });
-});
-
-router.get('/redactPanel/inspectionQuestions', function(req, res) {
-    Question.find({}, 'question')
-    .then(questions => res.json(questions))
-    .catch(err => {
-        console.log(err);
-    })  
-});
+router
+.post('/redactPanel/inspectionQuestions', validate, addQuestion)
+.delete('/redactPanel/inspectionQuestions', validate, deleteQuestion)
+.get('/redactPanel/inspectionQuestions', getQuestion)
 
 module.exports = router;

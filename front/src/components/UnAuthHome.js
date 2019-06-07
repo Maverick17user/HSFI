@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const logoStyle = {
     marginBottom: "25px"
 }

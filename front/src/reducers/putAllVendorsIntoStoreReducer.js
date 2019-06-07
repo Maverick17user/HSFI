@@ -14,6 +14,7 @@ export default function(state = initialState, action ) {
                 ...state,
                 dbVendors: action.payload
             }   
+            
         case RESET:
             return initialState   
         default: 

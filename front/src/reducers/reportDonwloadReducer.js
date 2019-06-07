@@ -10,6 +10,7 @@ export default function(state = initialState, action ) {
         case PREPARE_DONWLOAD_DATA: {
             return action.payload
         }
+        
         case RESET:
             return initialState   
         default: 

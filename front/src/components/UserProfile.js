@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 
 const UserProfile = (props) => {
-    console.log(props);
     const user = props.auth.user
 
     if(user.id === props.match.params.userId) {
@@ -74,7 +73,6 @@ const UserProfile = (props) => {
             </div>
         )
     }
-    // Deffends against unexpected success
     else {
         props.history.push('/')
         return null

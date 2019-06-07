@@ -58,9 +58,6 @@ class RedactCommonComponent extends Component {
             case 'remove':
                 this.props.removeDataUnit(targetName);
                 break;
-            case 'edit':
-                // TODO: implementation idea needed
-                break;
             default:
                 break;
         }

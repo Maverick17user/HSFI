@@ -47,18 +47,21 @@ export default function(state = initialState, action ) {
                     regDate: new Date().toLocaleString().slice(0,10)
                 })
             })}
+
         case FETCH_COUNTRY_IN_VENREG: {
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     country: [{id:0, country: action.payload}]
                 })
             })}
+
         case INPUT_CHANGE_IN_VENREG: {
             return Object.assign({}, state, {
                 vendorRegData: Object.assign({}, state.vendorRegData, {
                     [action.payload.name]: action.payload.value,
                 })
             })}
+
         case MARKED_INPUT_CHANGE_IN_VENREG: {
             changed[0][action.target.name] = action.target.value
             return Object.assign({}, state, {
@@ -66,6 +69,7 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })}
+            
         case MULTI_SELECT_CHANGE_IN_VENREG: {
             changed[0][action.target.name] = [...action.target.selectedOptions].map(o => o.value)
             return Object.assign({}, state, {
@@ -73,6 +77,7 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })}
+
         case CREATE_UNIT_IN_VENREG: {
             data.push({id: data[data.length-1].id+1})
             return Object.assign({}, state, {
@@ -80,6 +85,7 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })} 
+
         case REMOVE_UNIT_FROM_VENREG: {
             data.splice(data.indexOf(changed[0]), 1)
             return Object.assign({}, state, {
@@ -87,6 +93,7 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })}
+
         case SET_SINGLE_MAP_MARK_COORDINATES: {
             const gpsWhatWasCreatedWithThisID = state.vendorRegData.gps.find(gpsUnit => gpsUnit.id === action.locationData.id)
             let gps
@@ -105,6 +112,7 @@ export default function(state = initialState, action ) {
                     gps
                 })
             })}
+            
         case RESET:
             return initialState    
         default: 

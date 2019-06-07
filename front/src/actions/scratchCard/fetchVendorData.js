@@ -10,8 +10,6 @@ export const fetchVendorData = (inputedLicNumber, vendors) => dispatch => {
         })
     })
     .catch(err => {
-        console.log(err.response.data);
-        
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data

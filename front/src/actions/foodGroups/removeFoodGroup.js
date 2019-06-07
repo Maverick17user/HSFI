@@ -7,21 +7,15 @@ export const removeFoodGroup = (foodGroup) => dispatch => {
       
     axios.delete('/api/foodGroups/redactPanel/foodGroups', {headers, data})
         .then(res => {
-            console.log(res.data);
-            dispatch(deleteFoodGroup(res.data));
+            dispatch({
+                type: REMOVE_FOODGROUP,
+                foodGroup: res.data
+            });
         })
         .catch(err => {
-            console.log(err.response.data);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
             });
         });
-}
-
-export const deleteFoodGroup = name => {
-    return {
-        type: REMOVE_FOODGROUP,
-        foodGroup: name
-    }
 }

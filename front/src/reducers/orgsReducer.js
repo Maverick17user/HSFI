@@ -17,15 +17,18 @@ export default function(state = initialState, action ) {
                 ...state,
                 dborganizations: dborganizationsList
             }
+
         case ADD_NEW_ORG:
             return Object.assign({}, state, {
                 dborganizations: [...state.dborganizations, action.payload.organization]
             })
+
         case REMOVE_ORG:
             state.dborganizations.splice(state.dborganizations.indexOf(action.organization), 1)
             return Object.assign({}, state, {
                 dborganizations: state.dborganizations
             })
+            
         case RESET:
             return initialState           
         default: 

@@ -24,12 +24,9 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_COUNTRIES_VENDORS: {
             const {selectedValues, allVens} = action.payload
-
             let venCountryList
-
             const countriesSortedVendors = allVens.filter(ven => {
                 venCountryList = ven.country[0].country
-
                 return selectedValues.every((selectedValueItem) => 
                     (venCountryList.indexOf(selectedValueItem) !== -1) ? true : false
                 ) === true 
@@ -42,14 +39,11 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_CITIES_VENDORS: {
             const {cityName, allVens} = action.payload
-
             let venCitiesList
-
             const citiesSortedVendors = allVens.filter(ven => {
                 venCitiesList = ven.buisnessLocation.map(loc => {
                     return loc.city
                 })
-
                 return (venCitiesList.indexOf(cityName) !== -1) ? true : false
             })
 
@@ -60,11 +54,8 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_ISOPEN_VENDORS: {
             const {isOpen, allVens} = action.payload
-
             const isOpenBoolean = (isOpen === 'Open') ? true : false
-
             const isOpenSortedVendors = allVens.filter(ven => ven.isOpen === isOpenBoolean)
-            
             return Object.assign({}, state, {
                 sortedVens: isOpenSortedVendors
             })
@@ -72,9 +63,7 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_FOODGROUP_VENDORS: {
             const {selectedValues, allVens} = action.payload
-
             const fgSortedVendors = allVens.filter(ven => {
-
                 return selectedValues.some((selectedValueItem) => 
                     (selectedValueItem.indexOf(ven.foodGroup) !== -1) ? true : false
                 ) === true 
@@ -87,7 +76,6 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_OSS_VENDORS: {
             const {ossMarker, allVens} = action.payload
-
             const sortedVendors = allVens.filter(ven => {
                 switch (ossMarker) {
                     case "> 0":
@@ -110,7 +98,6 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_FLAG_VENDORS: {
             const {flagMarker, allVens} = action.payload
-
             const sortedVendors = allVens.filter(ven => {
                 return (flagMarker === 'red flagged')
                 ? ven.flagStatus === flagMarker
@@ -124,7 +111,6 @@ export default function(state = initialState, action ) {
 
         case SORT_BY_STARS_VENDORS: {
             const {starsCount, allVens} = action.payload
-    
             const sortedVendors = allVens.filter(ven => {
                 // TODO: fix == to ===
                 return Number(ven.stars) == starsCount
@@ -134,6 +120,7 @@ export default function(state = initialState, action ) {
                 sortedVens: sortedVendors
             }) 
         }
+        
         case RESET:
             return initialState   
         default: 

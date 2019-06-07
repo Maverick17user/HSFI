@@ -1,31 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { addNewCountry } from '../../../actions/countries/addNewCountry'
 import { removeCountry } from '../../../actions/countries/removeCountry'
 
 import RedactCommonComponent from '../../common/RedactCommonComponent'
 
-class RedactCountryList extends Component {
-    render() {
-        const props = this.props
-        const {dbCountries} = this.props.dbCountries
-        return (
-            <>
-                <RedactCommonComponent 
-                name="country"
-                errors={props.errors}
-                title="Country list redact form"
-                addNewDataUnit={props.addNewCountry}
-                removeDataUnit={props.removeCountry}
-                storeData={dbCountries}
-                listTitle="Curent country list"
-                placeholderText="Country name"
-                />
-            </>
-        )
-    }
+const RedactCountryList = props => {
+    const {dbCountries} = props.dbCountries
+    return (
+        <>
+            <RedactCommonComponent 
+            name="country"
+            errors={props.errors}
+            title="Country list redact form"
+            addNewDataUnit={props.addNewCountry}
+            removeDataUnit={props.removeCountry}
+            storeData={dbCountries}
+            listTitle="Curent country list"
+            placeholderText="Country name"
+            />
+        </>
+    )
 }
 
 RedactCountryList.propTypes = {
@@ -39,4 +35,4 @@ const mapStateToProps = (state) => ({
     dbCountries: state.dbCountries
 })
 
-export default connect(mapStateToProps, {addNewCountry, removeCountry})(withRouter(RedactCountryList));
+export default connect(mapStateToProps, {addNewCountry, removeCountry})(RedactCountryList)

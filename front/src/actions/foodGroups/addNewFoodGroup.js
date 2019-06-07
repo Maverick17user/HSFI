@@ -4,7 +4,10 @@ import { GET_ERRORS, ADD_NEW_FOODGROUP } from '../types'
 export const addNewFoodGroup = (newfoodGroup) => dispatch => {
     axios.post('/api/foodGroups/redactPanel/foodGroups', newfoodGroup)
         .then(res => {
-            dispatch(setNewFoodGroup(res.data));
+            dispatch({
+                type: ADD_NEW_FOODGROUP,
+                payload: res.data
+            })
         })
         .catch(err => {
             dispatch({
@@ -12,11 +15,4 @@ export const addNewFoodGroup = (newfoodGroup) => dispatch => {
                 payload: err.response.data
             });
         });
-}
-
-export const setNewFoodGroup = name => {
-    return {
-        type: ADD_NEW_FOODGROUP,
-        payload: name
-    }
 }

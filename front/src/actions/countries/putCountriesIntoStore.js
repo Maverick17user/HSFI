@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { GET_DB_COUNTRIES } from '../types'
 
 export const putCountriesIntoStore = (countriesData) => dispatch => {

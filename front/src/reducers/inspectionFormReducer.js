@@ -67,6 +67,7 @@ export default function(state = initialState, action ) {
                 return state
             }
         }
+        
         case RESET:
             return initialState   
         default: 
