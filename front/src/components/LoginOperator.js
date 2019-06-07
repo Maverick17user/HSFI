@@ -53,7 +53,7 @@ class LoginOperator extends Component {
     render() {
         const {errors} = this.state;
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Login</h2>
                 <p className="text-info">For Operators</p>
                 <form onSubmit={ this.handleSubmit }>

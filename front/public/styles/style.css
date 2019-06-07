@@ -2,17 +2,74 @@
   font-family: Montserrat-Medium, Arial, Helvetica, sans-serif;
 }
 
-html, body {
+html {
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  background: #F9FAFC;
+  z-index: 0;
 }
 
-input {
+div#root {
+  height: 100%;
+  width: 100%;
+}
+
+div#root header {
+  height: 57.51px;
+  background: #FFFFFF;
+  outline: 1px solid #CED4DA;
+  margin: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+div#root header nav {
+  width: inherit !important;
+}
+
+div#root header div.dropdown-menu.show {
+  border: none;
+  padding: 5px !important;
+  min-width: 80px !important;
+}
+
+div#root header div.dropdown-menu.show .dropdown-item {
+  padding: 5px 10px 5px 10px;
+}
+
+div#root header button.navbar-toggler {
+  border-color: white;
+}
+
+div#root header img.logo {
+  padding-bottom: 5px;
+}
+
+div#root main.mainContext {
+  padding-top: 50px;
+  weight: 100%;
+  height: calc(100% - 57.51px);
+  background: #F9FAFC;
+}
+
+div#root main.mainContext select {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+div#root main.mainContext input {
   cursor: pointer;
 }
 
-div.multiSelect-wrap {
+div#root main.mainContext div.helloContext {
+  padding-top: 50px;
+}
+
+div#root main.mainContext div.multiSelect-wrap {
   background: white;
   background-color: white;
   -webkit-box-shadow: 0 0 0 1px #CED4DA;
@@ -21,28 +78,11 @@ div.multiSelect-wrap {
   z-index: 99;
 }
 
-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  -webkit-box-shadow: 0 0 2px lightgray;
-          box-shadow: 0 0 2px lightgray;
-  z-index: 99;
-}
-
-header img.logo {
-  margin-bottom: 5px;
-}
-
-div.hellotext-wrap h2, div.hellotext-wrap p {
+div#root main.mainContext div.hellotext-wrap h2, div#root main.mainContext div.hellotext-wrap p {
   text-align: center;
 }
 
-div.progress {
-  margin-bottom: 50px;
-}
-
-div.regVen, div.startTransaction {
+div#root main.mainContext div.regVen, div#root main.mainContext div.startTransaction, div#root main.mainContext div.hotline {
   padding: 25px;
   background: white;
   border-radius: 5px;
@@ -50,18 +90,7 @@ div.regVen, div.startTransaction {
           box-shadow: 0 0 2px lightgray;
 }
 
-div.regVen h2, div.startTransaction h2 {
-  font-family: Montserrat-Bold, Arial, Helvetica, sans-serif;
-}
-
-div.hotline {
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 2px lightgray;
-          box-shadow: 0 0 2px lightgray;
-  padding: 25px;
-}
-
-div.venPicture-wrap {
+div#root main.mainContext div.venPicture-wrap {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -80,34 +109,34 @@ div.venPicture-wrap {
   margin-bottom: 10px;
 }
 
-div.venPicture-wrap img {
+div#root main.mainContext div.venPicture-wrap img {
   border-radius: 3px;
   border: 1px solid lightgray;
 }
 
-div.venPicture-wrap span {
+div#root main.mainContext div.venPicture-wrap span {
   margin-top: 10px;
 }
 
-div.vProfile img, div.uProfile img {
+div#root main.mainContext div.vProfile img, div#root main.mainContext div.uProfile img {
   border-radius: 3px;
   border: 1px solid lightgray;
 }
 
-div.vProfile h3.venProfile-h3, div.vProfile h3.usProfile-h3, div.uProfile h3.venProfile-h3, div.uProfile h3.usProfile-h3 {
+div#root main.mainContext div.vProfile h3.venProfile-h3, div#root main.mainContext div.vProfile h3.usProfile-h3, div#root main.mainContext div.uProfile h3.venProfile-h3, div#root main.mainContext div.uProfile h3.usProfile-h3 {
   margin-left: 15px;
   margin-bottom: 15px;
 }
 
-div.vProfile span.profileData, div.vProfile a, div.uProfile span.profileData, div.uProfile a {
+div#root main.mainContext div.vProfile span.profileData, div#root main.mainContext div.vProfile a, div#root main.mainContext div.uProfile span.profileData, div#root main.mainContext div.uProfile a {
   font-size: 1em;
 }
 
-div.vProfile div.table-wrap, div.uProfile div.table-wrap {
+div#root main.mainContext div.vProfile div.table-wrap, div#root main.mainContext div.uProfile div.table-wrap {
   margin-bottom: 40px;
 }
 
-div.viewVendors div.vendors_pseudoHeader {
+div#root main.mainContext div.viewVendors div.vendors_pseudoHeader {
   padding: 5px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -118,92 +147,55 @@ div.viewVendors div.vendors_pseudoHeader {
   margin-bottom: 10px;
 }
 
-div.viewVendors div.vendors_pseudoHeader h2 {
+div#root main.mainContext div.viewVendors div.vendors_pseudoHeader h2 {
   margin-right: 50px;
   margin-bottom: 0;
 }
 
-div.viewVendors p.text-info {
+div#root main.mainContext div.viewVendors p.text-info {
   margin-bottom: 10px;
 }
 
-div.viewVendors table.vendors__table {
+div#root main.mainContext div.viewVendors table.vendors__table {
   cursor: pointer;
 }
 
-div.tableSort-wrap {
+div#root main.mainContext div.tableSort-wrap {
   position: -webkit-sticky;
   position: sticky;
   top: 10%;
 }
 
-div.map-wrap {
+div#root main.mainContext div.map-wrap {
   height: 400px;
 }
 
-div.questions {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #CED4DA;
-  margin-top: 20px;
-}
-
-div.questions div.questions-wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 10px;
-}
-
-div.questions div.questions-wrap span.question {
-  min-width: 125px;
-  font-size: 0.9em;
-  margin-left: 25px;
-}
-
-div.questions div.questions-wrap div.ball {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-div.questions div.questions-wrap div.ball label.form-check-label {
-  font-family: Montserrat-Bold, Arial, Helvetica, sans-serif;
-  color: #8E8F91;
-}
-
-div.reportForm div.form-check {
+div#root main.mainContext div.reportForm div.form-check {
   padding: 0;
   margin-bottom: 5px;
 }
 
-div.reportForm div.form-check label.form-check-label {
+div#root main.mainContext div.reportForm div.form-check label.form-check-label {
   min-width: 250px;
 }
 
-div.reportForm div.form-check input {
+div#root main.mainContext div.reportForm div.form-check input {
   cursor: pointer;
 }
 
-div.vProfile span.vName, div.vProfile span.uName, div.uProfile span.vName, div.uProfile span.uName {
+div#root main.mainContext div.vProfile span.vName, div#root main.mainContext div.vProfile span.uName, div#root main.mainContext div.uProfile span.vName, div#root main.mainContext div.uProfile span.uName {
   margin: 10px 0 10px 0;
   font-size: 1.1em;
   font-weight: 600;
 }
 
-div.vProfile span.venProfile-country--item,
-div.vProfile span.userProfile-task--item, div.uProfile span.venProfile-country--item,
-div.uProfile span.userProfile-task--item {
+div#root main.mainContext div.vProfile span.venProfile-country--item,
+div#root main.mainContext div.vProfile span.userProfile-task--item, div#root main.mainContext div.uProfile span.venProfile-country--item,
+div#root main.mainContext div.uProfile span.userProfile-task--item {
   display: block;
 }
 
-div.vProfile label.lead, div.uProfile label.lead {
+div#root main.mainContext div.vProfile label.lead, div#root main.mainContext div.uProfile label.lead {
   font-family: Montserrat-Regular;
   display: block;
   font-size: 1.3em;
@@ -211,39 +203,169 @@ div.vProfile label.lead, div.uProfile label.lead {
   font-weight: 600;
 }
 
-div.vProfile span.profileData, div.vProfile li, div.vProfile td, div.vProfile a, div.uProfile span.profileData, div.uProfile li, div.uProfile td, div.uProfile a {
+div#root main.mainContext div.vProfile span.profileData, div#root main.mainContext div.vProfile li, div#root main.mainContext div.vProfile td, div#root main.mainContext div.vProfile a, div#root main.mainContext div.uProfile span.profileData, div#root main.mainContext div.uProfile li, div#root main.mainContext div.uProfile td, div#root main.mainContext div.uProfile a {
   font-size: 1.1em;
   color: #1F5C6B;
 }
 
-div.vProfile section, div.uProfile section {
+div#root main.mainContext div.vProfile section, div#root main.mainContext div.uProfile section {
   padding: 5px;
   margin-bottom: 10px;
 }
 
-div.vProfile section.rightItem, div.uProfile section.rightItem {
+div#root main.mainContext div.vProfile section.rightItem, div#root main.mainContext div.uProfile section.rightItem {
   padding: 0;
   margin: 0;
 }
 
-div.vProfile ul.profileData, div.uProfile ul.profileData {
+div#root main.mainContext div.vProfile ul.profileData, div#root main.mainContext div.uProfile ul.profileData {
   margin: 0;
   padding-left: 20px;
 }
 
-div.vProfile img.vendorPhoto, div.vProfile img.userPhoto, div.uProfile img.vendorPhoto, div.uProfile img.userPhoto {
+div#root main.mainContext div.vProfile img.vendorPhoto, div#root main.mainContext div.vProfile img.userPhoto, div#root main.mainContext div.uProfile img.vendorPhoto, div#root main.mainContext div.uProfile img.userPhoto {
   width: 200px;
 }
 
-div.vProfile button.venInspectBut, div.uProfile button.venInspectBut {
+div#root main.mainContext div.vProfile button.venInspectBut, div#root main.mainContext div.uProfile button.venInspectBut {
   width: 90px;
 }
 
-div.vProfile button[disabled], div.uProfile button[disabled] {
+div#root main.mainContext div.vProfile button[disabled], div#root main.mainContext div.uProfile button[disabled] {
   opacity: 0.25;
 }
 
+div.report_context {
+  padding: 25px;
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 2px lightgray;
+          box-shadow: 0 0 2px lightgray;
+}
+
+div.regVen, div.startTransaction, div.hotline, div.report_context {
+  max-width: 850px;
+  margin-bottom: 25px;
+}
+
 div.styles_modal__gNwvD.styles_modalCenter__L9F2w {
-  width: 50%;
+  width: 700px !important;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.venPicture-wrap {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.venPicture-wrap img {
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.venPicture-wrap span {
+  margin-top: 10px;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #CED4DA;
+  margin-top: 20px;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap span.question {
+  min-width: 125px;
+  font-size: 0.9em;
+  margin-left: 25px;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap div.ball {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap div.ball label.form-check-label {
+  font-family: Montserrat-Bold, Arial, Helvetica, sans-serif;
+  color: #8E8F91;
+}
+
+a.logOut {
+  color: black;
+  font-size: 1em;
+}
+
+.form-control, .form-control-lg {
+  width: 100% !important;
+}
+
+div.authedUser_label_wrap__profileLable {
+  display: inline-block;
+}
+
+div.authedUser_label_wrap__profileLable:hover {
+  text-decoration: none;
+}
+
+.btn-danger, .btn-success {
+  border-color: black !important;
+  background: #F9FAFC !important;
+  color: black !important;
+}
+
+.btn-danger:active, .btn-success:active {
+  border-color: white !important;
+  background: white !important;
+  color: white !important;
+}
+
+.btn-danger:focus, .btn-success:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+@media screen and (max-width: 540px) {
+  .hellotext-wrap {
+    width: 200px;
+  }
+  .hellotext-wrap .display-5 {
+    font-size: 1.2em;
+  }
+  .hellotext-wrap .text-info {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main.mainContext {
+    background: red;
+  }
 }
 /*# sourceMappingURL=style.css.map */

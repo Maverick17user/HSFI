@@ -33,6 +33,10 @@ const BuisnessLocationComponent = props => {
             index={Number(0)}
             key={toString(0)}/>
             {dopularUnits}
+            {(props.errors) 
+                ? <p className="text-danger"><small>{`${props.errors}`}</small></p> 
+                : null
+            }
         </>
     )
 }

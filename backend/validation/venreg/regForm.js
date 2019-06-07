@@ -4,23 +4,6 @@ const isEmpty = require('../is-empty');
 module.exports = function validateVenRegForm(data) {
     
     let errors = {};
-
-    // const deepIsEmpty = (data, target, errMessage) => {
-    //     data.forEach(unit => {
-    //         switch (target) {
-    //             case 'country':
-    //                 if(!unit.country) {
-    //                     errors.country = errMessage;
-    //                 }
-    //                 break;
-    //             case ''
-    //             default:
-    //                 break;
-    //         }
-    //     })
-
-    // deepIsEmpty(data.country, 'country', 'Country field is required')
-
     
     data.country.forEach(unit => {
         if(!unit.country) {
@@ -28,29 +11,51 @@ module.exports = function validateVenRegForm(data) {
         }
     });
 
-    // if(Validator.isEmpty(data.venName)) {
-    //     errors.venName = 'Vendor name is required';
-    // }
+    if(Validator.isEmpty(data.venName)) {
+        errors.venName = 'Vendor name is required';
+    }
 
-    // if(Validator.isEmpty(data.licNumber)) {
-    //     errors.licNumber = 'License number is required';
-    // }
+    if(Validator.isEmpty(data.licNumber)) {
+        errors.licNumber = 'License number is required';
+    }
 
-    // if(!Validator.isEmail(data.email)) {
-    //     errors.email = 'E-mail is invalid';
-    // }
+    if(!Validator.isEmail(data.email)) {
+        errors.email = 'E-mail is invalid';
+    }
 
-    // if(Validator.isEmpty(data.email)) {
-    //     errors.email = 'E-mail is required';
-    // }
+    if(Validator.isEmpty(data.email)) {
+        errors.email = 'E-mail is required';
+    }
+    
+    const isFilledLoc = data.buisnessLocation.every(locUnit => {
+        return locUnit.city && locUnit.street && locUnit.objNumber
+    })
 
-    // // deepIsEmpty(data.buisnessLocation, 'buisnessLocation',)
-    // // deepIsEmpty(data.buisnessSchedule, 'buisnessSchedule',)
-    // // deepIsEmpty(data.ingredientSource, 'ingredientSource',)
+    const isFilledShedule = data.buisnessSchedule.every(sheduleUnit => {
+        return sheduleUnit.day && sheduleUnit.from && sheduleUnit.to
+    })
 
-    // if(Validator.isEmpty(data.foodGroup)) {
-    //     errors.foodGroup = 'Food group field is required';
-    // }
+    const isFilledIngredientSource = data.ingredientSource.every(sourceUnit => {
+        return typeof sourceUnit.source !== "undefined" && sourceUnit.source !== ''
+    })
+
+    if(!isFilledLoc) {
+        errors.buisnessLocation = 'Each input in this group is required';
+    }
+
+
+    if(!isFilledShedule) {
+        errors.buisnessSchedule = 'Each input in this group is required';
+    }
+
+
+    if(!isFilledIngredientSource) {
+        errors.ingredientSource = 'Each input in this group is required';
+    }
+
+    if(Validator.isEmpty(data.foodGroup)) {
+        errors.foodGroup = 'Food group field is required';
+    }
     
     return {
         errors,

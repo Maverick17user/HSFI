@@ -46,7 +46,8 @@ class App extends Component {
         <Provider store={ store }>
           <Router >    
               <Navbar history={this.props.history}/>
-              <div className="container">
+              <main className="mainContext">
+                <div className="container">
                 <Switch>
                   <Route exact path="/" render={() => <Home />}/>
                   <Route exact path="/registerManager" component={RegisterManager} />
@@ -69,7 +70,8 @@ class App extends Component {
                   <Route exact path="/vendors/:vendorId" component={VendorProfile}/>
                   <Route exact path="/vendors/:vendorId/edit" component={VendorProfileEdit}/>
                 </Switch>
-              </div>
+                </div>
+              </main>
           </Router>
         </Provider> 
       );

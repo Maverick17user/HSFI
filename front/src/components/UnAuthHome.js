@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+
 
 const logoStyle = {
     marginBottom: "25px"
@@ -21,4 +19,4 @@ const UnAuthHome = () => {
     )
 }
 
-export  default UnAuthHome;
+export default UnAuthHome

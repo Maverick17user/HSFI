@@ -54,7 +54,7 @@ class LoginManager extends Component {
         // console.log(errors);
         
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Login</h2>
                 <p className="text-info">For Manager's</p>
                 <form onSubmit={ this.handleSubmit }>

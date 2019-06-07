@@ -5,19 +5,31 @@ import ConfirmRegistrationBlock from './regConfirm/ConfirmRegistrationBlock'
 import {confirmRegister} from '../../../actions/confirmReg/confirm'
 import {rejectRegister} from '../../../actions/confirmReg/reject'
 
+const alertStyles = {
+    padding: '10px',
+    borderRadius: '5px',
+    border: '1px solid gray',
+    background: 'white'
+}
+
 const RedactNPCsRegRequests = props => {
     const currentUserData = props.auth.user 
     const usersToConfirm = props.usersToConfirm
-    console.log(usersToConfirm.users);
-    
+
     return (
         <div className="col-9">
             {(currentUserData.role === "manager")
-                ? <p>NPC users confirming</p>
-                : <p>Operator users confirming</p>
+                ? <p className="text-primary">NPC users confirming</p>
+                : <p className="text-primary">Operator users confirming</p>
             }
             {(usersToConfirm.users.length === 0)
-                ? <em className="text-primary"><small>Here is no users to confirm!</small></em>
+                ? (
+                    <div style={alertStyles}>
+                        <em className="text-dark">
+                            <span><b className="text-danger" style={{fontSize: '1.25em'}}>!</b> Here is no users to confirm.</span>
+                        </em>
+                    </div>
+                )
                 : (
                     <ConfirmRegistrationBlock 
                     usersToConfirm={usersToConfirm} 

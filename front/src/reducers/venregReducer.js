@@ -6,6 +6,7 @@ import {
     MULTI_SELECT_CHANGE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
     SET_SINGLE_MAP_MARK_COORDINATES,
+    REMOVE_UNIT_FROM_VENREG,
     RESET
 } from '../actions/types';
 
@@ -79,6 +80,13 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })} 
+        case REMOVE_UNIT_FROM_VENREG: {
+            data.splice(data.indexOf(changed[0]), 1)
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    [action.prop]: data,
+                })
+            })}
         case SET_SINGLE_MAP_MARK_COORDINATES: {
             const gpsWhatWasCreatedWithThisID = state.vendorRegData.gps.find(gpsUnit => gpsUnit.id === action.locationData.id)
             let gps

@@ -62,7 +62,7 @@ class ReportForm extends Component {
         const reportFileData = this.props.reportFileData
         
         return(
-            <div className="container report-context">
+            <div className="container report_context">
                 <h2>Report form</h2>
                 <p className="text-info">Select info to be displayed in the report</p>
                 <form onSubmit={e => this.handleSubmit(e, this.props.reportState)}>

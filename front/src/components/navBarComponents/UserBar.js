@@ -87,15 +87,17 @@ class UserBar extends Component {
         return (
             <div className="authedUser_label_wrap">
                 <Link to={`/userProfile/${user.id}`}>
-                    <img 
-                    src={this.props.avatar} 
-                    alt={this.props.name} 
-                    title={this.props.name} 
-                    className="rounded-circle" 
-                    style={{ width: '25px', marginRight: '5px'}} />
-                    <span className="text-info">{this.props.name} ({user.role})</span>
+                    <div className="authedUser_label_wrap__profileLable">
+                        <img 
+                        src={this.props.avatar} 
+                        alt={this.props.name} 
+                        title={this.props.name} 
+                        className="rounded-circle" 
+                        style={{ width: '25px', marginRight: '5px'}} />
+                        <span className="text-info">{this.props.name} ({user.role})</span>
+                    </div>
                 </Link>
-                <a href="#" className="nav-link" onClick={this.props.toLogOut} style={{display: 'inline'}}>
+                <a href="#" className="nav-link logOut" onClick={this.props.toLogOut} style={{display: 'inline'}}>
                     Log Out    
                 </a>
             </div>

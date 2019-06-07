@@ -71,7 +71,7 @@ class Register extends Component {
         const { dborganizations } = this.props.dborganizations
 
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Registration</h2>
                 <p className="text-info">Form for NPC</p>
                 <form onSubmit={ this.handleSubmit }>
@@ -82,7 +82,9 @@ class Register extends Component {
                                 'is-invalid': errors.country
                             })}
                             name="country"
+                            defaultValue={'DEFAULT'}
                             onChange={ this.handleInputChange }>
+                                <option value={"DEFAULT"} disabled>Country</option>
                                 {dbCountries.map((country, i)=> {
                                     return <option value={country} key={country+i}>{country}</option>
                                 })}
@@ -108,7 +110,9 @@ class Register extends Component {
                                 'is-invalid': errors.organization
                             })}
                             name="organization"
+                            defaultValue={'DEFAULT'}
                             onChange={ this.handleInputChange }>
+                                <option value={"DEFAULT"} disabled>Organization</option>
                                 {dborganizations.map((org, i)=> {
                                     return <option value={org} key={org+i}>{org}</option>
                                 })}

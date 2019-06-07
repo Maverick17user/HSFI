@@ -1,145 +1,238 @@
 *
     font-family: Montserrat-Medium, Arial, Helvetica, sans-serif
-html, body 
+html
+  width: 100%
   height: 100%
   margin: 0
   padding: 0
-
-input
-    cursor: pointer
-div.multiSelect-wrap
-    background: white
-    background-color: white
-    box-shadow: 0 0 0 1px #CED4DA
-    border-radius: 3px
-    z-index: 99
-header
-    position: sticky
-    top: 0
-    box-shadow: 0 0 2px lightgray
-    z-index: 99
-    img.logo
-        margin-bottom: 5px
-    // ul
-
-div.hellotext-wrap
-    h2,p
-        text-align: center
-div.progress    
-    margin-bottom: 50px
-div.regVen, div.startTransaction
-    padding: 25px
-    background: white
-    border-radius: 5px
-    box-shadow: 0 0 2px lightgray
-    h2
-        font-family: Montserrat-Bold, Arial, Helvetica, sans-serif
-div.hotline
-    border-radius: 5px
-    box-shadow: 0 0 2px lightgray
-    padding: 25px
-div.venPicture-wrap
+  background: #F9FAFC
+  z-index: 0
+div#root 
+    height: 100%
     width: 100%
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    margin-top: 15px
-    margin-bottom: 10px
-    img
-        border-radius: 3px
-        border: 1px solid lightgray
-    span
-        margin-top: 10px
-div.vProfile, div.uProfile
-    img
-        border-radius: 3px
-        border: 1px solid lightgray
-    h3.venProfile-h3, h3.usProfile-h3
-        margin-left: 15px
-        margin-bottom: 15px
-    span.profileData, a
-        font-size: 1em
-    div.table-wrap
-        margin-bottom: 40px
-div.viewVendors
-    div.vendors_pseudoHeader
-        padding: 5px 0
-        display: flex
-        align-items: center
-        margin-bottom: 10px
-        h2
-            margin-right: 50px
-            margin-bottom: 0
-    p.text-info
-        margin-bottom: 10px
-    table.vendors__table
-        cursor: pointer
-div.tableSort-wrap
-    position: sticky
-    top: 10%
-div.map-wrap
-    height: 400px
-div.questions
-    padding: 5px
-    border-radius: 5px
-    border: 1px solid #CED4DA
-    margin-top: 20px
-    div.questions-wrap
-        display: flex
-        align-items: center
-        margin-bottom: 10px
-        span.question
-            min-width: 125px
-            font-size: 0.9em
-            margin-left: 25px
-        div.ball
-            display: flex
-            align-items: center
-            label.form-check-label
-                font-family: Montserrat-Bold, Arial, Helvetica, sans-serif
-                color: #8E8F91
-div.reportForm
-    div.form-check
-        padding: 0
-        margin-bottom: 5px
-        label.form-check-label
-            min-width: 250px
+    header
+        // width: 100 !important
+        height: 57.51px
+        background: #FFFFFF
+        outline: 1px solid #CED4DA
+        margin: 0
+        position: sticky
+        top: 0
+        z-index: 1000
+        nav 
+            width: inherit !important
+        div.dropdown-menu.show
+            border: none
+            padding: 5px !important
+            min-width: 80px !important
+            .dropdown-item
+                padding: 5px 10px 5px 10px
+        button.navbar-toggler
+            border-color: white
+        img.logo
+            padding-bottom: 5px
+    main.mainContext
+        padding-top: 50px
+        weight: 100%
+        height: calc(100% - 57.51px)
+        background: #F9FAFC
+        select
+            font-size: 1.25rem
+            line-height: 1.5
         input
             cursor: pointer
-div.vProfile, div.uProfile
-    span.vName, span.uName
-        margin: 10px 0 10px 0
-        font-size: 1.1em
-        font-weight: 600
-    span.venProfile-country--item,
-    span.userProfile-task--item
-        display: block
-    label.lead
-        font-family: Montserrat-Regular
-        display: block
-        font-size: 1.3em
-        margin-bottom: 5px
-        font-weight: 600
-    span.profileData, li, td, a
-        font-size: 1.1em
-        color: #1F5C6B
-    section
-        padding: 5px
-        margin-bottom: 10px
-    section.rightItem
-        padding: 0
-        margin: 0
-    ul.profileData
-        margin: 0
-        padding-left: 20px
-    img.vendorPhoto, img.userPhoto
-        width: 200px
-    button.venInspectBut
-        width: 90px
-    button[disabled]
-        opacity: 0.25
+        div.helloContext
+            padding-top: 50px
+        div.multiSelect-wrap
+            background: white
+            background-color: white
+            box-shadow: 0 0 0 1px #CED4DA
+            border-radius: 3px
+            z-index: 99
+        // header
+        //     position: sticky
+        //     top: 0
+        //     box-shadow: 0 0 2px lightgray
+        //     z-index: 99
+        //     img.logo
+        //         margin-bottom: 5px
+        //     // ul
+
+        div.hellotext-wrap
+            h2,p
+                text-align: center
+        div.regVen, div.startTransaction, div.hotline
+            padding: 25px
+            background: white
+            border-radius: 5px
+            box-shadow: 0 0 2px lightgray
+        div.venPicture-wrap
+            width: 100%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 15px
+            margin-bottom: 10px
+            img
+                border-radius: 3px
+                border: 1px solid lightgray
+            span
+                margin-top: 10px
+        div.vProfile, div.uProfile
+            img
+                border-radius: 3px
+                border: 1px solid lightgray
+            h3.venProfile-h3, h3.usProfile-h3
+                margin-left: 15px
+                margin-bottom: 15px
+            span.profileData, a
+                font-size: 1em
+            div.table-wrap
+                margin-bottom: 40px
+        div.viewVendors
+            div.vendors_pseudoHeader
+                padding: 5px 0
+                display: flex
+                align-items: center
+                margin-bottom: 10px
+                h2
+                    margin-right: 50px
+                    margin-bottom: 0
+            p.text-info
+                margin-bottom: 10px
+            table.vendors__table
+                cursor: pointer
+        div.tableSort-wrap
+            position: sticky
+            top: 10%
+        div.map-wrap
+            height: 400px
+        div.reportForm 
+            div.form-check
+                padding: 0
+                margin-bottom: 5px
+                label.form-check-label
+                    min-width: 250px
+                input
+                    cursor: pointer
+        div.vProfile, div.uProfile
+            span.vName, span.uName
+                margin: 10px 0 10px 0
+                font-size: 1.1em
+                font-weight: 600
+            span.venProfile-country--item,
+            span.userProfile-task--item
+                display: block
+            label.lead
+                font-family: Montserrat-Regular
+                display: block
+                font-size: 1.3em
+                margin-bottom: 5px
+                font-weight: 600
+            span.profileData, li, td, a
+                font-size: 1.1em
+                color: #1F5C6B
+            section
+                padding: 5px
+                margin-bottom: 10px
+            section.rightItem
+                padding: 0
+                margin: 0
+            ul.profileData
+                margin: 0
+                padding-left: 20px
+            img.vendorPhoto, img.userPhoto
+                width: 200px
+            button.venInspectBut
+                width: 90px
+            button[disabled]
+                opacity: 0.25
+
+div.report_context
+    padding: 25px
+    background: white
+    border-radius: 5px
+    box-shadow: 0 0 2px lightgray
+
+div.regVen, div.startTransaction, div.hotline, div.report_context
+    max-width: 850px
+    margin-bottom: 25px
+
 div.styles_modal__gNwvD.styles_modalCenter__L9F2w
-    width: 50%       // small - 100  
+    width: 700px !important 
+    div.inspF 
+        div.venPicture-wrap
+            width: 100%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 15px
+            margin-bottom: 10px
+            img
+                border-radius: 3px
+                border: 1px solid lightgray
+            span
+                margin-top: 10px
+        div.questions
+            padding: 5px
+            border-radius: 5px
+            border: 1px solid #CED4DA
+            margin-top: 20px
+            div.questions-wrap
+                display: flex
+                align-items: center
+                margin-bottom: 10px
+                span.question
+                    min-width: 125px
+                    font-size: 0.9em
+                    margin-left: 25px
+                div.ball
+                    display: flex
+                    align-items: center
+                    label.form-check-label
+                        font-family: Montserrat-Bold, Arial, Helvetica, sans-serif
+                        color: #8E8F91   
+
+a.logOut
+    color: black
+    font-size: 1em
+
+.form-control, .form-control-lg
+    width: 100% !important
+
+div.authedUser_label_wrap__profileLable
+    display: inline-block
+    &:hover
+        text-decoration: none
+
+.btn-danger, .btn-success
+    border-color: black !important
+    background: #F9FAFC !important
+    color: black !important
+    &:active
+        border-color: white !important
+        background: white !important
+        color: white !important
+    &:focus
+        box-shadow: none !important
+
+#navbar1.show
+    
+// Media
+
+@media screen and (max-width: 540px)
+    .hellotext-wrap
+        .display-5
+            font-size: 1.2em
+        .text-info
+            font-size: 0.8em
+        width: 200px
+@media screen and (max-width: 400px)
+    main.mainContext
+        background: red
+        // padding-top: 10px !important
+
     
 

@@ -156,46 +156,36 @@ class Navbar extends Component {
         
         const guestLinks = (
             <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Registration
-                        </button>
-                        <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="/registerManager">Manager</Link>
-                            <Link className="dropdown-item" to="/register">NPC</Link>
-                            <Link className="dropdown-item" to="/registerOperator">Operator</Link>
-                        </div>
+                <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register</a>
+                    <div className="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <Link className="dropdown-item" to="/registerManager">Manager</Link>
+                        <Link className="dropdown-item" to="/register">NPC</Link>
+                        <Link className="dropdown-item" to="/registerOperator">Operator</Link>
                     </div>
                 </li>
-                <li className="nav-item" style={{marginLeft: '25px'}}>
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Log in as
-                        </button>
-                        <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="/loginManager">Manager</Link>
-                            <Link className="dropdown-item" to="/login">NPC</Link>
-                            <Link className="dropdown-item" to="/loginOperator">Operator</Link>
-                        </div>
+                <li className="nav-item dropdown lefted" style={{marginRight: '15px'}}>
+                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log in</a>
+                    <div className="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <Link className="dropdown-item" to="/loginManager">Manager</Link>
+                        <Link className="dropdown-item" to="/login">NPC</Link>
+                        <Link className="dropdown-item" to="/loginOperator">Operator</Link>
                     </div>
                 </li>
             </ul>
         )
         return(
             <header>
-                <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "white"}}>
                     <Link className="navbar-brand" to="/">
-                        <img src="/img/logo.png" className="logo" alt="HSFI" height="30px"/>
+                        <img src="/img/logo.png" className="logo" alt="HSFI" height="30px" />
                     </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        {isAuthenticated ? authLinks : guestLinks}
+
+                    <div className="collapse navbar-collapse" id="navbar1">
+                            {isAuthenticated ? authLinks : guestLinks}
                     </div>
                 </nav>
             </header>
@@ -204,8 +194,6 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
-    
     return ({
         auth: state.auth
     })

@@ -60,14 +60,13 @@ class InspectionForm extends Component {
             vendorName,
             vendorPhoto,
             foodGroup,
-            questionsStatus,
             totalOSS
         } = this.props.inspectionFormData
 
         const err = this.state.errors
         
         return (
-            <div className="container inspF">
+            <div className="inspF">
                 <h2>Inspection</h2>
                 <form action="" className="px-4 py-3" onSubmit={e => this.handleSubmit(e, this.props.inspectionFormData)}>
                     <div className="form-group">

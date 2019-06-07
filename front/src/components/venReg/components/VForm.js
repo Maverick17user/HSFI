@@ -75,6 +75,7 @@ class VForm extends Component {
         const {dbCountries} = this.props.dbCountries
         const {dbFoodGroups} = this.props.dbFoodGroups
         const {vendorRegData} = this.props.vendorRegData
+        const errors = this.props.errors
 
         if (dbCountries.length === 0) {
             return <p>Fetching data...</p>
@@ -83,33 +84,55 @@ class VForm extends Component {
         return (
             <form 
             onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
-                <OperatorName_FetchedInput value={vendorRegData.operatorName} />
+                <OperatorName_FetchedInput value={vendorRegData.operatorName}/>
                 <RegData_FetchedInput value={vendorRegData.regDate} />
                 {(dbCountries.length === 1)
                     ? <CountrySelectFetched dbCountries={dbCountries} />
-                    : <CountrySelect dbCountries={dbCountries} handleMultiSelectChange={this.handleMultiSelectChange} />
+                    : <CountrySelect 
+                      dbCountries={dbCountries} 
+                      handleMultiSelectChange={this.handleMultiSelectChange}
+                      errCountries={errors.country} />
                 }
-                <VenNameInput venName={vendorRegData.venName} handleInputChange={this.handleInputChange} />
+                <VenNameInput 
+                venName={vendorRegData.venName} 
+                handleInputChange={this.handleInputChange} 
+                errors={errors.venName}
+                />
                 {/* <VenPicktureInput/> */}
                 <p className="text-warning">TODO: Vendor picture input</p>
-                <LicenseNumberInput handleInputChange={this.handleInputChange} value={vendorRegData.licNumber}/>
+                <LicenseNumberInput 
+                handleInputChange={this.handleInputChange} 
+                value={vendorRegData.licNumber}
+                errors={errors.licNumber}
+                />
                 {/* <LicenseScanInput /> */}
                 <p className="text-warning">TODO: License Scan input</p>
-                <PhoneInput handleInputChange={this.handleInputChange} value={vendorRegData.phone}/>
-                <EmailInput handleInputChange={this.handleInputChange} value={vendorRegData.email}/>
+                <PhoneInput 
+                handleInputChange={this.handleInputChange} 
+                value={vendorRegData.phone}
+                />
+                <EmailInput 
+                handleInputChange={this.handleInputChange} 
+                value={vendorRegData.email}
+                errors={errors.email}
+                />
                 <BuisnessLocationComponent 
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
+                errors={errors.buisnessLocation}
                 /> 
                 <BuisnessScheduleComponent 
                 handleMultiSelectChange={this.handleMultiSelectChange}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
+                errors={errors.buisnessSchedule}
                 />
                 <IngredientSourceComponent 
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
+                errors={errors.ingredientSource}
                 />
                 <FoodGroupSelect 
                 dbFoodGroups={dbFoodGroups}
                 handleInputChange={this.handleInputChange} 
+                errors={errors.foodGroup}
                 />
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
@@ -125,14 +148,16 @@ VForm.propTypes = {
     inputChange: PropTypes.func.isRequired,
     marked_inputChange: PropTypes.func.isRequired,
     multiSelecChange: PropTypes.func.isRequired,
-    getLocationCoordinates: PropTypes.func.isRequired,   
+    getLocationCoordinates: PropTypes.func.isRequired,  
+    errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
     dbCountries: state.dbCountries,
     vendorRegData: state.vendorRegData,
-    dbFoodGroups: state.dbFoodGroups
+    dbFoodGroups: state.dbFoodGroups,
+    errors: state.errors
 })
 
 export default connect(mapStateToProps, {

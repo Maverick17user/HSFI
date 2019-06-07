@@ -72,7 +72,7 @@ class RegisterOperator extends Component {
         const { dborganizations } = this.props.dborganizations
 
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Registration</h2>
                 <p className="text-info">Form for Operator</p>
                 <form onSubmit={ this.handleSubmit }>
@@ -83,7 +83,9 @@ class RegisterOperator extends Component {
                                 'is-invalid': errors.country
                             })}
                             name="country"
+                            defaultValue={'DEFAULT'}
                             onChange={ this.handleInputChange }>
+                                <option value={"DEFAULT"} disabled>Country</option>
                                 {dbCountries.map((country, i)=> {
                                     return <option value={country} key={country+i}>{country}</option>
                                 })}
@@ -109,7 +111,9 @@ class RegisterOperator extends Component {
                                 'is-invalid': errors.organization
                             })}
                             name="organization"
+                            defaultValue={'DEFAULT'}
                             onChange={ this.handleInputChange }>
+                                <option value={"DEFAULT"} disabled>Organization</option>
                                 {dborganizations.map((org, i)=> {
                                     return <option value={org} key={org+i}>{org}</option>
                                 })}
@@ -156,7 +160,7 @@ class RegisterOperator extends Component {
                         {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                     </div>
                     <div className="form-group">
-                        <label htmlFor="task">Task</label>
+                        <label htmlFor="task">Tasks</label>
                         <select multiple={true} className={classnames('form-control', {
                             'is-invalid': errors.task
                         })} id="task" name="task"  onChange={ this.handleMultiSelectChange }>

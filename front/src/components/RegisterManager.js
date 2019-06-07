@@ -65,7 +65,7 @@ class RegisterManager extends Component {
         const { errors } = this.state;
 
         return(
-            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <div className="container" style={{maxWidth: '700px'}}>
                 <h2>Registration</h2>
                 <p className="text-info">Form for Manager</p>
                 <form onSubmit={ this.handleSubmit }>
