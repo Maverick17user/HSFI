@@ -10,7 +10,7 @@ const confirmStyle ={
 
 const style = {
     fontSize: "1.1em",
-    padding: '15px',
+    padding: '10px 5px',
     paddingLeft: '30px',
     background: 'white'
 }
@@ -22,13 +22,15 @@ const ConfirmRegistrationBlock = ({usersToConfirm, role, confirmRegister, reject
             {users.map(user => {
                 return (
                     <div className='row' key={user._id} style={rowStyle}>
-                        <div className='col-6' style={style}>
-                            <small><b className="text-info">{user.name}</b> | </small>
+                        <div className='col-xl-6 col-12' style={style}>
+                            <small><b>{user.name}</b> | </small>
                             <small>{user.email}</small>
                         </div>
-                        <div className='col-3' style={style}>
-                            <button type="button" onClick={() => confirmRegister(user, role)} style={confirmStyle} className="btn btn-success btn-sm">Confirm</button>
-                            <button type="button" onClick={() => rejectRegister(user, role)} className="btn btn-danger btn-sm">Reject</button>
+                        <div className='col-xl-3 col-12 confirmChoise-wrap' style={style}>
+                            <div>
+                                <button type="button" onClick={() => confirmRegister(user, role)} style={confirmStyle} className="btn btn-success btn-sm">Confirm</button>
+                                <button type="button" onClick={() => rejectRegister(user, role)} className="btn btn-danger btn-sm">Reject</button>
+                            </div>
                         </div>
                     </div>
                 )

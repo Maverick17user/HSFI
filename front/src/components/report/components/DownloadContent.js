@@ -11,8 +11,8 @@ const DownloadContent = ({name, content}) => {
     const file = new Blob([dataReadyToPrint], {type: 'text/plain'});
 
     return (
-        <button type='submit' className="btn btn-outline-primary" style={style}>
-            <a href={URL.createObjectURL(file)} download={name}>Donwload report</a>
+        <button type='submit' className="btn btn-success">
+            <a href={URL.createObjectURL(file)} download={name}>Donwload</a>
         </button>
     )
 }

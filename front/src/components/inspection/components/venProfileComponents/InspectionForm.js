@@ -124,7 +124,6 @@ class InspectionForm extends Component {
             </div>
         )
     }
-    
 }
 
 const mapStateToProps = (state) => ({

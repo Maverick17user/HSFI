@@ -1,6 +1,9 @@
 import React from 'react'
 import PanelLink from './PanelLink'
 
+const style = {
+    marginBottom: "25px"
+}
 // Tab-Panel
 const ReadactPanelNav = function(props) {
     const PanelLinks = props.links.map((linkData, index) =>
@@ -8,9 +11,9 @@ const ReadactPanelNav = function(props) {
     )
     
     return (
-        <div className="col-3">
+        <div className="col-md-3 col-12" style={style}>
             <div className="list-group" id="list-tab" role="tablist">
-                {PanelLinks}
+                {PanelLinks} 
             </div>
         </div>
     )

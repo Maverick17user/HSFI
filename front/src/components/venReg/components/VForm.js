@@ -99,14 +99,14 @@ class VForm extends Component {
                 errors={errors.venName}
                 />
                 {/* <VenPicktureInput/> */}
-                <p className="text-warning">TODO: Vendor picture input</p>
+                {/* <p className="text-warning">TODO: Vendor picture input</p> */}
                 <LicenseNumberInput 
                 handleInputChange={this.handleInputChange} 
                 value={vendorRegData.licNumber}
                 errors={errors.licNumber}
                 />
                 {/* <LicenseScanInput /> */}
-                <p className="text-warning">TODO: License Scan input</p>
+                {/* <p className="text-warning">TODO: License Scan input</p> */}
                 <PhoneInput 
                 handleInputChange={this.handleInputChange} 
                 value={vendorRegData.phone}

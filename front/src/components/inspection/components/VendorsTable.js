@@ -19,7 +19,7 @@ class VendorsTable extends Component {
         const output = this.props.sortedVens 
         
         return (
-            <div className="col-9">
+            <div className="col-lg-9 col-12">
                 <p className="text-info">Table ({output.length})</p>
                 <div className="table-wrap">
                     <table className="table table-hover vendors__table">

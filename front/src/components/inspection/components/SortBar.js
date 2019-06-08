@@ -19,10 +19,9 @@ const SortBar = props => {
     const {dbCountries} = props.dbCountries 
     const {dbFoodGroups} = props.dbFoodGroups
     const dbVendors = props.dbVendors
-    console.log(dbVendors);
-    
+
     return (
-        <div className="col-3">
+        <div className="col-3 sortBar">
             <div className="tableSort-wrap">
                 <p className="text-info">Tabel sort form (single)</p>
                 <div className="tableSort">

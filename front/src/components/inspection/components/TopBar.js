@@ -9,7 +9,7 @@ const TopBar = props => {
             <div className="dropright-wrap">
                 <div className="btn-group dropright">
                     <button type="button" className="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select format
+                        Format
                     </button>
                     <div className="dropdown-menu">
                         <Link to="/inspection/table">

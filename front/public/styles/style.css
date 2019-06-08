@@ -50,7 +50,7 @@ div#root header img.logo {
 }
 
 div#root main.mainContext {
-  padding-top: 50px;
+  padding-top: 25px !important;
   weight: 100%;
   height: calc(100% - 57.51px);
   background: #F9FAFC;
@@ -124,7 +124,6 @@ div#root main.mainContext div.vProfile img, div#root main.mainContext div.uProfi
 }
 
 div#root main.mainContext div.vProfile h3.venProfile-h3, div#root main.mainContext div.vProfile h3.usProfile-h3, div#root main.mainContext div.uProfile h3.venProfile-h3, div#root main.mainContext div.uProfile h3.usProfile-h3 {
-  margin-left: 15px;
   margin-bottom: 15px;
 }
 
@@ -235,6 +234,10 @@ div#root main.mainContext div.vProfile button[disabled], div#root main.mainConte
   opacity: 0.25;
 }
 
+div#root main.mainContext .vendors__table th, div#root main.mainContext .vendors__table td {
+  text-align: center;
+}
+
 div.report_context {
   padding: 25px;
   background: white;
@@ -303,18 +306,18 @@ div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.qu
   margin-left: 25px;
 }
 
-div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap div.ball {
+label.checkingUnit {
+  min-width: 230px !important;
+  font-size: 0.9em;
+}
+
+div.ball {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.inspF div.questions div.questions-wrap div.ball label.form-check-label {
-  font-family: Montserrat-Bold, Arial, Helvetica, sans-serif;
-  color: #8E8F91;
 }
 
 a.logOut {
@@ -352,20 +355,165 @@ div.authedUser_label_wrap__profileLable:hover {
 }
 
 @media screen and (max-width: 540px) {
-  .hellotext-wrap {
-    width: 200px;
-  }
   .hellotext-wrap .display-5 {
     font-size: 1.2em;
   }
   .hellotext-wrap .text-info {
     font-size: 0.8em;
+    width: 200px;
+  }
+  div.row p.text-primary {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  main.mainContext {
+    padding-top: 15px !important;
+  }
+  .btn-success {
+    margin-bottom: 10px;
+  }
+  div.confirmChoise-wrap .btn-success {
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  section {
+    font-size: 0.8em;
+  }
+  div.userCard-wrap, div.w-100 {
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+    -webkit-box-align: start !important;
+        -ms-flex-align: start !important;
+            align-items: flex-start !important;
+  }
+  div.userCard-wrap section, div.w-100 section {
+    width: auto !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .vendors__table th, .vendors__table td {
+    font-size: 0.8em !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .vendors__table th, .vendors__table td {
+    font-size: 0.6em !important;
+    padding: 2px !important;
+  }
+  div.userCard-wrap {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
+  }
+  div.userCard-wrap section {
+    width: 100%;
+    margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 400px) {
-  main.mainContext {
-    background: red;
+  .vendors__table th, .vendors__table td {
+    font-size: 0.525em !important;
+  }
+  .vendors__table img {
+    width: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h3.usProfile-h3 {
+    text-align: center;
+  }
+  div.regVen div.form-group {
+    margin-bottom: 25px !important;
+  }
+  .vendors__table th, .vendors__table td {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  div.venredBuisnessChoise, div.ingredientUnit-wrapper {
+    margin-bottom: 25px !important;
+    margin-top: 15px;
+    background: #F9FAFC;
+    border-right: 2px solid #F1F2F4;
+  }
+  div.venredBuisnessChoise button, div.ingredientUnit-wrapper button {
+    margin-top: 15px !important;
+  }
+  div.chedule button {
+    margin-top: 15px !important;
+  }
+  div.ingredientUnit-wrapper {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+  }
+  div.sortBar {
+    display: none;
+  }
+  div.vProfile div.userCard {
+    margin-bottom: 45px;
+  }
+  div.vProfile div.userCard div.userCard-wrap, div.vProfile div.userCard div.w-100 {
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+    -webkit-box-align: start !important;
+        -ms-flex-align: start !important;
+            align-items: flex-start !important;
+    width: auto !important;
+  }
+  div.vProfile div.userCard div.userCard-wrap section, div.vProfile div.userCard div.w-100 section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (max-width: 992px) and (max-width: 330px) {
+  div.styles_modal__gNwvD.styles_modalCenter__L9F2w {
+    width: 100% !important;
+  }
+  div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.questions {
+    border: none !important;
+  }
+  div.styles_modal__gNwvD.styles_modalCenter__L9F2w div.questions span.question {
+    margin-left: 5px !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

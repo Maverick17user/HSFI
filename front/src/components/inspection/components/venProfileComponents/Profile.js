@@ -13,32 +13,34 @@ const Profile = props => {
         <div className="container vProfile">
             <h3 className="venProfile-h3">Vendor profile</h3>
             <div className="row">
-                <div className="col-3">
-                    <div className="container d-flex justify-content-center align-items-center flex-column">
-                        <img src={venData.venPhotoURL} alt="Vendor" className="vendorPhoto"/>
-                        <div className="w-100 d-flex justify-content-around align-items-center">
-                            <span className="vName">{venData.venName}</span>
-                        </div>
-                        <div className="w-100 d-flex justify-content-around align-items-center">
-                            {(venData.flagStatus === "red flagged")
-                                ? <button type="button" className="btn btn-outline-primary venInspectBut" 
-                                  onClick={() => setOpen(true)}>Inspect</button>
-                                : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
-                            }
-                            {(userRole !== 'operator')
-                                ? (
-                                    <Link to={props.history.location.pathname + '/edit'}>
-                                        <button type="button" className="btn btn-outline-info venInspectBut">
-                                            Edit
-                                        </button>
-                                    </Link>
-                                )
-                                : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Edit</button>
-                            }
-                        </div>
+                <div className="col-lg-3 col-12 userCard">
+                    <div className="d-flex justify-content-center align-items-center flex-column userCard-wrap">
+                        <section>
+                            <img src={venData.venPhotoURL} alt="Vendor" className="vendorPhoto"/>
+                            <div className="w-100 d-flex justify-content-around align-items-center">
+                                <span className="vName">{venData.venName}</span>
+                            </div>
+                            <div className="w-100 d-flex justify-content-around align-items-center">
+                                {(venData.flagStatus === "red flagged")
+                                    ? <button type="button" className="btn btn-outline-primary venInspectBut" 
+                                    onClick={() => setOpen(true)}>Inspect</button>
+                                    : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
+                                }
+                                {/* {(userRole !== 'operator')
+                                    ? (
+                                        <Link to={props.history.location.pathname + '/edit'}>
+                                            <button type="button" className="btn btn-outline-info venInspectBut">
+                                                Edit
+                                            </button>
+                                        </Link>
+                                    )
+                                    : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Edit</button>
+                                } */}
+                            </div>
+                        </section>
                     </div>
                 </div>
-                <div className="col-4">
+                <div className="col-lg-4 col-md-6 col-12">
                     <div className="container">
                         <section>
                             <label className="lead">Country</label>
@@ -86,7 +88,7 @@ const Profile = props => {
                         </section>
                     </div>
                 </div>
-                <div className="col-5">
+                <div className="col-lg-5 col-md-6 col-12">
                     <div className="container">
                         <div className="table-wrap">
                             <section className="rightItem">

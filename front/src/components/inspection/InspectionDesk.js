@@ -36,7 +36,7 @@ class InspectionDesk extends Component {
                             dbVendors={dbVendors}/>
                         } />
                         <Route exact path="/inspection/map" render={() => 
-                            <div className="col-9" >
+                            <div className="col-lg-9 col-12" >
                                 <p className="text-info">Map ({sortedVens.length})</p>
                                 <VendorsMap 
                                 isMarkerShown 

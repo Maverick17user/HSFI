@@ -9,12 +9,12 @@ const IngredientSourceUnit = props => {
     return (
         <div className="form-group">
             {(props.flag === 'initial') && <label htmlFor="ing_source">Ingredient source</label>}
-            <div className="row">
-                <div className="col">
+            <div className="row ingredientUnit-wrapper">
+                <div className="col-md-10 col-12">
                     <input type="text" className="form-control" onChange={(e) => props.handleInputChangeWithFlag(e, props.index, 'ingredientSource')} 
                     value={dataUnit.source || ''} name="source" placeholder="Ingredient source" id="ing_source" />
                 </div>
-                <div className="col">
+                <div className="col-md-2 col-12">
                     {(props.flag === 'initial') && 
                     <button type="button" 
                     onClick={() => store.dispatch(addUnitIn('ingredientSource'))}

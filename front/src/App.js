@@ -47,7 +47,7 @@ class App extends Component {
           <Router >    
               <Navbar history={this.props.history}/>
               <main className="mainContext">
-                <div className="container">
+                <div className="container cheifAppContainer">
                 <Switch>
                   <Route exact path="/" render={() => <Home />}/>
                   <Route exact path="/registerManager" component={RegisterManager} />

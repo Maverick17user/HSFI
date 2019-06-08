@@ -17,7 +17,7 @@ const RedactNPCsRegRequests = props => {
     const usersToConfirm = props.usersToConfirm
 
     return (
-        <div className="col-9">
+        <div className="col-md-9 col-12">
             {(currentUserData.role === "manager")
                 ? <p className="text-primary">NPC users confirming</p>
                 : <p className="text-primary">Operator users confirming</p>
@@ -26,7 +26,7 @@ const RedactNPCsRegRequests = props => {
                 ? (
                     <div style={alertStyles}>
                         <em className="text-dark">
-                            <span><b className="text-danger" style={{fontSize: '1.25em'}}>!</b> Here is no users to confirm.</span>
+                            <span><b className="text-danger" style={{fontSize: '1.25em'}}>!</b> All users confirmed.</span>
                         </em>
                     </div>
                 )

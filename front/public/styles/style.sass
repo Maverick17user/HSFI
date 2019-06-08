@@ -11,7 +11,6 @@ div#root
     height: 100%
     width: 100%
     header
-        // width: 100 !important
         height: 57.51px
         background: #FFFFFF
         outline: 1px solid #CED4DA
@@ -32,7 +31,7 @@ div#root
         img.logo
             padding-bottom: 5px
     main.mainContext
-        padding-top: 50px
+        padding-top: 25px !important
         weight: 100%
         height: calc(100% - 57.51px)
         background: #F9FAFC
@@ -84,7 +83,6 @@ div#root
                 border-radius: 3px
                 border: 1px solid lightgray
             h3.venProfile-h3, h3.usProfile-h3
-                margin-left: 15px
                 margin-bottom: 15px
             span.profileData, a
                 font-size: 1em
@@ -148,6 +146,9 @@ div#root
                 width: 90px
             button[disabled]
                 opacity: 0.25
+        .vendors__table
+            th,td
+                text-align: center
 
 div.report_context
     padding: 25px
@@ -188,12 +189,12 @@ div.styles_modal__gNwvD.styles_modalCenter__L9F2w
                     min-width: 125px
                     font-size: 0.9em
                     margin-left: 25px
-                div.ball
-                    display: flex
-                    align-items: center
-                    label.form-check-label
-                        font-family: Montserrat-Bold, Arial, Helvetica, sans-serif
-                        color: #8E8F91   
+label.checkingUnit
+    min-width: 230px !important
+    font-size: 0.9em  
+div.ball
+    display: flex
+    align-items: center
 
 a.logOut
     color: black
@@ -217,8 +218,6 @@ div.authedUser_label_wrap__profileLable
         color: white !important
     &:focus
         box-shadow: none !important
-
-#navbar1.show
     
 // Media
 
@@ -228,11 +227,108 @@ div.authedUser_label_wrap__profileLable
             font-size: 1.2em
         .text-info
             font-size: 0.8em
-        width: 200px
-@media screen and (max-width: 400px)
+            width: 200px
+    div.row
+        p.text-primary
+            display: none
+
+@media screen and (max-width: 460px)
     main.mainContext
-        background: red
-        // padding-top: 10px !important
+        padding-top: 15px !important
+    .btn-success
+        margin-bottom: 10px
+    div.confirmChoise-wrap
+        .btn-success
+            margin-bottom: 0px
+
+@media screen and (max-width: 375px)
+    section 
+        font-size: 0.8em
+    div.userCard-wrap, div.w-100
+        justify-content: flex-start !important
+        align-items: flex-start !important
+        // width: auto !important
+        section
+            width: auto !important
+            display: flex
+            flex-direction: column
+            justify-content: center !important
+            align-items: center !important
+
+@media screen and (max-width: 540px)
+    .vendors__table
+        th,td
+            font-size: 0.8em !important
+
+@media screen and (max-width: 500px)
+    .vendors__table
+        th,td
+            font-size: 0.6em !important
+            padding: 2px !important
+    div.userCard-wrap
+        justify-content: center !important
+        align-items: center !important
+        section
+            width: 100%
+            margin: 0 auto
+
+@media screen and (max-width: 400px)
+    .vendors__table
+        th,td
+            font-size: 0.525em !important
+        img
+            width: 10px
+
+@media screen and (max-width: 768px)
+    h3.usProfile-h3
+        text-align: center
+    div.regVen
+        div.form-group
+            margin-bottom: 25px !important
+    .vendors__table
+            th,td
+                font-size: 0.9em
+
+@media screen and (max-width: 992px)
+    div.venredBuisnessChoise, div.ingredientUnit-wrapper
+        margin-bottom: 25px !important
+        margin-top: 15px
+        background: #F9FAFC
+        border-right: 2px solid #F1F2F4   
+        button
+            margin-top: 15px !important
+    div.chedule
+        button
+            margin-top: 15px !important
+    div.ingredientUnit-wrapper
+        padding-top: 10px
+        padding-bottom: 10px
+        margin-top: 10px
+    div.sortBar
+        display: none
+    div.vProfile
+        div.userCard
+            margin-bottom: 45px
+            div.userCard-wrap, div.w-100
+                justify-content: flex-start !important
+                align-items: flex-start !important
+                width: auto !important
+                section
+                    display: flex
+                    flex-direction: column
+                    justify-content: center
+                    align-items: center
+    @media screen and (max-width: 330px)
+        div.styles_modal__gNwvD.styles_modalCenter__L9F2w
+            width: 100% !important
+            div.questions
+                border: none !important
+                span.question
+                    margin-left: 5px !important
+    
+
+    
+
 
     
 

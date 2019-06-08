@@ -12,7 +12,7 @@ const UserProfile = (props) => {
                     {user.role.slice(0,1).toUpperCase() + user.role.slice(1)} profile
                 </h3>
                 <div className="row">
-                    <div className="col-sm-3">
+                    <div className="col-xl-3 col-md-4 col-12">
                         <div className="container d-flex justify-content-center align-items-center flex-column">
                             <img src={user.avatar} alt="User" className="userPhoto"/>
                             <div className="w-100 d-flex justify-content-around align-items-center">
@@ -20,14 +20,14 @@ const UserProfile = (props) => {
                             </div>
                             <div className="w-100 d-flex justify-content-around align-items-center">
                                 <Link to={`/userProfile/${props.match.params.userId}/edit`}>
-                                    <button type="button" className="btn btn-outline-primary">
+                                    <button type="button" className="btn btn-success">
                                         Edit
                                     </button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-sm-9">
+                    <div className="col-xl-9 col-md-8 col-12">
                         <div className="container">
                             <section>
                                 <label className="lead">E-mail</label>

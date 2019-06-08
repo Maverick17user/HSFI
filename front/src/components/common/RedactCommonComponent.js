@@ -81,11 +81,11 @@ class RedactCommonComponent extends Component {
         const props = this.props
         
         return (
-            <div className="col-9">
+            <div className="col-md-9">
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div className="row">
-                            <div className="col-8">
+                            <div className="col-sm-8 col-6">
                                 <p className="text-primary">{props.title}</p>
                                 <form className="form" onSubmit={this.handleAddSubmit}>
                                     <div className="form-group">
@@ -108,7 +108,7 @@ class RedactCommonComponent extends Component {
                                     </div>
                                 </form>
                             </div>
-                            <div className="col-4">
+                            <div className="col-sm-4 col-6">
                                 <ListOfAddedReadactItems listTitle={props.listTitle} storeData={props.storeData}/>
                             </div>
                         </div>

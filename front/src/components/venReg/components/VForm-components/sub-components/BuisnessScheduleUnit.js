@@ -3,7 +3,6 @@ import {addUnitIn} from '../../../../../actions/venreg/createNewShaduleObject'
 import {removeUnitOut} from '../../../../../actions/venreg/removeShaduleObject'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import store from '../../../../../store';
 
 class BuisnessScheduleUnit extends Component {
@@ -26,8 +25,8 @@ class BuisnessScheduleUnit extends Component {
         const dataUnit = props.data.filter(unit => unit.id === props.index)[0]
 
         return (
-            <div className="row">
-                <div className="col">
+            <div className="row venredBuisnessChoise chedule">
+                <div className="col-lg-4 col-12">
                     <div className="form-group">
                         <span>{props.index}</span>
                         <label htmlFor="work_day"><small>Day</small></label>
@@ -45,7 +44,7 @@ class BuisnessScheduleUnit extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col-lg-4 col-12">
                     <div className="from-group">
                         <label htmlFor="work_from"><small>From</small></label>
                         <input type="time" className="form-control" id="work_from" name="from"
@@ -53,18 +52,18 @@ class BuisnessScheduleUnit extends Component {
                         value={dataUnit.from} />
                     </div>
                 </div>
-                <div className="col">
+                <div className="col-lg-4 col-12">
                     <div className="form-group">
                         <div className="row">
-                            <div className="col">
+                            <div className="col-12">
                                 <label htmlFor="work_to"><small>To</small></label>
                                 <div className="row">
-                                    <div className="col">
+                                    <div className="col-lg-6 col-12">
                                         <input type="time" className="form-control" id="work_to" name="to" 
                                         onChange={(e) => props.handleInputChangeWithFlag(e, dataUnit.id, 'buisnessSchedule')} 
                                         value={dataUnit.to}/>
                                     </div>
-                                    <div className="col">
+                                    <div className="col-lg-6 col-12">
                                         {(props.flag === 'initial') && 
                                         <button type="button" 
                                         onClick={() => this.addUnit('buisnessSchedule')}
