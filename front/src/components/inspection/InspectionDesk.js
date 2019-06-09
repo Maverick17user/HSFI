@@ -7,13 +7,21 @@ import TopBar from './components/TopBar'
 import SortBar from './components/SortBar'
 
 import {sortBy_ALL} from '../../actions/sort/tableSort'
+import {fetchVendorsByRole} from '../../actions/fetchStaff/fetchVendorsByRole'
 
 import {Switch, Route, Redirect} from 'react-router-dom'
 
 class InspectionDesk extends Component {
 
-    componentDidMount() {
-        this.props.sortBy_ALL(this.props.dbVendors.dbVendors)
+    componentWillMount() {
+        const options = {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }     
+        this.props.fetchVendorsByRole(options, this.props.auth.user)
+        this.props.fetchVendorsByRole(options, this.props.auth.user, 'sortBar')
     }
 
     render() {
@@ -55,11 +63,13 @@ class InspectionDesk extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     dbVendors: state.dbVendors,
     sortedVens: state.sortedVens,
 })
 
 export default connect(mapStateToProps, {
-    sortBy_ALL
+    sortBy_ALL,
+    fetchVendorsByRole
 })(InspectionDesk)
 

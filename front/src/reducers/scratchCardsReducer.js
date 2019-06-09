@@ -3,7 +3,8 @@ import {
     INPUT_CHANGE_IN_TRANSACTION,
     FETCH_VENDOR_DATA_IN_TRANSACTION,
     SET_TOTAL_COST_IN_TRANSACTION,
-    RESET
+    RESET,
+    REMOVE_TRANSACTION_STATE
 } from '../actions/types';
 
 const initialState = {
@@ -62,6 +63,22 @@ export default function(state = initialState, action ) {
             return Object.assign({}, state, {
                 scratchCardData: Object.assign({}, state.scratchCardData, {
                     totalCost: totalCost
+                })
+            })
+        }
+
+        case REMOVE_TRANSACTION_STATE: {
+            return Object.assign({}, state, {
+                scratchCardData: Object.assign({}, state.scratchCardData, {
+                    licNumber: '',
+                    venName: '',
+                    venPhotoURL: '',
+                    foodGroup: '',
+                    cardsQuantity: '',
+                    serialNumber: '',
+                    cardCost: '',
+                    currency: '$',
+                    totalCost: ''
                 })
             })
         }

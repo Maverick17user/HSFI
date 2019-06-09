@@ -1,10 +1,19 @@
 import axios from 'axios';
-import { GET_ERRORS } from '../types';
-// ADD_NEW_VENDOR
+import { GET_ERRORS, MARK_VENREG_SUCCESS, REMOVE_VENREG_STATE } from '../types';
+
 export const submitVenRegForm = (newVendor) => dispatch => {
     axios.post('/api/vendors/venRegistration', newVendor)
         .then(res => {
-            console.log('Vendor added successfully');
+            dispatch({
+                type: MARK_VENREG_SUCCESS
+            })
+            dispatch({
+                type: REMOVE_VENREG_STATE
+            })
+            dispatch({
+                type: GET_ERRORS,
+                payload: {}
+            });
         })
         .catch(err => {
             dispatch({

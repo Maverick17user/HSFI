@@ -20,6 +20,7 @@ const callLogs = require('./routes/callLog');
 const inspections = require('./routes/inspection')
 const reports = require('./routes/report')
 
+mongoose.set('useFindAndModify', false);
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(     
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database'+ err)}

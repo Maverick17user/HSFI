@@ -1,7 +1,8 @@
 import { 
     FETCH_IN_HOTLINE,
     INPUT_CHANGE_IN_HOTLINE,
-    RESET
+    RESET,
+    REMOVE_HOTLINE_STATE
 } from '../actions/types';
 
 const initialState = {
@@ -31,7 +32,15 @@ export default function(state = initialState, action ) {
             })
         }
         case RESET:
-            return initialState   
+            return initialState  
+        case REMOVE_HOTLINE_STATE: {
+            return Object.assign({}, state, {
+                hotlineCall: Object.assign({}, state.hotlineCall, {
+                    callerNationalID: initialState.hotlineCall.callerNationalID,
+                    scratchCardserialNumber: initialState.hotlineCall.scratchCardserialNumber
+                })
+            })
+        }
         default: 
             return state;
     }

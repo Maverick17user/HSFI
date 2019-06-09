@@ -1,10 +1,19 @@
 import axios from 'axios';
-import { GET_ERRORS } from '../types';
+import { GET_ERRORS, MARK_INSPECTION_SUCCESS, REMOVE_INSPECTION_STATE } from '../types';
 
 export const submitInspectionAction = inspectionData => dispatch => {
     axios.post('/api/inspection/submit', inspectionData)
         .then(res => {
-            console.log('Inspected successfully');
+            dispatch({
+                type: MARK_INSPECTION_SUCCESS
+            })
+            dispatch({
+                type: REMOVE_INSPECTION_STATE
+            })
+            dispatch({
+                type: GET_ERRORS,
+                payload: {}
+            });
         })
         .catch(err => {
             dispatch({

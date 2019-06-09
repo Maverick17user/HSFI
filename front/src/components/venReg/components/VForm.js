@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom'
 
 import {fetchData} from '../../../actions/venreg/fetching'
 import {fetchCountry} from '../../../actions/venreg/fetchCountry'
@@ -64,7 +65,7 @@ class VForm extends Component {
     handleSubmit(e, data) {
         e.preventDefault();
         const newVendor = Object.assign({},data)
-        this.props.submitVenRegForm(newVendor)
+        this.props.submitVenRegForm(newVendor, this.props.auth.user)
     }
 
     componentDidMount() {
@@ -81,9 +82,12 @@ class VForm extends Component {
             return <p>Fetching data...</p>
         }
 
+        if (vendorRegData.isSuccess) {
+            this.props.history.push('/inspection');
+        }
+
         return (
-            <form 
-            onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
+            <form onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
                 <OperatorName_FetchedInput value={vendorRegData.operatorName}/>
                 <RegData_FetchedInput value={vendorRegData.regDate} />
                 {(dbCountries.length === 1)
@@ -117,15 +121,18 @@ class VForm extends Component {
                 errors={errors.email}
                 />
                 <BuisnessLocationComponent 
+                vendorRegData={this.props.vendorRegData}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 errors={errors.buisnessLocation}
                 /> 
                 <BuisnessScheduleComponent 
+                vendorRegData={this.props.vendorRegData}
                 handleMultiSelectChange={this.handleMultiSelectChange}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 errors={errors.buisnessSchedule}
                 />
                 <IngredientSourceComponent 
+                vendorRegData={this.props.vendorRegData}
                 handleInputChangeWithFlag={this.handleInputChangeWithFlag}
                 errors={errors.ingredientSource}
                 />

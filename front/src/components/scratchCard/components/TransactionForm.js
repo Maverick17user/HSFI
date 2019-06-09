@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-import store from '../../../store';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-import axios from 'axios'
 
 import {fetchInitialData} from '../../../actions/scratchCard/fetchInitialData'
 import {inputChange} from '../../../actions/scratchCard/inputChange'
@@ -30,24 +27,24 @@ class TransactionForm extends Component {
     }
 
     handleInputChange(e) {
-        store.dispatch(inputChange(e.target))
-        store.dispatch(setTotalCost())
+        this.props.inputChange(e.target)
+        this.props.setTotalCost()
     }
 
     componentDidMount() {
-        store.dispatch(fetchInitialData(this.props.auth.user.name))
+        this.props.fetchInitialData(this.props.auth.user.name)
     }
 
     fetchVendorData(vendorNumber, dbVendors) {
         if((vendorNumber)) {
-            store.dispatch(fetchVendorData(vendorNumber, dbVendors))
+            this.props.fetchVendorData(vendorNumber, dbVendors)
         }
     }
-
+    
     handleSubmit(e, data) {
         e.preventDefault()
         const newCard = Object.assign({},data)
-        store.dispatch(submitTransaction(newCard))
+        this.props.submitTransaction(newCard)
     }
 
     render() {
@@ -68,7 +65,7 @@ class TransactionForm extends Component {
                 <SerialCardNumberInput 
                 value={scratchCardData.serialNumber}
                 handleInputChange={this.handleInputChange} />
-                <div className="row">
+                <div className="row calculator">
                     <CardCostInput 
                     value={scratchCardData.cardCost}
                     handleInputChange={this.handleInputChange} />
@@ -91,4 +88,10 @@ const mapStateToProps = (state) => ({
     scratchCardData: state.scratchCardData,
 })
 
-export default connect(mapStateToProps)(TransactionForm)
+export default connect(mapStateToProps, {
+    inputChange,
+    setTotalCost,
+    fetchInitialData,
+    fetchVendorData,
+    submitTransaction
+})(TransactionForm)

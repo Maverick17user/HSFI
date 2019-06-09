@@ -234,8 +234,12 @@ div#root main.mainContext div.vProfile button[disabled], div#root main.mainConte
   opacity: 0.25;
 }
 
-div#root main.mainContext .vendors__table th, div#root main.mainContext .vendors__table td {
+div#root main.mainContext .vendors__table th, div#root main.mainContext .vendors__table tr {
   text-align: center;
+}
+
+select {
+  font-size: 1rem !important;
 }
 
 div.report_context {
@@ -416,6 +420,9 @@ div.authedUser_label_wrap__profileLable:hover {
 }
 
 @media screen and (max-width: 500px) {
+  table.vendors__table img {
+    width: 10px;
+  }
   .vendors__table th, .vendors__table td {
     font-size: 0.6em !important;
     padding: 2px !important;
@@ -437,9 +444,6 @@ div.authedUser_label_wrap__profileLable:hover {
 @media screen and (max-width: 400px) {
   .vendors__table th, .vendors__table td {
     font-size: 0.525em !important;
-  }
-  .vendors__table img {
-    width: 10px;
   }
 }
 

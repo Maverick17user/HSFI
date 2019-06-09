@@ -11,7 +11,7 @@ const VendorData_FetchedInputGroup = props => {
                 value={scratchCardData.venName || ''} id="venName" readOnly/>
             </div>
             <div className="venPicture-wrap">
-                {scratchCardData.venPhotoURL && <img src={scratchCardData.venPhotoURL} alt="Vendor"/>}
+                {scratchCardData.venPhotoURL && <img src={scratchCardData.venPhotoURL} alt="Vendor" width="200px"/>}
                 <span>Vendor's picture</span>
             </div>
             <div className="form-group">

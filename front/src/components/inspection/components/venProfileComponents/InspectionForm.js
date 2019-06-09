@@ -64,6 +64,10 @@ class InspectionForm extends Component {
         } = this.props.inspectionFormData
 
         const err = this.state.errors
+
+        if (this.props.inspectionFormData.isSuccess) {
+            this.props.history.push('/inspection');
+        }
         
         return (
             <div className="inspF">

@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-import store from '../../../store';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-import axios from 'axios'
 
 import {fetchInitialData} from '../../../actions/hotline/fetchInitialData'
 import {inputChange} from '../../../actions/hotline/inputChange'
@@ -21,16 +18,16 @@ class FormComponents extends Component {
     }
 
     handleInputChange(e) {
-        store.dispatch(inputChange(e.target))
+        this.props.inputChange(e.target)
     }
 
     componentDidMount() {
-        store.dispatch(fetchInitialData(this.props.auth.user.name))
+        this.props.fetchInitialData(this.props.auth.user.name)
     }
 
     handleSubmit(e, callData) {
         e.preventDefault()
-        store.dispatch(submitAction(callData))
+        this.props.submitAction(callData)  
     }
 
     render() {
@@ -56,13 +53,19 @@ class FormComponents extends Component {
 }
 
 FormComponents.propTypes = {
+    errors: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     hotlineCall: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
+    errors: state.errors,
     auth: state.auth,
     hotlineCall: state.hotlineCall,
 })
 
-export default connect(mapStateToProps)(FormComponents)
+export default connect(mapStateToProps, {
+    inputChange,
+    fetchInitialData,
+    submitAction,
+})(FormComponents)

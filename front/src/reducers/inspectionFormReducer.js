@@ -1,7 +1,9 @@
 import { 
     FETCH_IN_INSPECTION,
     SET_TOTAL_OSS_IN_INSPECTION,
-    RESET
+    RESET,
+    REMOVE_INSPECTION_STATE,
+    MARK_INSPECTION_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
     foodGroup: '',
     questionsStatus: [],
     totalOSS: 0,
+    isSuccess: false
 }
 
 export default function(state = initialState, action ) {
@@ -66,6 +69,22 @@ export default function(state = initialState, action ) {
             else {
                 return state
             }
+        }
+
+        case MARK_INSPECTION_SUCCESS: {
+            return Object.assign({}, state, {
+                questionsStatus: [],
+                totalOSS: 0,
+                isSuccess: true
+            })
+        }
+
+        case REMOVE_INSPECTION_STATE: {
+            return Object.assign({}, state, {
+                questionsStatus: [],
+                totalOSS: 0,
+                isSuccess: false
+            })
         }
         
         case RESET:

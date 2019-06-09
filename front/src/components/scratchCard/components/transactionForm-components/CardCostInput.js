@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 const CardCostInput = props => {
     return (
-        <div className="col">
+        <div className="col-sm-6 col-12">
             <div className="form-group">
                 <label htmlFor="1card_cost">Cost per card</label>
                 <input 

@@ -1,7 +1,6 @@
 import React from 'react';
 import BuisnessLocationUnit from './sub-components/BuisnessLocationUnit'
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const BuisnessLocationComponent = props => {
     const {vendorRegData} = props.vendorRegData
@@ -42,12 +41,7 @@ const BuisnessLocationComponent = props => {
 }
 
 BuisnessLocationComponent.propTypes = {
-    vendorRegData: PropTypes.object.isRequired,
     handleInputChangeWithFlag: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-    vendorRegData: state.vendorRegData
-})
-
-export default connect(mapStateToProps)(BuisnessLocationComponent)
+export default BuisnessLocationComponent

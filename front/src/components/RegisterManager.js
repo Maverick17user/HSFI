@@ -39,7 +39,6 @@ class RegisterManager extends Component {
             password: this.state.password,
             password_confirm: this.state.password_confirm
         }
-        console.log(this.state);
         this.props.registerManagerUser(Manager_user, this.props.history);
     }
 

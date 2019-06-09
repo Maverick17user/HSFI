@@ -9,8 +9,7 @@ const saveChanges = (req, res, next) => {
         {licNumber: scdata.licNumber}, 
         updatedData
     ).then(() => {
-        console.log('yes');
-        return res.status(200)
+        return res.status(200).json('yes')
     })
 }
 

@@ -5,10 +5,13 @@ import Modal from 'react-responsive-modal'
 import {Link} from 'react-router-dom'
 
 const Profile = props => {
-    const venData = props.venData
     const userRole = props.auth.user.role
     const [open, setOpen] = React.useState(false)
-
+    const {dbVendors} = props.dbVendors
+    
+    if (dbVendors.length > 0) {
+        const venData = dbVendors.find(vendor => vendor._id === props.match.params.vendorId)
+    
     return (
         <div className="container vProfile">
             <h3 className="venProfile-h3">Vendor profile</h3>
@@ -164,10 +167,15 @@ const Profile = props => {
             </div>
         </div>
     )
+    }
+    else {
+        return null
+    }
 }
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
+    dbVendors: state.dbVendors
 })
 
 export default connect(mapStateToProps)(Profile)

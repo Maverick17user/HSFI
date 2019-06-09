@@ -147,9 +147,10 @@ div#root
             button[disabled]
                 opacity: 0.25
         .vendors__table
-            th,td
+            th, tr
                 text-align: center
-
+select
+    font-size: 1rem !important
 div.report_context
     padding: 25px
     background: white
@@ -247,7 +248,6 @@ div.authedUser_label_wrap__profileLable
     div.userCard-wrap, div.w-100
         justify-content: flex-start !important
         align-items: flex-start !important
-        // width: auto !important
         section
             width: auto !important
             display: flex
@@ -261,6 +261,9 @@ div.authedUser_label_wrap__profileLable
             font-size: 0.8em !important
 
 @media screen and (max-width: 500px)
+    table.vendors__table
+        img
+            width: 10px
     .vendors__table
         th,td
             font-size: 0.6em !important
@@ -276,8 +279,6 @@ div.authedUser_label_wrap__profileLable
     .vendors__table
         th,td
             font-size: 0.525em !important
-        img
-            width: 10px
 
 @media screen and (max-width: 768px)
     h3.usProfile-h3

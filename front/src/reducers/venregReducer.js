@@ -7,7 +7,9 @@ import {
     CREATE_UNIT_IN_VENREG,
     SET_SINGLE_MAP_MARK_COORDINATES,
     REMOVE_UNIT_FROM_VENREG,
-    RESET
+    MARK_VENREG_SUCCESS,
+    RESET,
+    REMOVE_VENREG_STATE
 } from '../actions/types';
 
 const initialState = {
@@ -16,7 +18,7 @@ const initialState = {
         regDate: '',
         country: [{id:0}],
         venName: '',
-        venPhotoURL: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
+        venPhotoURL: 'https://yt3.ggpht.com/a-/AN66SAwGMl5lcOtW4tdn8egWzVGXz7eBJqrwkm9iYQ=s900-mo-c-c0xffffffff-rj-k-no',
         licNumber: '',
         licScanURL: 'https://www.repmyers.us/wp-content/uploads/2018/10/fake-business-license-unique-top-result-fake-driving-licence-template-awesome-fake-of-fake-business-license.jpg',
         phone: '',
@@ -29,7 +31,8 @@ const initialState = {
         hasBeenFlagged: false,
         oss: '',
         isOpen: true,
-        gps: []
+        gps: [],
+        isSuccess: false
     }
 }
 
@@ -112,6 +115,37 @@ export default function(state = initialState, action ) {
                     gps
                 })
             })}
+        
+        case MARK_VENREG_SUCCESS: {
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    isSuccess: true
+                })
+            })
+        }
+        
+        case REMOVE_VENREG_STATE: {
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    venName: initialState.vendorRegData.venName,
+                    venPhotoURL: initialState.vendorRegData.venPhotoURL,
+                    licNumber: initialState.vendorRegData.licNumber,
+                    licScanURL: initialState.vendorRegData.licScanURL,
+                    phone: initialState.vendorRegData.phone,
+                    email: initialState.vendorRegData.email,
+                    buisnessLocation: [{id:0}],
+                    buisnessSchedule: [{id:0}],
+                    ingredientSource: [{id:0}],
+                    foodGroup: initialState.vendorRegData.foodGroup,
+                    flagStatus: initialState.vendorRegData.flagStatus,
+                    hasBeenFlagged: initialState.vendorRegData.hasBeenFlagged,
+                    oss: initialState.vendorRegData.oss,
+                    isOpen: initialState.vendorRegData.isOpen,
+                    gps: initialState.vendorRegData.gps,
+                    isSuccess: false
+                })
+            })
+        }
             
         case RESET:
             return initialState    

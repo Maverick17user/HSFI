@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import BuisnessScheduleUnit from './sub-components/BuisnessScheduleUnit'
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
 
 class BuisnessScheduleComponent extends Component {
     constructor(props){
@@ -52,13 +50,8 @@ class BuisnessScheduleComponent extends Component {
 }
 
 BuisnessScheduleComponent.propTypes = {
-    vendorRegData: PropTypes.object.isRequired,
     handleMultiSelectChange: PropTypes.func.isRequired,
     handleInputChangeWithFlag: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-    vendorRegData: state.vendorRegData
-})
-
-export default connect(mapStateToProps)(BuisnessScheduleComponent)
+export default BuisnessScheduleComponent
