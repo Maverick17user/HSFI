@@ -7,6 +7,7 @@ const validationLogIn = (req, res, next) => {
         return res.status(400).json(errors);
     }
     else {
+        req.errors = errors
         next()
     }
 }

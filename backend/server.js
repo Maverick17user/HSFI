@@ -21,31 +21,20 @@ const callLogs = require('./routes/callLog');
 const inspections = require('./routes/inspection')
 const reports = require('./routes/report')
 
+
+const app = express();
+
 mongoose.set('useFindAndModify', false);
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(     
+console.log('====================')
+console.log(config.DB);
+console.log('====================')
+
+mongoose.connect(config.DB, { useNewUrlParser: true, useCreateIndex: true }).then(     
     () => {console.log('Database is connected') },
     err => { console.log('Can not connect to the database'+ err)}
 );
 
-const app = express();
-
-// app.use('/static', express.static(__dirname + '/public'));
-
-// // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../front/build')));
-// app.use(express.static(path.join(__dirname, '/front/build')))
-
-// // Answer API requests.
-// app.get('/api', function (req, res) {
-//   res.set('Content-Type', 'application/json');
-//   res.send('{"message":"Hello from the custom server!"}');
-// });
-
-// All remaining requests return the React app, so it can handle routing.
-app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
-//   res.sendFile(path.join(__dirname + '/front/build/index.html'))
-});
+// app.use('/static', express.static(__dirname + '/public'))
 
 app.use(passport.initialize());
 require('./passport')(passport);
@@ -68,6 +57,16 @@ app.use('/api/calls', callLogs);
 
 app.use('/api/inspection', inspections);
 app.use('/api/report', reports)
+
+if (process.env.NODE_ENV === 'production') {
+    // Priority serve any static files.
+    app.use(express.static(path.resolve(__dirname, '../front/build')));
+
+    // All remaining requests return the React app, so it can handle routing.
+    app.get('*', function(req, res) {
+        res.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
+    });
+  }
 
 const PORT = process.env.PORT || 5000;
 

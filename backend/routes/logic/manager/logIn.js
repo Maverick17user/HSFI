@@ -5,6 +5,7 @@ const Manager_User = require('../../../models/Manager_User');
 const logIn = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    const errors = req.errors
 
     Manager_User.findOne({email})
     .then(user => {
