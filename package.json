@@ -1,0 +1,19 @@
+{
+  "name": "hsfi",
+  "version": "1.0.0",
+  "description": "iTechArt internship project",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maverick17user/HSFI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maverick17user/HSFI/issues"
+  },
+  "homepage": "https://github.com/Maverick17user/HSFI#readme"
+}
