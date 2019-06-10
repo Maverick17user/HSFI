@@ -29,10 +29,11 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 
 const app = express();
 
-app.use('/static', express.static(__dirname + '/public'));
+// app.use('/static', express.static(__dirname + '/public'));
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../front/build')));
+// // Priority serve any static files.
+// app.use(express.static(path.resolve(__dirname, '../front/build')));
+app.use(express.static(path.join(__dirname, '/front/build')))
 
 // Answer API requests.
 app.get('/api', function (req, res) {
@@ -42,7 +43,8 @@ app.get('/api', function (req, res) {
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
+//   response.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
+  res.sendFile(path.join(__dirname + '/front/build/index.html'))
 });
 
 app.use(passport.initialize());
