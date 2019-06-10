@@ -43,7 +43,7 @@ app.use(express.static(path.resolve(__dirname, '../front/build')));
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(req, res) {
-  response.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
 //   res.sendFile(path.join(__dirname + '/front/build/index.html'))
 });
 
