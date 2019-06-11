@@ -58,15 +58,15 @@ app.use('/api/calls', callLogs);
 app.use('/api/inspection', inspections);
 app.use('/api/report', reports)
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
     // Priority serve any static files.
-    app.use(express.static(path.resolve(__dirname, '../front/build')));
+app.use(express.static(path.resolve(__dirname, '../front/build')));
 
-    // All remaining requests return the React app, so it can handle routing.
-    app.get('*', function(req, res) {
-        res.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(req, res) {
+    res.sendFile(path.resolve(__dirname, '../front/public', 'index.html'));
     });
-  }
+//   }
 
 const PORT = process.env.PORT || 5000;
 
