@@ -8,10 +8,6 @@
     "start": "node backend/server.js",
     "heroku-postbuild": "cd front && npm install && npm run build"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "front/node_modules"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Maverick17user/HSFI.git"
