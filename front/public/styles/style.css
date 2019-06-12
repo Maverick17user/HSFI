@@ -242,6 +242,10 @@ select {
   font-size: 1rem !important;
 }
 
+div.regOperator select, div.regNPC select {
+  font-size: 1.25rem !important;
+}
+
 div.report_context {
   padding: 25px;
   background: white;

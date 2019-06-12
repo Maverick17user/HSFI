@@ -71,7 +71,7 @@ class Register extends Component {
         const { dborganizations } = this.props.dborganizations
 
         return(
-            <div className="container" style={{maxWidth: '700px'}}>
+            <div className="container regNPC" style={{maxWidth: '700px'}}>
                 <h2>Registration</h2>
                 <p className="text-info">Form for NPC</p>
                 <form onSubmit={ this.handleSubmit }>
