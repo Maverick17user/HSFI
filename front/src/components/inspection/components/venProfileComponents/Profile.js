@@ -2,10 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import InspectionForm from './InspectionForm'
 import Modal from 'react-responsive-modal'
-import {Link} from 'react-router-dom'
 
 const Profile = props => {
-    const userRole = props.auth.user.role
     const [open, setOpen] = React.useState(false)
     const {dbVendors} = props.dbVendors
     
@@ -29,16 +27,6 @@ const Profile = props => {
                                     onClick={() => setOpen(true)}>Inspect</button>
                                     : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Inspect</button>
                                 }
-                                {/* {(userRole !== 'operator')
-                                    ? (
-                                        <Link to={props.history.location.pathname + '/edit'}>
-                                            <button type="button" className="btn btn-outline-info venInspectBut">
-                                                Edit
-                                            </button>
-                                        </Link>
-                                    )
-                                    : <button disabled type="button" className="btn btn-outline-dark venInspectBut">Edit</button>
-                                } */}
                             </div>
                         </section>
                     </div>

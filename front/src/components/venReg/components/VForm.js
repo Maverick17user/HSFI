@@ -1,24 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom'
 
 import {fetchData} from '../../../actions/venreg/fetching'
-import {fetchCountry} from '../../../actions/venreg/fetchCountry'
 import {inputChange} from '../../../actions/venreg/inputChange'
 import {marked_inputChange} from '../../../actions/venreg/marked_inputChange'
 import {multiSelecChange} from '../../../actions/venreg/multiSelecChange'
 import {submitVenRegForm} from '../../../actions/venreg/submitVenRegForm'
 import {getLocationCoordinates} from '../../../actions/venreg/getLocationCoordinates'
+import {setPicture} from '../../../actions/venreg/setPicture'
 
 import OperatorName_FetchedInput from './VForm-components/OperatorName_FetchedInput'
 import RegData_FetchedInput from './VForm-components/RegData_FetchedInput'
 import CountrySelect from './VForm-components/CountrySelect' 
 import CountrySelectFetched from './VForm-components/CountrySelectFetched' 
 import VenNameInput from './VForm-components/VenNameInput'
-import VenPicktureInput from './VForm-components/VenPicktureInput'
+import VenPictureInput from './VForm-components/VenPictureInput'
 import LicenseNumberInput from './VForm-components/LicenseNumberInput'
-import LicenseScanInput from './VForm-components/LicenseScanInput'
 import PhoneInput from './VForm-components/PhoneInput'
 import EmailInput from './VForm-components/EmailInput'
 import BuisnessLocationComponent from './VForm-components/BuisnessLocationComponent'
@@ -33,6 +31,7 @@ class VForm extends Component {
         this.handleInputChangeWithFlag = this.handleInputChangeWithFlag.bind(this)
         this.handleMultiSelectChange = this.handleMultiSelectChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.catchPhoto = this.catchPhoto.bind(this)
     }
 
     handleInputChange(e) {
@@ -64,12 +63,25 @@ class VForm extends Component {
 
     handleSubmit(e, data) {
         e.preventDefault();
-        const newVendor = Object.assign({},data)
-        this.props.submitVenRegForm(newVendor, this.props.auth.user)
+        const newVendor = Object.assign({}, data)
+        const config = {
+            headers: {
+                "Contetnt-Type":"multipart/form-data" 
+            }
+        }
+        
+        this.props.submitVenRegForm(newVendor, config)
     }
 
     componentDidMount() {
         this.props.fetchData(this.props.auth.user.name)
+    }
+
+    catchPhoto(e) {
+        const file = e.target.files[0]
+        const formData = new FormData();
+        formData.append('file', file)
+        this.props.setPicture(formData)
     }
 
     render() {
@@ -85,32 +97,32 @@ class VForm extends Component {
         if (vendorRegData.isSuccess) {
             this.props.history.push('/inspection');
         }
-
+        
         return (
-            <form onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} className="mx-3">
+            <form onSubmit={(e) => {this.handleSubmit(e, vendorRegData)}} encType="multipart/form-data" className="mx-3">
                 <OperatorName_FetchedInput value={vendorRegData.operatorName}/>
                 <RegData_FetchedInput value={vendorRegData.regDate} />
                 {(dbCountries.length === 1)
                     ? <CountrySelectFetched dbCountries={dbCountries} />
                     : <CountrySelect 
-                      dbCountries={dbCountries} 
-                      handleMultiSelectChange={this.handleMultiSelectChange}
-                      errCountries={errors.country} />
+                    dbCountries={dbCountries} 
+                    handleMultiSelectChange={this.handleMultiSelectChange}
+                    errCountries={errors.country} />
                 }
                 <VenNameInput 
                 venName={vendorRegData.venName} 
                 handleInputChange={this.handleInputChange} 
                 errors={errors.venName}
                 />
-                {/* <VenPicktureInput/> */}
-                {/* <p className="text-warning">TODO: Vendor picture input</p> */}
                 <LicenseNumberInput 
                 handleInputChange={this.handleInputChange} 
                 value={vendorRegData.licNumber}
                 errors={errors.licNumber}
                 />
-                {/* <LicenseScanInput /> */}
-                {/* <p className="text-warning">TODO: License Scan input</p> */}
+                <VenPictureInput
+                catchPhoto={this.catchPhoto}
+                errors={errors.venPhotoURL}
+                />
                 <PhoneInput 
                 handleInputChange={this.handleInputChange} 
                 value={vendorRegData.phone}
@@ -173,5 +185,6 @@ export default connect(mapStateToProps, {
     submitVenRegForm,
     marked_inputChange,
     multiSelecChange,
-    getLocationCoordinates
+    getLocationCoordinates,
+    setPicture
 })(VForm)

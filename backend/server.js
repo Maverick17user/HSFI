@@ -30,11 +30,15 @@ mongoose.connect(config.DB, { useNewUrlParser: true, useCreateIndex: true }).the
     err => { console.log('Can not connect to the database'+ err)}
 );
 
+
 app.use(passport.initialize());
 require('./passport')(passport);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}))
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true, parameterLimit: 1000000}))
+
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app.use('/api/managerUsers', manager_users);
 app.use('/api/users', npc_users);

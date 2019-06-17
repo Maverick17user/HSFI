@@ -4,6 +4,7 @@ import {
     INPUT_CHANGE_IN_VENREG, 
     MARKED_INPUT_CHANGE_IN_VENREG,
     MULTI_SELECT_CHANGE_IN_VENREG,
+    SET_VENDOR_PICTURE_IN_VENREG,
     CREATE_UNIT_IN_VENREG,
     SET_SINGLE_MAP_MARK_COORDINATES,
     REMOVE_UNIT_FROM_VENREG,
@@ -18,7 +19,7 @@ const initialState = {
         regDate: '',
         country: [{id:0}],
         venName: '',
-        venPhotoURL: 'https://yt3.ggpht.com/a-/AN66SAwGMl5lcOtW4tdn8egWzVGXz7eBJqrwkm9iYQ=s900-mo-c-c0xffffffff-rj-k-no',
+        venPhotoURL: '',
         licNumber: '',
         licScanURL: 'https://www.repmyers.us/wp-content/uploads/2018/10/fake-business-license-unique-top-result-fake-driving-licence-template-awesome-fake-of-fake-business-license.jpg',
         phone: '',
@@ -80,6 +81,14 @@ export default function(state = initialState, action ) {
                     [action.prop]: data,
                 })
             })}
+        
+        case SET_VENDOR_PICTURE_IN_VENREG: {
+            return Object.assign({}, state, {
+                vendorRegData: Object.assign({}, state.vendorRegData, {
+                    venPhotoURL: action.payload,
+                })
+            })
+        }
 
         case CREATE_UNIT_IN_VENREG: {
             data.push({id: data[data.length-1].id+1})

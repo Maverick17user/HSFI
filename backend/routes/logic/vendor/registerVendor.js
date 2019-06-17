@@ -2,7 +2,7 @@ const Vendor = require('../../../models/Vendor');
 
 const registerVendor = (req, res) => {
     Vendor.findOne({
-        licNumber: req.body.licNumber
+        licNumber: req.body.newVendor.licNumber
     }).then(licNumber => {
         if(licNumber) {
             return res.status(400).json({
@@ -11,34 +11,34 @@ const registerVendor = (req, res) => {
         }
         else {
             const newVendor = new Vendor({
-                operatorName: req.body.operatorName,
-                regDate: req.body.regDate,
-                country: req.body.country,
-                venName: req.body.venName,
-                venPhotoURL: req.body.venPhotoURL,
-                licNumber: req.body.licNumber,
-                licScanURL: req.body.licScanURL,
-                phone: req.body.phone,
-                email: req.body.email,
-                buisnessLocation: req.body.buisnessLocation,
-                buisnessSchedule: req.body.buisnessSchedule,
-                ingredientSource: req.body.ingredientSource,
-                foodGroup: req.body.foodGroup,
+                operatorName: req.body.newVendor.operatorName,
+                regDate: req.body.newVendor.regDate,
+                country: req.body.newVendor.country,
+                venName: req.body.newVendor.venName,
+                venPhotoURL: `/img/userAvatars/${req.body.avatarFileName}`,
+                licNumber: req.body.newVendor.licNumber,
+                licScanURL: req.body.newVendor.licScanURL,
+                phone: req.body.newVendor.phone,
+                email: req.body.newVendor.email,
+                buisnessLocation: req.body.newVendor.buisnessLocation,
+                buisnessSchedule: req.body.newVendor.buisnessSchedule,
+                ingredientSource: req.body.newVendor.ingredientSource,
+                foodGroup: req.body.newVendor.foodGroup,
                 flagStatus: '',
                 hasBeenFlagged: false,
                 oss: '',
                 isOpen: true,
-                gps: req.body.gps,
+                gps: req.body.newVendor.gps,
                 stars: 0
             });
+
             newVendor.save()
-                .then(ven => {
-                    console.log(req.body.venName + ' added!');
-                    res.json(ven)
-                })
-                .catch(err => {
-                    console.log(err);
-                })                                    
+            .then(ven => {
+                res.json(ven)
+            })
+            .catch(err => {
+                console.log(err);
+            })                                 
         }
     });
 }

@@ -10,13 +10,19 @@ module.exports = function validateVenRegForm(data) {
             errors.country = 'Country field is required';
         }
     });
-
+    
     if(Validator.isEmpty(data.venName)) {
         errors.venName = 'Vendor name is required';
     }
 
     if(Validator.isEmpty(data.licNumber)) {
         errors.licNumber = 'License number is required';
+    }
+
+    // console.log(data.venPhotoURL);
+    
+    if(!data.venPhotoURL) {
+        errors.venPhotoURL = 'Vendor photo is required'
     }
 
     if(!Validator.isEmail(data.email)) {
